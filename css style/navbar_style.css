@@ -83,7 +83,7 @@
 #navbar-menu-icon {
     font-size: 34px;
     color: #fff;
-    z-index: 10001;
+    z-index: 1001;
     cursor: pointer;
     display: none;
 }
@@ -129,7 +129,7 @@
         flex-direction: column;
         padding-top: 180px;
         transition: all .7s ease;
-        z-index: 1000;
+        z-index: 1001;
     }
 
     .navbar-navlist a {
