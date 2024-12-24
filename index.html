@@ -20,9 +20,15 @@
 
 </head>
 <body>
-    <header>
-    
-    </header>
+    <header id="navbar"> </header>
+    <script>
+        fetch('pages/navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
 
     <!--- Home Area --->
     <section class="home">
