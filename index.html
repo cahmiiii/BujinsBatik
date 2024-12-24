@@ -21,14 +21,7 @@
 </head>
 <body>
     <header>
-        <script>
-            fetch('pages/navbar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('navbar').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading navbar:', error));
-        </script>
+        <iframe src="pages/navbar.html" width="100%" height="80px" frameborder="0"></iframe>
     </header>
     
 
