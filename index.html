@@ -20,15 +20,17 @@
 
 </head>
 <body>
-    <header id="navbar"> </header>
-    <script>
-        fetch('pages/navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading navbar:', error));
-    </script>
+    <header id="navbar">
+        <script>
+            fetch('pages/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+        </script>
+    </header>
+    
 
     <!--- Home Area --->
     <section class="home">
