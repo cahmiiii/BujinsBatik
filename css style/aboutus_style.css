@@ -1,0 +1,324 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    border: none;
+    outline: none;
+    font-family: "Poppins", sans-serif;
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    min-height: 100%;
+    padding-bottom: 185px;
+    box-sizing: inherit;
+}
+
+:root {
+    --h1-font: 5rem;
+    --h2-font: 4rem;
+    --p-font: 1.1rem;
+}
+
+section {
+    padding: 70px 12% 80px;
+}
+
+.about {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.about-text h1 {
+    margin: 18px 0;
+    font-size: var(--h1-font);
+    font-weight: 800;
+    line-height: 1.3;
+    text-transform: uppercase;
+    margin-left: 95px;
+}
+
+.about-text p {
+    color: black;
+    font-size: var(--p-font);
+    mask-border: 40px;
+    margin-bottom: 40px;
+    padding-right: 100px;
+    margin-left: 100px;
+}
+
+.about-img img {
+    width: 500px;
+    height: auto;
+    padding-bottom: 100px;
+}
+
+.aboutcta-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: #04023c;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    margin-right: 12px;
+    transition: all .6s ease;
+    cursor: pointer;
+    margin-left: 100px;
+}
+
+.aboutcta-btn:hover {
+    background: #fbd875;
+    color: #04023c;
+    transform: scale(1.1);
+}
+
+.award {
+    display: flex;
+    background: #04023c;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    text-align: center;
+    padding: 0 35px;
+}
+
+.award-content {
+    padding-bottom: 100px;
+    max-width: 1100px;
+    width: 100%;
+    position: relative;
+}
+
+.award-content h1{
+    font-size: var(--h1-font);
+    margin-right: 25px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.award-content .award-carousel {
+    display: grid;
+    margin-left: 50px;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% / 3) - 12px);
+    gap: 16px;
+    overflow: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: 0;
+}
+
+.award-carousel .award-card {
+    scroll-snap-align: start;
+    height: 342px;
+    width: 260px;
+    list-style: none;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.award-card .award-img img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #fff;
+}
+
+.award-card h3 {
+    font-weight: 500;
+    font-size: 1.56rem;
+    margin: 30px 0 5px;
+}
+
+.award-card span {
+    color: #04023c;
+    font-size: 1rem;
+    margin: 30px 0 5px;
+    padding-left: 5px;
+}
+
+.map-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.map-container h1{
+    text-align: center;
+    font-size: 28px;
+}
+
+.loc-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+.map-btn {
+    display: inline-block;
+    background-color: #04023c;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+
+@media screen and (max-width: 1750px) {
+    section {
+        padding: 60px 7% 60px;    
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    section {
+        padding: 60px 5% 60px;    
+    }
+
+    :root {
+        --h1-font: 4.2rem;
+        --h2-font: 3.2rem;
+        --p-font: 1rem;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .about {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+        height: auto;
+        margin-left: 0px;
+    }
+
+    .about-text {
+        padding: 60px;
+        margin-bottom: 40px;
+        margin-left: 0px;
+    }
+
+    .about-text h1 {
+        margin-left: 0px;
+    }
+
+    .about-text p {
+        color: black;
+        font-size: var(--p-font);
+        mask-border: 40px;
+        margin-bottom: 40px;
+        padding-right: 0px;
+        margin-left: 0px;
+    }
+
+    .aboutcta-btn {
+        margin-left: 0px;
+    }
+
+    .award-content .award-carousel {
+        margin-left: 55px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .award-content .award-carousel {
+        margin-left: 32px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    .award-content .award-carousel {
+        margin-left: 9px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .award-content .award-carousel {
+        grid-auto-columns: calc((100% / 2) - 12px);
+        margin-left: 80px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .about {
+        gap: 0px;
+    }
+
+    :root {
+        --h1-font: 3rem;
+        --h2-font: 2rem;
+    }
+
+    .award-content .award-carousel {
+        grid-auto-columns: calc((100% / 2) - 12px);
+        margin-left: 50px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .award-content .award-carousel {
+        grid-auto-columns: 100%;
+        margin-left: 120px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --h1-font: 2.4rem;
+        --h2-font: 1.8rem;
+    }
+
+    .award-content .award-carousel {
+        grid-auto-columns: 100%;
+        margin-left: 75px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .award-content .award-carousel {
+        grid-auto-columns: 100%;
+        margin-left: 30px;
+    }
+}

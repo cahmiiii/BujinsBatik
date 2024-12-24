@@ -1,0 +1,148 @@
+/* Global Reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Navbar Styles */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #04023c;
+    color: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    font-size: 28px;
+    color: #fff;
+    font-weight: 800;
+}
+
+.navbar-logo img {
+    width: 70px;
+    height: auto;
+}
+
+.navbar-navlist {
+    display: flex;
+}
+
+.navbar-navlist a {
+    display: inline-block;
+    margin: 0 35px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all .50s ease;
+}
+
+.navbar-navlist a:hover {
+    transform: scale(1.1);
+    color: #fbd875;
+}
+
+.navbar-nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    color: #04023c;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    margin-right: 12px;
+    transition: all .6s ease;
+    cursor: pointer;
+}
+
+.navbar-btn:hover {
+    background: #fbd875;
+    color: #04023c;
+    transform: scale(1.1);
+}
+
+#navbar-menu-icon {
+    font-size: 34px;
+    color: #fff;
+    z-index: 10001;
+    cursor: pointer;
+    display: none;
+}
+
+@media(max-width:1300px) {
+    .navbar-container {
+        padding: 20px 4%;
+    }
+}
+
+@media(max-width:1050px) {
+    .navbar-logo {
+        font-size: 25px;
+    }
+    .navbar-logo img {
+        width: 65px;
+        height: auto;
+    }
+    .navbar-navlist a {
+        margin: 0 25px;
+    }
+
+    .navbar-btn {
+        padding: 11px 23px;
+    }
+}
+
+@media(max-width:940px) {
+    #navbar-menu-icon {
+        display: block;
+    }
+
+    .navbar-navlist {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background: rgba(2, 0, 36, 0.60);
+        backdrop-filter: blur(32px);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding-top: 180px;
+        transition: all .7s ease;
+        z-index: 1000;
+    }
+
+    .navbar-navlist a {
+        display: block;
+        padding: 0;
+        margin: 0px 0px 50px 0px;
+        font-size: 1.7rem;
+        color: #fff;
+    }
+    .navbar-navlist.open {
+        right: 0;
+        z-index: 1001;
+        background-color: rgba(0, 0, 0, 0.8); /* Debug color */
+    }
+}
+
