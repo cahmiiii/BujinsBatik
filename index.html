@@ -17,20 +17,18 @@
     <!--- Java Script Connection --->
     <script src="script.js" defer></script>
     <script src="https://kit.fontawesome.com/26bb1f1303.js" crossorigin="anonymous"></script>
-    
-    <script>
-        fetch('pages/navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading navbar:', error));
-    </script>
 
 </head>
 <body>
     <header>
-
+        <script>
+            fetch('pages/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+        </script>
     </header>
     
 
