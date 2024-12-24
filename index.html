@@ -187,14 +187,7 @@
     </section>
 
     <footer>
-        <script>
-            fetch('pages/footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('footer').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading footer:', error));
-        </script>
+        <iframe src="pages/footer.html" width="100%" height="80px" frameborder="0"></iframe>
     </footer>
 
 </body>
