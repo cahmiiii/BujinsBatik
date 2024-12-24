@@ -20,7 +20,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 9999;
 }
 
 .navbar-logo {
@@ -83,7 +83,7 @@
 #navbar-menu-icon {
     font-size: 34px;
     color: #fff;
-    z-index: 1001;
+    z-index: 10000;
     cursor: pointer;
     display: none;
 }
@@ -129,7 +129,7 @@
         flex-direction: column;
         padding-top: 180px;
         transition: all .7s ease;
-        z-index: 1001;
+        z-index: 9998;
     }
 
     .navbar-navlist a {
@@ -141,7 +141,7 @@
     }
     .navbar-navlist.open {
         right: 0;
-        z-index: 1001;
+        z-index: 9999;
         background-color: rgba(0, 0, 0, 0.8); /* Debug color */
     }
 }
