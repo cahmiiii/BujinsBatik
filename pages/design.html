@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Design</title>
+        <link rel="stylesheet" href="css style/designstyle.css"> <!-- Include Design Stylesheet -->
+
+        <!-- Boxicon -->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+        <!-- Google Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+
+        <script src="https://kit.fontawesome.com/26bb1f1303.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header id="navbar">
+        <nav>
+            <ul class="sidebar">
+              <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Design</a></li>
+              <li><a href="pages/about.html">About</a></li>
+              <li><a href="#">Rating</a></li>
+            </ul>
+            <ul>
+              <li><a href="#">Coding2go</a></li>
+              <li class="hideOnMobile"><a href="index.html">Home</a></li>
+              <li class="hideOnMobile"><a href="#">Design</a></li>
+              <li class="hideOnMobile"><a href="pages/about.html">About</a></li>
+              <li class="hideOnMobile"><a href="#">Rating</a></li>
+              <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
+            </ul>
+          </nav>
+        
+          <script>
+            function showSidebar(){
+              const sidebar = document.querySelector('.sidebar')
+              sidebar.style.display = 'flex'
+            }
+            function hideSidebar(){
+              const sidebar = document.querySelector('.sidebar')
+              sidebar.style.display = 'none'
+            }
+          </script>
+    </header>
+
+    <!--- Home Area --->
+    <section class="product">
+        <div class="product-text">
+            <h1>Mens Look</h1>
+            <p> The men's batik look exudes a blend of tradition and masculinity, showcasing elegant patterns and 
+                colors that symbolize cultural heritage and sophistication.</p>
+        </div>
+        <div class="product-img">
+            <img src="img/mens look-01.png" alt="">
+        </div>
+    </section>
+    <section class="product2">
+        <div class="product2-img">
+            <img src="img/ladies look-01.png" alt="">
+        </div>
+        <div class="product2-text">
+            <h1>Ladies Look</h1>
+            <p>The ladies' batik look embodies grace and elegance with its intricate patterns and vibrant colors, 
+                reflecting a timeless blend of tradition and contemporary style.</p>
+        </div>
+    </section>
+    <section class="product3">
+        <div class="product3-text">
+            <h1>Mens Look</h1>
+            <p>Batik fashion blends tradition with style, showcasing intricate patterns and craftsmanship. 
+            This industry celebrates cultural heritage through unique and stylish clothing pieces.</p>
+        </div>
+        <div class="product3-img">
+            <img src="img/Kemeja Batik 1.webp" alt="">
+        </div>
+    </section>
+
+    <footer id="footer"></footer>
+    <script>
+        fetch('pages/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
