@@ -14,33 +14,36 @@
 </head>
 <body>
     
-    <header>
-        <div class="navbar-container">
-            <div class="navbar-logo">
-                <img src="img/BUJINS LOGO 3.png" alt="Logo">
-                <span></span>
-            </div>
-            <ul class="navbar-navlist">
-                <li><a href="mainpage.php">Home</a></li>
-                <li><a href="design.php">Design</a></li>
-                <li><a href="about.php">About</a></li>
-                <li><a href="contactus.php">Contact Us</a></li>
-            </ul>
-            <div class="navbar-nav-right">
-                <button class="navbar-btn" hre>Book Now</button>
-                <i class='bx bx-menu' id="navbar-menu-icon"></i>
-            </div>
-        </div>
-    </header>
-    <script type="text/javascript">
-        let menu = document.querySelector('#navbar-menu-icon');
-        let navlist = document.querySelector('.navbar-navlist');
-
-        menu.onclick = () => {
-            menu.classList.toggle('bx-x');
-            navlist.classList.toggle('open')
+    <nav>
+        <ul class="sidebar">
+          <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"/></svg></a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Forum</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">Coding2go</a></li>
+          <li class="hideOnMobile"><a href="#">Blog</a></li>
+          <li class="hideOnMobile"><a href="#">Products</a></li>
+          <li class="hideOnMobile"><a href="#">About</a></li>
+          <li class="hideOnMobile"><a href="#">Forum</a></li>
+          <li class="hideOnMobile"><a href="#">Login</a></li>
+          <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26"><path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"/></svg></a></li>
+        </ul>
+      </nav>
+    
+      <script>
+        function showSidebar(){
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'flex'
         }
-    </script>
+        function hideSidebar(){
+          const sidebar = document.querySelector('.sidebar')
+          sidebar.style.display = 'none'
+        }
+      </script>
 
 </body>
 </html>
