@@ -433,32 +433,38 @@ section {
 nav{
     background-color: white;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  }
-  nav ul{
+}
+nav ul{
     width: 100%;
     list-style: none;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-  }
-  nav li{
+}
+nav li{
     height: 50px;
-  }
-  nav a{
+}
+/* logo size */
+nav ul li a img {
+    height: 50px; 
+    width: auto;
+    display: block;
+}
+nav a{
     height: 100%;
     padding: 0 30px;
     text-decoration: none;
     display: flex;
     align-items: center;
     color: black;
-  }
-  nav a:hover{
+}
+nav a:hover{
     background-color: #f0f0f0;
-  }
-  nav li:first-child{
+}
+nav li:first-child{
     margin-right: auto;
-  }
-  .sidebar{
+}
+.sidebar{
     position: fixed;
     top: 0; 
     right: 0;
@@ -473,27 +479,27 @@ nav{
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-  }
-  .sidebar li{
+}
+.sidebar li{
     width: 100%;
-  }
-  .sidebar a{
+}
+.sidebar a{
     width: 100%;
-  }
-  .menu-button{
+}
+.menu-button{
     display: none;
     z-index: 1001;
-  }
-  @media(max-width: 800px){
+}
+@media(max-width: 800px){
     .hideOnMobile{
       display: none;
     }
     .menu-button{
       display: block;
     }
-  }
-  @media(max-width: 400px){
+}
+@media(max-width: 400px){
     .sidebar{
       width: 100%;
     }
-  }
+}
