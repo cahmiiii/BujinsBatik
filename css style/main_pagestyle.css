@@ -259,6 +259,7 @@ section {
     padding-bottom: 30px;
     background-color: #fff;
     align-items: center;
+    z-index: 1;
 }
 
 .center-info {
