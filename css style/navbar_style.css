@@ -9,71 +9,119 @@
 }
 
 /* Navbar Styles */
-nav{
+nav {
     background-color: white;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-  }
-  nav ul{
+    z-index: 999; /* Ensures navbar stays above other content */
+    position: relative;
+}
+
+nav ul {
     width: 100%;
     list-style: none;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-  }
-  nav li{
+}
+
+nav li {
     height: 50px;
-  }
-  nav a{
+}
+
+nav a {
     height: 100%;
     padding: 0 30px;
     text-decoration: none;
     display: flex;
     align-items: center;
     color: black;
-  }
-  nav a:hover{
+}
+
+nav a:hover {
     background-color: #f0f0f0;
-  }
-  nav li:first-child{
+}
+
+nav li:first-child {
     margin-right: auto;
-  }
-  .sidebar{
+}
+
+/* Sidebar Styles */
+.sidebar {
     position: fixed;
-    top: 0; 
+    top: 0;
     right: 0;
     height: 100vh;
     width: 250px;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.95); /* More solid background */
     backdrop-filter: blur(12px);
     box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
-    list-style: none;
     z-index: 1000;
     display: none;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-  }
-  .sidebar li{
-    width: 100%;
-  }
-  .sidebar a{
-    width: 100%;
-  }
-  .menu-button{
-    display: none;
-    z-index: 1001;
-  }
-  @media(max-width: 800px){
-    .hideOnMobile{
-      display: none;
-    }
-    .menu-button{
-      display: block;
-    }
-  }
-  @media(max-width: 400px){
-    .sidebar{
-      width: 100%;
-    }
-  }
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+}
 
+/* Show Sidebar */
+.sidebar.active {
+    display: flex;
+    transform: translateX(0);
+}
+
+/* Sidebar Items */
+.sidebar li {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.sidebar a {
+    width: 100%;
+    padding: 10px 15px;
+    color: black;
+    display: block;
+}
+
+.sidebar a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Close Button */
+.sidebar .close-button {
+    align-self: flex-end;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+/* Hamburger Menu Button */
+.menu-button {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.menu-button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    .hideOnMobile {
+        display: none;
+    }
+    .menu-button {
+        display: block;
+    }
+}
+
+@media (max-width: 400px) {
+    .sidebar {
+        width: 100%;
+    }
+}
