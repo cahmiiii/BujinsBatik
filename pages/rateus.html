@@ -36,7 +36,80 @@
     <section class="review-display">
         <h2>User Reviews</h2>
         <div class="review-carousel">
-            <!-- Reviews will be dynamically added here -->
+            <script>
+                // Star rating functionality
+                document.addEventListener('DOMContentLoaded', () => {
+                    const stars = document.querySelectorAll('.star');
+                    let selectedRating = 0;
+        
+                    stars.forEach((star, index) => {
+                        star.addEventListener('mouseover', () => {
+                            highlightStars(index + 1);
+                        });
+        
+                        star.addEventListener('mouseout', () => {
+                            highlightStars(selectedRating);
+                        });
+        
+                        star.addEventListener('click', () => {
+                            selectedRating = index + 1;
+                        });
+                    });
+        
+                    function highlightStars(count) {
+                        stars.forEach((star, index) => {
+                            if (index < count) {
+                                star.classList.add('highlighted');
+                            } else {
+                                star.classList.remove('highlighted');
+                            }
+                        });
+                    }
+        
+                    // Form submission with query parameters
+                    document.getElementById('submitFeedback').addEventListener('click', () => {
+                        const name = document.getElementById('name').value;
+                        const email = document.getElementById('email').value;
+                        const feedback = document.getElementById('feedback').value;
+        
+                        if (!name || !email || !feedback || selectedRating === 0) {
+                            alert('Please fill out all fields and select a rating.');
+                            return;
+                        }
+        
+                        let storedFeedback = localStorage.getItem('userFeedback') || '[]';
+                        let feedbackList = JSON.parse(storedFeedback);
+        
+                        feedbackList.push({
+                            name: name,
+                            email: email,
+                            rating: selectedRating,
+                            feedback: feedback
+                        });
+        
+                        localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
+                        alert('Feedback successfully stored!');
+                        location.reload();
+                    });
+        
+                    // Display Feedback
+                    const reviewCarousel = document.querySelector('.review-carousel');
+                    let storedFeedback = localStorage.getItem('userFeedback') || '[]';
+                    let feedbackList = JSON.parse(storedFeedback);
+        
+                    feedbackList.forEach((review) => {
+                        const reviewCard = document.createElement('div');
+                        reviewCard.classList.add('review-card');
+                        reviewCard.innerHTML = `
+                            <h3>${review.name}</h3>
+                            <p>Email: ${review.email}</p>
+                            <p>Rating: ${'★'.repeat(review.rating)}</p>
+                            <p>${review.feedback}</p>
+                        `;
+                        reviewCarousel.appendChild(reviewCard);
+                    });
+                });
+            </script>
         </div>
     </section>
 
@@ -71,81 +144,6 @@
                 document.getElementById('footer').innerHTML = data;
             })
             .catch(error => console.error('Error loading footer:', error));
-    </script>
-
-    <script>
-        // Star rating functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            const stars = document.querySelectorAll('.star');
-            let selectedRating = 0;
-
-            stars.forEach((star, index) => {
-                star.addEventListener('mouseover', () => {
-                    highlightStars(index + 1);
-                });
-
-                star.addEventListener('mouseout', () => {
-                    highlightStars(selectedRating);
-                });
-
-                star.addEventListener('click', () => {
-                    selectedRating = index + 1;
-                });
-            });
-
-            function highlightStars(count) {
-                stars.forEach((star, index) => {
-                    if (index < count) {
-                        star.classList.add('highlighted');
-                    } else {
-                        star.classList.remove('highlighted');
-                    }
-                });
-            }
-
-            // Form submission with query parameters
-            document.getElementById('submitFeedback').addEventListener('click', () => {
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const feedback = document.getElementById('feedback').value;
-
-                if (!name || !email || !feedback || selectedRating === 0) {
-                    alert('Please fill out all fields and select a rating.');
-                    return;
-                }
-
-                let storedFeedback = localStorage.getItem('userFeedback') || '[]';
-                let feedbackList = JSON.parse(storedFeedback);
-
-                feedbackList.push({
-                    name: name,
-                    email: email,
-                    rating: selectedRating,
-                    feedback: feedback
-                });
-
-                localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
-                alert('Feedback successfully stored!');
-                location.reload();
-            });
-
-            // Display Feedback
-            const reviewCarousel = document.querySelector('.review-carousel');
-            let storedFeedback = localStorage.getItem('userFeedback') || '[]';
-            let feedbackList = JSON.parse(storedFeedback);
-
-            feedbackList.forEach((review) => {
-                const reviewCard = document.createElement('div');
-                reviewCard.classList.add('review-card');
-                reviewCard.innerHTML = `
-                    <h3>${review.name}</h3>
-                    <p>Email: ${review.email}</p>
-                    <p>Rating: ${'★'.repeat(review.rating)}</p>
-                    <p>${review.feedback}</p>
-                `;
-                reviewCarousel.appendChild(reviewCard);
-            });
-        });
     </script>
 </body>
 </html>
