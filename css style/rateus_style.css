@@ -11,7 +11,6 @@ body {
 }
 
 /* Review Display Section */
-/* Review Display Section */
 .review-display {
     padding: 2rem;
     text-align: center;
@@ -34,10 +33,13 @@ body {
     padding: 1rem;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    width: 100%;
+    cursor: grab;
     white-space: nowrap;
-    background: #fff;
-    border-radius: 10px;
+}
+
+.review-carousel.dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
 }
 
 .review-carousel::-webkit-scrollbar {
@@ -46,8 +48,8 @@ body {
 
 .review-card {
     flex: 0 0 auto;
-    min-width: 90%;
-    max-width: 90%;
+    min-width: 300px;
+    max-width: 300px;
     scroll-snap-align: start;
     background: #fff;
     border-radius: 10px;

@@ -78,7 +78,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const stars = document.querySelectorAll('.star');
-            const reviewCarousel = document.getElementById('reviewCarousel');
+            const reviewCarousel = document.querySelector('.review-carousel');
+            let isDragging = false;
+            let startX, scrollLeft;
+
             let selectedRating = 0;
 
             // Star Rating Selection
@@ -110,7 +113,6 @@
                 let storedFeedback = localStorage.getItem('userFeedback') || '[]';
                 let feedbackList = JSON.parse(storedFeedback);
 
-                // Save Feedback
                 feedbackList.push({
                     name: name,
                     email: email,
@@ -151,6 +153,32 @@
                     <p>${review.feedback}</p>
                 `;
                 reviewCarousel.appendChild(reviewCard);
+            });
+
+            // Enable Dragging for Review Carousel
+            reviewCarousel.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                reviewCarousel.classList.add('dragging');
+                startX = e.pageX - reviewCarousel.offsetLeft;
+                scrollLeft = reviewCarousel.scrollLeft;
+            });
+
+            reviewCarousel.addEventListener('mouseleave', () => {
+                isDragging = false;
+                reviewCarousel.classList.remove('dragging');
+            });
+
+            reviewCarousel.addEventListener('mouseup', () => {
+                isDragging = false;
+                reviewCarousel.classList.remove('dragging');
+            });
+
+            reviewCarousel.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - reviewCarousel.offsetLeft;
+                const walk = (x - startX) * 2; // Adjust scrolling speed
+                reviewCarousel.scrollLeft = scrollLeft - walk;
             });
         });
     </script>
