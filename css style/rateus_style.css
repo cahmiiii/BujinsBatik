@@ -11,6 +11,7 @@ body {
 }
 
 /* Review Display Section */
+/* Review Display Section */
 .review-display {
     padding: 2rem;
     text-align: center;
@@ -35,6 +36,8 @@ body {
     -webkit-overflow-scrolling: touch;
     width: 100%;
     white-space: nowrap;
+    background: #fff;
+    border-radius: 10px;
 }
 
 .review-carousel::-webkit-scrollbar {
@@ -75,11 +78,21 @@ body {
     .review-carousel {
         grid-auto-columns: calc((100% / 2) - 12px);
     }
+
+    .review-card {
+        min-width: 48%;
+        max-width: 48%;
+    }
 }
 
 @media (min-width: 992px) {
     .review-carousel {
         grid-auto-columns: calc((100% / 3) - 12px);
+    }
+
+    .review-card {
+        min-width: 30%;
+        max-width: 30%;
     }
 }
 
@@ -87,7 +100,13 @@ body {
     .review-carousel {
         grid-auto-columns: calc((100% / 5) - 12px);
     }
+
+    .review-card {
+        min-width: 18%;
+        max-width: 18%;
+    }
 }
+
 
 /* Rate Us Section */
 .rateus {
