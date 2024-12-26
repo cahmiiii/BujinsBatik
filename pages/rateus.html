@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Us</title>
+    <link rel="stylesheet" href="../css style/navbar_style.css">
+    <link rel="stylesheet" href="../css style/footerstyle.css">
+    <link rel="stylesheet" href="../css style/rateus_style.css">
+
+    <!-- Boxicon -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/26bb1f1303.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-container"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/BujinsBatik/pages/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+        });
+    </script>
+
+    <!-- Rate Us Section -->
+    <section class="rateus">
+        <div class="rateus-container">
+            <h1>Rate Us</h1>
+            <p>We value your feedback! Please rate your experience and share your thoughts with us.</p>
+            
+            <form action="#" method="post" class="rateus-form">
+                <div class="rateus-stars">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
+                </div>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="feedback" placeholder="Your Feedback" rows="5" required></textarea>
+                <button type="submit" class="rateus-btn">Submit Feedback</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <footer id="footer"></footer>
+    <script>
+        fetch('../pages/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <script>
+        // Star rating functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('.star');
+            let selectedRating = 0;
+
+            stars.forEach((star, index) => {
+                star.addEventListener('mouseover', () => {
+                    highlightStars(index + 1);
+                });
+
+                star.addEventListener('mouseout', () => {
+                    highlightStars(selectedRating);
+                });
+
+                star.addEventListener('click', () => {
+                    selectedRating = index + 1;
+                });
+            });
+
+            function highlightStars(count) {
+                stars.forEach((star, index) => {
+                    if (index < count) {
+                        star.classList.add('highlighted');
+                    } else {
+                        star.classList.remove('highlighted');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
