@@ -6,13 +6,30 @@
     font-family: "Poppins", sans-serif;
 }
 
-/* Footer Base Style */
+/* Body and HTML Styling */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Content Wrapper */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+}
+
+/* Footer Styling */
 footer {
     background-color: #04023c;
     z-index: 1;
     width: 100%;
-    position: relative; /* Changed from absolute */
-    margin-top: 50px; /* Ensures spacing from the content above */
+    margin-top: auto; /* Ensures footer sticks to bottom */
 }
 
 /* Footer Container */
