@@ -87,7 +87,7 @@ body {
 }
 
 .rateus-btn {
-    background: #4a90e2;
+    background: #04023c;
     color: #fff;
     border: none;
     padding: 12px 20px;
@@ -99,7 +99,7 @@ body {
 }
 
 .rateus-btn:hover {
-    background: #357ab7;
+    background: #fbd875;
     transform: scale(1.05);
 }
 
