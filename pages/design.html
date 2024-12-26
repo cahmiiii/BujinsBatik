@@ -45,16 +45,17 @@
     <section class="product">
         <div class="product-text">
             <h1>Mens Look</h1>
-            <p> The men's batik look exudes a blend of tradition and masculinity, showcasing elegant patterns and 
+            <p>The men's batik look exudes a blend of tradition and masculinity, showcasing elegant patterns and 
                 colors that symbolize cultural heritage and sophistication.</p>
         </div>
         <div class="product-img">
-            <img src="img/mens look-01.png" alt="">
+            <img src="../img/mens look-01.png" alt="">
         </div>
     </section>
+    
     <section class="product2">
         <div class="product2-img">
-            <img src="img/ladies look-01.png" alt="">
+            <img src="../img/ladies look-01.png" alt="">
         </div>
         <div class="product2-text">
             <h1>Ladies Look</h1>
@@ -62,6 +63,7 @@
                 reflecting a timeless blend of tradition and contemporary style.</p>
         </div>
     </section>
+    
     <section class="product3">
         <div class="product3-text">
             <h1>Mens Look</h1>
@@ -69,13 +71,13 @@
             This industry celebrates cultural heritage through unique and stylish clothing pieces.</p>
         </div>
         <div class="product3-img">
-            <img src="img/Kemeja Batik 1.webp" alt="">
+            <img src="../img/Kemeja Batik 1.webp" alt="">
         </div>
     </section>
 
     <footer id="footer"></footer>
     <script>
-        fetch('pages/footer.html')
+        fetch('../pages/footer.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('footer').innerHTML = data;
