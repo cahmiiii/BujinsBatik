@@ -31,19 +31,30 @@ body {
     scroll-behavior: smooth;
     gap: 1rem;
     padding: 1rem;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    cursor: grab;
     white-space: nowrap;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Add Scrollbar for Desktop */
+.review-carousel::-webkit-scrollbar {
+    height: 8px;
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.review-carousel::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.review-carousel::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
 }
 
 .review-carousel.dragging {
     cursor: grabbing;
     scroll-snap-type: none;
-}
-
-.review-carousel::-webkit-scrollbar {
-    display: none;
 }
 
 .review-card {
@@ -79,6 +90,11 @@ body {
 @media (min-width: 768px) {
     .review-carousel {
         grid-auto-columns: calc((100% / 2) - 12px);
+        scrollbar-width: none;
+    }
+
+    .review-carousel::-webkit-scrollbar {
+        display: none;
     }
 
     .review-card {
@@ -90,6 +106,11 @@ body {
 @media (min-width: 992px) {
     .review-carousel {
         grid-auto-columns: calc((100% / 3) - 12px);
+        scrollbar-width: none;
+    }
+
+    .review-carousel::-webkit-scrollbar {
+        display: none;
     }
 
     .review-card {
@@ -101,6 +122,11 @@ body {
 @media (min-width: 1200px) {
     .review-carousel {
         grid-auto-columns: calc((100% / 5) - 12px);
+        scrollbar-width: none;
+    }
+
+    .review-carousel::-webkit-scrollbar {
+        display: none;
     }
 
     .review-card {
