@@ -27,6 +27,18 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-container').innerHTML = data;
+
+                // Attach event listeners AFTER navbar is loaded
+                const showSidebar = () => {
+                    document.querySelector('.sidebar').style.display = 'flex';
+                };
+                
+                const hideSidebar = () => {
+                    document.querySelector('.sidebar').style.display = 'none';
+                };
+
+                document.querySelector('.menu-button').addEventListener('click', showSidebar);
+                document.querySelector('.sidebar li').addEventListener('click', hideSidebar);
             })
             .catch(error => console.error('Error loading navbar:', error));
     </script>
