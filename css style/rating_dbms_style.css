@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #f9fafc;
+    background-color: #ffffff; /* White background */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -21,13 +21,13 @@ body {
     align-items: center;
     text-align: center;
     padding: 2rem;
-    background: linear-gradient(to bottom, #ffffff, #f3f4f6);
+    background-color: #ffffff; /* White background */
 }
 
 .rating-container {
-    background: #ffffff;
+    background: #f8f9fa;
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     padding: 2rem 3rem;
     max-width: 500px;
     width: 90%;
@@ -49,7 +49,7 @@ body {
 #feedbackMessage {
     font-size: 1rem;
     font-weight: bold;
-    color: #04023c;
+    color: #28a745;
     margin-top: 1rem;
 }
 
