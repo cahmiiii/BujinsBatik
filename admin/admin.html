@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="../css style/adminstyle.css"> <!-- Add your admin CSS here -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <table id="feedbackTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Rating</th>
+                <th>Feedback</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic Rows will be added here -->
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve feedback from localStorage
+            let storedFeedback = localStorage.getItem('userFeedback') || '[]';
+            let feedbackList = JSON.parse(storedFeedback);
+
+            const feedbackTableBody = document.querySelector('#feedbackTable tbody');
+
+            if (feedbackList.length === 0) {
+                feedbackTableBody.innerHTML = '<tr><td colspan="6">No feedback available</td></tr>';
+            } else {
+                feedbackList.forEach((feedback, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${feedback.name}</td>
+                        <td>${feedback.email}</td>
+                        <td>${feedback.rating}</td>
+                        <td>${feedback.feedback}</td>
+                        <td>
+                            <a href="edit.html?id=${index}">Update</a>
+                            <a href="#" onclick="deleteFeedback(${index}); return false;">Delete</a>
+                        </td>
+                    `;
+                    feedbackTableBody.appendChild(row);
+                });
+            }
+        });
+
+        function deleteFeedback(index) {
+            if (confirm('Are you sure you want to delete this entry?')) {
+                let storedFeedback = localStorage.getItem('userFeedback') || '[]';
+                let feedbackList = JSON.parse(storedFeedback);
+
+                feedbackList.splice(index, 1); // Remove the specific feedback
+
+                localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
+
+                // Reload the page to refresh the table
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
