@@ -19,14 +19,24 @@
     <script src="https://kit.fontawesome.com/26bb1f1303.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Navbar Placeholder -->
-    <div id="navbar-container"></div>
+    <div id="navbar-container"></div> <!-- Placeholder for Navbar -->
+
+    <!-- Navbar Fetch Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             fetch('/BujinsBatik/pages/navbar.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('navbar-container').innerHTML = data;
+
+                    // Reattach event listeners
+                    document.querySelector('.menu-button').addEventListener('click', () => {
+                        document.querySelector('.sidebar').style.display = 'flex';
+                    });
+                    
+                    document.querySelector('.sidebar li').addEventListener('click', () => {
+                        document.querySelector('.sidebar').style.display = 'none';
+                    });
                 })
                 .catch(error => console.error('Error loading navbar:', error));
         });
