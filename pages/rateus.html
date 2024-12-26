@@ -38,7 +38,7 @@
             <h1>Rate Us</h1>
             <p>We value your feedback! Please rate your experience and share your thoughts with us.</p>
             
-            <form action="#" method="post" class="rateus-form">
+            <form id="rateusForm" class="rateus-form">
                 <div class="rateus-stars">
                     <span class="star" data-value="1">&#9733;</span>
                     <span class="star" data-value="2">&#9733;</span>
@@ -46,10 +46,10 @@
                     <span class="star" data-value="4">&#9733;</span>
                     <span class="star" data-value="5">&#9733;</span>
                 </div>
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="feedback" placeholder="Your Feedback" rows="5" required></textarea>
-                <button type="submit" class="rateus-btn">Submit Feedback</button>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <textarea id="feedback" name="feedback" placeholder="Your Feedback" rows="5" required></textarea>
+                <button type="button" class="rateus-btn" id="submitFeedback">Submit Feedback</button>
             </form>
         </div>
     </section>
@@ -94,6 +94,27 @@
                     }
                 });
             }
+
+            // Form submission with query parameters
+            document.getElementById('submitFeedback').addEventListener('click', () => {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const feedback = document.getElementById('feedback').value;
+
+                if (!name || !email || !feedback || selectedRating === 0) {
+                    alert('Please fill out all fields and select a rating.');
+                    return;
+                }
+
+                const queryParams = new URLSearchParams({
+                    name: name,
+                    email: email,
+                    rating: selectedRating,
+                    feedback: feedback
+                });
+
+                window.location.href = `/BujinsBatik/database/rating_dbms.html?${queryParams.toString()}`;
+            });
         });
     </script>
 </body>

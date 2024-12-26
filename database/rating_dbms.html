@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating Database</title>
+    <link rel="stylesheet" href="../css style/navbar_style.css">
+    <link rel="stylesheet" href="../css style/footerstyle.css">
+    <link rel="stylesheet" href="../css style/rating_dbms_style.css">
+
+    <!-- Boxicon -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/26bb1f1303.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-container"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/BujinsBatik/pages/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+        });
+    </script>
+
+    <!-- Rating Database Section -->
+    <section class="rating-dbms">
+        <div class="rating-container">
+            <h1>User Feedback Storage</h1>
+            <p>All submitted feedback is stored here and can be fetched by other pages.</p>
+            
+            <div id="feedbackMessage"></div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <footer id="footer"></footer>
+    <script>
+        fetch('../pages/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <script>
+        // Simulated Feedback Storage
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('name');
+            const email = params.get('email');
+            const rating = params.get('rating');
+            const feedback = params.get('feedback');
+
+            if (name && email && rating && feedback) {
+                let storedFeedback = localStorage.getItem('userFeedback') || '[]';
+                let feedbackList = JSON.parse(storedFeedback);
+                
+                feedbackList.push({
+                    name: name,
+                    email: email,
+                    rating: rating,
+                    feedback: feedback
+                });
+                
+                localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
+
+                document.getElementById('feedbackMessage').innerHTML = '<p>Feedback successfully stored!</p>';
+            }
+        });
+    </script>
+</body>
+</html>
