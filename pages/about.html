@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About Us</title>
         <link rel="stylesheet" href="../css style/aboutus_style.css"> <!-- Include About Us Stylesheet -->
+        <link rel="stylesheet" href="/css style/navbar_style.css">
+
 
         <!-- Boxicon -->
         <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -20,7 +22,7 @@
     <div id="navbar-container"></div> <!-- Placeholder for Navbar -->
 
     <script>
-        fetch('../pages/navbar.html')
+        fetch('/pages/navbar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('navbar-container').innerHTML = data;
