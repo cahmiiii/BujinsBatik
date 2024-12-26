@@ -106,11 +106,6 @@ body {
 @media (min-width: 992px) {
     .review-carousel {
         grid-auto-columns: calc((100% / 3) - 12px);
-        scrollbar-width: none;
-    }
-
-    .review-carousel::-webkit-scrollbar {
-        display: none;
     }
 
     .review-card {
@@ -122,11 +117,6 @@ body {
 @media (min-width: 1200px) {
     .review-carousel {
         grid-auto-columns: calc((100% / 5) - 12px);
-        scrollbar-width: none;
-    }
-
-    .review-carousel::-webkit-scrollbar {
-        display: none;
     }
 
     .review-card {
