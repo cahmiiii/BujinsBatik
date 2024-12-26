@@ -21,7 +21,7 @@ body {
     align-items: center;
     text-align: center;
     padding: 2rem;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    background: linear-gradient(to bottom, #ffffff, #f3f4f6);
 }
 
 .rating-container {
@@ -49,18 +49,8 @@ body {
 #feedbackMessage {
     font-size: 1rem;
     font-weight: bold;
-    color: #28a745;
+    color: #04023c;
     margin-top: 1rem;
-}
-
-/* Footer Placeholder */
-footer {
-    background: #2c3e50;
-    color: #ecf0f1;
-    text-align: center;
-    padding: 1rem 0;
-    font-size: 0.9rem;
-    margin-top: auto;
 }
 
 /* Responsive Design */
