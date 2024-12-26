@@ -195,10 +195,11 @@ section {
     grid-auto-flow: column;
     grid-auto-columns: calc((100% / 3) - 12px);
     gap: 16px;
-    overflow: hidden;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    scrollbar-width: 0;
+    scrollbar-width: none; 
+    -webkit-overflow-scrolling: touch;
 }
 
 .review-carousel::-webkit-scrollbar {
@@ -227,13 +228,27 @@ section {
 .review-carousel.dragging {
     scroll-snap-type: none;
     scroll-behavior: auto;
+    cursor: grabbing;
+}
+
+.review-card {
+    scroll-snap-align: start;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 342px;
+    width: 260px;
+    user-select: none; 
 }
 
 .review-card i {
     color: #fbd875;
 }
 
-.review-card .review-img img {
+.review-card img {
     width: 140px;
     height: 140px;
     object-fit: cover;
