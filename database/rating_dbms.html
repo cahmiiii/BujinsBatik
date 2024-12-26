@@ -76,6 +76,11 @@
                 localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
 
                 document.getElementById('feedbackMessage').innerHTML = '<p>Feedback successfully stored!</p>';
+                
+                // Auto-redirect after 2 seconds
+                setTimeout(() => {
+                    window.location.href = '/BujinsBatik/index.html';
+                }, 2000);
             }
         });
     </script>
