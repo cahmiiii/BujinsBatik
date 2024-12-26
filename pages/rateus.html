@@ -32,6 +32,14 @@
         });
     </script>
 
+    <!-- Display Reviews Section -->
+    <section class="review-display">
+        <h2>User Reviews</h2>
+        <div class="review-carousel">
+            <!-- Reviews will be dynamically added here -->
+        </div>
+    </section>
+
     <!-- Rate Us Section -->
     <section class="rateus">
         <div class="rateus-container">
@@ -106,14 +114,36 @@
                     return;
                 }
 
-                const queryParams = new URLSearchParams({
+                let storedFeedback = localStorage.getItem('userFeedback') || '[]';
+                let feedbackList = JSON.parse(storedFeedback);
+
+                feedbackList.push({
                     name: name,
                     email: email,
                     rating: selectedRating,
                     feedback: feedback
                 });
 
-                window.location.href = `/BujinsBatik/database/rating_dbms.html?${queryParams.toString()}`;
+                localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
+                alert('Feedback successfully stored!');
+                location.reload();
+            });
+
+            // Display Feedback
+            const reviewCarousel = document.querySelector('.review-carousel');
+            let storedFeedback = localStorage.getItem('userFeedback') || '[]';
+            let feedbackList = JSON.parse(storedFeedback);
+
+            feedbackList.forEach((review) => {
+                const reviewCard = document.createElement('div');
+                reviewCard.classList.add('review-card');
+                reviewCard.innerHTML = `
+                    <h3>${review.name}</h3>
+                    <p>Email: ${review.email}</p>
+                    <p>Rating: ${'★'.repeat(review.rating)}</p>
+                    <p>${review.feedback}</p>
+                `;
+                reviewCarousel.appendChild(reviewCard);
             });
         });
     </script>

@@ -10,6 +10,52 @@ body {
     background-color: #f9fafc;
 }
 
+.review-display {
+    padding: 2rem;
+    text-align: center;
+    background: #f9fafc;
+}
+
+.review-display h2 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+.review-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.review-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.review-card {
+    min-width: 300px;
+    max-width: 300px;
+    scroll-snap-align: start;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+}
+
+.review-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.review-card p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
 /* Rate Us Section */
 .rateus {
     display: flex;
