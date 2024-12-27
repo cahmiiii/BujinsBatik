@@ -113,11 +113,11 @@ p {
 }
 
 .product2-img img {
-    max-width: 400px;
+    max-width: 400px; /* Ensure same size as Product 1 and Product 3 */
     max-height: 400px;
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 10px; /* Slightly rounded corners */
     object-fit: cover;
     border: none;
     transition: transform 0.3s ease-in-out;
