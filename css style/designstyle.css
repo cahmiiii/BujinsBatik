@@ -32,43 +32,130 @@ p {
     text-align: center;
 }
 
-/* General Product Section Styling */
-.product,
-.product2,
+/* === PRODUCT 1 - MENS LOOK === */
+.product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-direction: row; /* Image on the right */
+}
+
+.product-text {
+    flex: 1;
+    text-align: left;
+}
+
+.product-text h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.product-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+}
+
+.product-img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-img img {
+    max-width: 400px;
+    max-height: 400px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-img img:hover {
+    transform: scale(1.05);
+}
+
+/* === PRODUCT 2 - LADIES LOOK === */
+.product2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-direction: row-reverse; /* Image on the left */
+}
+
+.product2-text {
+    flex: 1;
+    text-align: left;
+}
+
+.product2-text h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.product2-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+}
+
+.product2-img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product2-img img {
+    max-width: 350px;
+    max-height: 350px;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.product2-img img:hover {
+    transform: scale(1.05);
+}
+
+/* === PRODUCT 3 - BATIK UNIFORM === */
 .product3 {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
     margin-bottom: 3rem;
+    flex-direction: row; /* Image on the right */
+    background-color: #f3f4f6;
+    padding: 40px 5%;
+    border-radius: 10px;
 }
 
-/* Text Section */
-.product-text,
-.product2-text,
 .product3-text {
     flex: 1;
     text-align: left;
 }
 
-.product-text h1,
-.product2-text h1,
 .product3-text h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
 }
 
-.product-text p,
-.product2-text p,
 .product3-text p {
     font-size: 1rem;
     line-height: 1.6;
-    color: #666;
+    color: #444;
 }
 
-/* Image Section */
-.product-img,
-.product2-img,
 .product3-img {
     flex: 1;
     display: flex;
@@ -76,39 +163,24 @@ p {
     align-items: center;
 }
 
-.product-img img,
-.product2-img img,
 .product3-img img {
-    max-width: 400px; /* Constrain max width */
-    max-height: 400px; /* Constrain max height */
+    max-width: 300px;
+    max-height: 300px;
     width: 100%;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #ddd;
     transition: transform 0.3s ease-in-out;
-    object-fit: cover; /* Ensures image maintains aspect ratio */
 }
 
-.product-img img:hover,
-.product2-img img:hover,
 .product3-img img:hover {
-    transform: scale(1.05);
+    transform: rotate(5deg);
 }
 
-/* Alternate Layout for Odd Sections */
-.product {
-    flex-direction: row;
-}
+/* === RESPONSIVE DESIGN === */
 
-.product2 {
-    flex-direction: row-reverse;
-}
-
-.product3 {
-    flex-direction: row;
-}
-
-/* Responsive Adjustments */
+/* Tablet View */
 @media (max-width: 992px) {
     .product,
     .product2,
@@ -120,7 +192,13 @@ p {
     .product-img,
     .product2-img,
     .product3-img {
-        order: -1; /* Image on top */
+        order: -1; /* Images go on top */
+    }
+
+    .product-img img,
+    .product2-img img,
+    .product3-img img {
+        max-width: 300px;
     }
 
     .product-text,
@@ -128,14 +206,9 @@ p {
     .product3-text {
         text-align: center;
     }
-
-    .product-img img,
-    .product2-img img,
-    .product3-img img {
-        max-width: 300px; /* Smaller image for tablets */
-    }
 }
 
+/* Mobile View */
 @media (max-width: 768px) {
     section {
         padding: 40px 5%;
@@ -152,10 +225,11 @@ p {
     .product-img img,
     .product2-img img,
     .product3-img img {
-        max-width: 250px; /* Adjust image size for smaller tablets */
+        max-width: 250px;
     }
 }
 
+/* Small Mobile View */
 @media (max-width: 480px) {
     section {
         padding: 20px 5%;
@@ -172,6 +246,6 @@ p {
     .product-img img,
     .product2-img img,
     .product3-img img {
-        max-width: 200px; /* Adjust image size for mobile view */
+        max-width: 200px;
     }
 }
