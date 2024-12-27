@@ -47,85 +47,78 @@ p {
 /* -------------------------- */
 
 .who-is-bujin {
-    padding: 70px 12%;
-    background: #fff;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
+    padding: 50px 12%;
+    flex-direction: row; /* Default for Desktop */
 }
 
-/* Container for text and image */
 .bujin-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
+    flex-direction: row;
 }
 
-/* IMAGE SECTION */
-.bujin-img {
-    flex: 0 0 40%;
-    max-width: 400px;
-}
-
-.bujin-img img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-}
-
-/* TEXT SECTION */
 .bujin-text {
     flex: 1;
+    max-width: 50%;
 }
 
 .bujin-text h1 {
     font-size: 2.5rem;
-    margin-bottom: 15px;
-    color: #333;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
 .bujin-text p {
     font-size: 1rem;
-    color: #666;
-    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #444;
 }
 
-.bujin-text strong {
-    color: #04023c;
+.bujin-img {
+    flex: 1;
+    max-width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* MOBILE VIEW */
+.bujin-img img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Mobile View */
 @media (max-width: 768px) {
     .who-is-bujin {
         flex-direction: column;
         text-align: center;
     }
 
-    .bujin-img {
-        flex: none;
-        max-width: 70%;
-        margin-bottom: 1rem;
+    .bujin-container {
+        flex-direction: column;
     }
 
     .bujin-text {
-        text-align: center;
+        max-width: 100%;
+        order: 2;
     }
 
-    .bujin-text h1 {
-        font-size: 2rem;
-    }
-
-    .bujin-text p {
-        font-size: 0.9rem;
-    }
-}
-
-/* LARGE DESKTOP VIEW */
-@media (min-width: 1200px) {
     .bujin-img {
-        max-width: 450px;
+        max-width: 100%;
+        order: 1;
+        margin-bottom: 1.5rem;
+    }
+
+    .bujin-img img {
+        max-width: 80%;
     }
 }
 
