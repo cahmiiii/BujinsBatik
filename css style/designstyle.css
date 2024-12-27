@@ -90,7 +90,7 @@ p {
 }
 
 .product2-text {
-    flex: 1;
+    order: 1;
     text-align: left;
 }
 
@@ -106,7 +106,7 @@ p {
 }
 
 .product2-img {
-    flex: 2;
+    order: 2;
     display: flex;
     justify-content: center;
     align-items: center;
