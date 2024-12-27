@@ -106,12 +106,12 @@ p {
     }
 
     .bujin-text {
-        order: 1;
+        order: 1; 
         text-align: center;
     }
 
     .bujin-img {
-        order: 2;
+        order: 2; 
         margin-top: 20px;
     }
 
@@ -127,6 +127,7 @@ p {
         max-width: 70%;
     }
 }
+
 
 /* -------------------------- */
 /* ESTABLISHMENT SECTION */
