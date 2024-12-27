@@ -105,6 +105,17 @@ p {
     border: none;
 }
 
+/* LARGE DESKTOP VIEW */
+@media (min-width: 1200px) {
+    .bujin-container {
+        gap: 3rem;
+    }
+
+    .bujin-img img {
+        max-width: 400px;
+    }
+}
+
 /* Mobile View Adjustment */
 @media (max-width: 768px) {
     .who-is-bujin {
@@ -118,14 +129,14 @@ p {
     }
 
     .bujin-text {
-        order: 1; /* Text first */
+        order: 1; 
         text-align: center;
     }
 
     .bujin-img {
-        position: static; /* Remove absolute positioning */
+        position: static; 
         transform: none;
-        order: 2; /* Image second */
+        order: 2; 
         margin-top: 20px;
     }
 
