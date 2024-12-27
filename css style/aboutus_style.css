@@ -140,11 +140,11 @@ p {
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
-    flex-direction: row-reverse;
+    flex-direction: row;
 }
 
 .establishment-img {
-    flex: 1;
+    order: 2;
     max-width: 40%;
     display: flex;
     justify-content: center;
@@ -160,7 +160,7 @@ p {
 }
 
 .establishment-text {
-    flex: 1;
+    order: 1;
     max-width: 50%;
 }
 
