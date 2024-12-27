@@ -86,11 +86,12 @@ p {
     justify-content: space-between;
     gap: 2rem;
     margin-bottom: 3rem;
-    flex-direction: row-reverse;
+    flex-direction: row; /* Set image on the left */
 }
 
 .product2-text {
-    order: 2;
+    order: 2; /* Text comes after image */
+    flex: 1;
     text-align: left;
 }
 
@@ -106,7 +107,8 @@ p {
 }
 
 .product2-img {
-    order: 1;
+    order: 1; /* Image comes before text */
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,7 +117,6 @@ p {
 .product2-img img {
     width: 400px;  /* Fixed width for desktop */
     height: 400px; /* Fixed height for desktop */
-    max-width: none; /* Prevent image from scaling down */
     object-fit: cover;
     border-radius: 10px;
     transition: transform 0.3s ease-in-out;
