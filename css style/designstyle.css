@@ -39,6 +39,8 @@ p {
     justify-content: space-between;
     gap: 2rem;
     margin-bottom: 3rem;
+    background-color: #f3f4f6;
+    padding: 40px 5%;
     flex-direction: row; /* Image on the right */
 }
 
