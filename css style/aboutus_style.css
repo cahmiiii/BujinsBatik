@@ -50,25 +50,20 @@ p {
     position: relative;
     padding: 70px 12%;
     background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
 }
 
+/* Container for text and image */
 .bujin-container {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    text-align: left;
 }
 
 /* TEXT SECTION */
 .bujin-text {
-    flex: 1;
-    z-index: 2;
-    text-align: left;
+    max-width: 600px;
+    z-index: 1;
 }
 
 .bujin-text h1 {
@@ -90,10 +85,10 @@ p {
 /* IMAGE SECTION */
 .bujin-img {
     position: absolute;
-    right: 0;
-    top: 0;
-    transform: translateY(10%);
-    z-index: 1;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    z-index: 0;
 }
 
 .bujin-img img {
@@ -101,48 +96,35 @@ p {
     height: auto;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: none;
     border: none;
 }
 
-/* LARGE DESKTOP VIEW */
-@media (min-width: 1200px) {
-    .bujin-container {
-        gap: 3rem;
-    }
-
-    .bujin-img img {
-        max-width: 400px;
-    }
-}
-
-/* Mobile View Adjustment */
+/* MOBILE VIEW */
 @media (max-width: 768px) {
     .who-is-bujin {
-        flex-direction: column;
-        text-align: center;
+        padding: 50px 5%;
     }
 
     .bujin-container {
         flex-direction: column;
-        gap: 1rem;
-    }
-
-    .bujin-text {
-        order: 1; 
         text-align: center;
     }
 
     .bujin-img {
-        position: static; 
+        position: relative; /* Change to relative for mobile */
+        top: unset;
+        left: unset;
         transform: none;
-        order: 2; 
         margin-top: 20px;
     }
 
     .bujin-img img {
         width: 70%;
         max-width: 300px;
+    }
+
+    .bujin-text {
+        text-align: center;
     }
 
     .bujin-text h1 {
@@ -153,6 +135,14 @@ p {
         font-size: 0.9rem;
     }
 }
+
+/* LARGE DESKTOP VIEW */
+@media (min-width: 1200px) {
+    .bujin-img img {
+        width: 400px;
+    }
+}
+
 
 
 /* -------------------------- */
