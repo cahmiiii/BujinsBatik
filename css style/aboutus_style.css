@@ -127,37 +127,91 @@ p {
 /* -------------------------- */
 
 .establishment {
-    background: linear-gradient(to bottom, #ffffff, #f3f4f6);
-    text-align: center;
-    padding: 60px 12%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 12%;
+    flex-direction: row;
+    gap: 2rem;
 }
 
 .establishment-container {
-    max-width: 900px;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-direction: row;
 }
 
-.establishment h1 {
+.establishment-img {
+    flex: 1;
+    max-width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.establishment-img img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.establishment-text {
+    flex: 1;
+    max-width: 50%;
+}
+
+.establishment-text h1 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #333;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
-.establishment p {
+.establishment-text p {
     font-size: 1rem;
-    line-height: 1.8;
-    color: #555;
+    line-height: 1.6;
+    color: #444;
 }
 
+/* Mobile View */
 @media (max-width: 768px) {
-    .establishment h1 {
+    .establishment {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 5%;
+    }
+
+    .establishment-container {
+        flex-direction: column;
+    }
+
+    .establishment-img {
+        max-width: 100%;
+        order: 1;
+        margin-bottom: 1.5rem;
+    }
+
+    .establishment-img img {
+        max-width: 80%;
+    }
+
+    .establishment-text {
+        max-width: 100%;
+        order: 2;
+    }
+
+    .establishment-text h1 {
         font-size: 2rem;
     }
 
-    .establishment p {
-        font-size: 0.9rem;
+    .establishment-text p {
+        font-size: 0.95rem;
     }
 }
+
 
 /* -------------------------- */
 /* ACADEMY SECTION */
