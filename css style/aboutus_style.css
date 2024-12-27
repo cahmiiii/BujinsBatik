@@ -256,7 +256,7 @@ p {
 
 .award {
     padding: 60px 12%;
-    background-color: #f9fafc;
+    background-color: #04023c;
     text-align: center;
 }
 
@@ -264,6 +264,7 @@ p {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 2rem;
+    color:#fff;
 }
 
 .award-carousel {
