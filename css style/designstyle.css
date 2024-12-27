@@ -86,7 +86,7 @@ p {
     justify-content: space-between;
     gap: 2rem;
     margin-bottom: 3rem;
-    flex-direction: row-reverse; /* Image on the left */
+    flex-direction: row-reverse;
 }
 
 .product2-text {
@@ -113,13 +113,13 @@ p {
 }
 
 .product2-img img {
-    max-width: 350px;
-    max-height: 350px;
+    max-width: 400px;
+    max-height: 400px;
     width: 100%;
     height: auto;
-    border-radius: 15px;
+    border-radius: 10px;
     object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
     transition: transform 0.3s ease-in-out;
 }
 
