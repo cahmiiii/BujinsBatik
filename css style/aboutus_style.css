@@ -47,38 +47,27 @@ p {
 /* -------------------------- */
 
 .who-is-bujin {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+    position: relative;
     padding: 70px 12%;
     background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
 }
 
 .bujin-container {
+    position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
-    flex-wrap: wrap;
 }
 
-.bujin-img {
-    flex: 1;
-    text-align: center;
-}
-
-.bujin-img img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: none;
-    border: none;
-}
-
+/* TEXT SECTION */
 .bujin-text {
     flex: 1;
+    z-index: 2;
     text-align: left;
 }
 
@@ -98,6 +87,24 @@ p {
     color: #04023c;
 }
 
+/* IMAGE SECTION */
+.bujin-img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(10%);
+    z-index: 1;
+}
+
+.bujin-img img {
+    width: 350px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: none;
+    border: none;
+}
+
 /* Mobile View Adjustment */
 @media (max-width: 768px) {
     .who-is-bujin {
@@ -105,14 +112,26 @@ p {
         text-align: center;
     }
 
+    .bujin-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
     .bujin-text {
-        order: 1; 
+        order: 1; /* Text first */
         text-align: center;
     }
 
     .bujin-img {
-        order: 2; 
+        position: static; /* Remove absolute positioning */
+        transform: none;
+        order: 2; /* Image second */
         margin-top: 20px;
+    }
+
+    .bujin-img img {
+        width: 70%;
+        max-width: 300px;
     }
 
     .bujin-text h1 {
@@ -121,10 +140,6 @@ p {
 
     .bujin-text p {
         font-size: 0.9rem;
-    }
-
-    .bujin-img img {
-        max-width: 70%;
     }
 }
 
