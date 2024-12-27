@@ -71,8 +71,10 @@ p {
     width: 100%;
     max-width: 400px;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: none;
+    border: none;
 }
 
 .bujin-text {
@@ -96,15 +98,21 @@ p {
     color: #04023c;
 }
 
-
+/* Mobile View Adjustment */
 @media (max-width: 768px) {
     .who-is-bujin {
-        flex-direction: column-reverse;
+        flex-direction: column;
         text-align: center;
     }
 
     .bujin-text {
+        order: 1;
         text-align: center;
+    }
+
+    .bujin-img {
+        order: 2;
+        margin-top: 20px;
     }
 
     .bujin-text h1 {
@@ -116,7 +124,7 @@ p {
     }
 
     .bujin-img img {
-        max-width: 80%;
+        max-width: 70%;
     }
 }
 
