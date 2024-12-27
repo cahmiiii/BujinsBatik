@@ -255,74 +255,87 @@ p {
 /* -------------------------- */
 
 .award {
-    display: flex;
-    background: #04023c;
-    align-items: center;
-    justify-content: center;
-    min-height: 70vh;
+    padding: 60px 12%;
+    background-color: #f9fafc;
     text-align: center;
-    padding: 0 35px;
 }
 
-.award-content {
-    padding-bottom: 100px;
-    max-width: 1100px;
-    width: 100%;
-    position: relative;
+.award-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
 }
 
-.award-content h1{
-    font-size: var(--h1-font);
-    margin-right: 25px;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-.award-content .award-carousel {
+.award-carousel {
     display: grid;
-    margin-left: 50px;
-    grid-auto-flow: column;
-    grid-auto-columns: calc((100% / 3) - 12px);
-    gap: 16px;
-    overflow: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: 0;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row on desktop */
+    gap: 1.5rem;
+    justify-content: center;
 }
 
-.award-carousel .award-card {
-    scroll-snap-align: start;
-    height: 342px;
-    width: 260px;
-    list-style: none;
+/* Award Card Styling */
+.award-card {
     background: #fff;
     border-radius: 10px;
-    display: flex;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
 }
 
-.award-card .award-img img {
-    width: 140px;
-    height: 140px;
+.award-card:hover {
+    transform: translateY(-5px);
+}
+
+.award-img img {
+    width: 80px;
+    height: 80px;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #fff;
+    margin-bottom: 10px;
 }
 
 .award-card h3 {
-    font-weight: 500;
-    font-size: 1.56rem;
-    margin: 30px 0 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
 .award-card span {
-    color: #04023c;
-    font-size: 1rem;
-    margin: 30px 0 5px;
-    padding-left: 5px;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Mobile View: Horizontal Scroll */
+@media (max-width: 768px) {
+    .award-carousel {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        padding-bottom: 10px;
+    }
+
+    .award-carousel::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .award-carousel::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+
+    .award-carousel::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .award-card {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        width: 80%;
+        max-width: 300px;
+    }
 }
 
 /* -------------------------- */
@@ -390,64 +403,6 @@ iframe {
     }
 }
 
-@media screen and (max-width: 1100px) {
-    .about {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-        height: auto;
-        margin-left: 0px;
-    }
-
-    .about-text {
-        padding: 60px;
-        margin-bottom: 40px;
-        margin-left: 0px;
-    }
-
-    .about-text h1 {
-        margin-left: 0px;
-    }
-
-    .about-text p {
-        color: black;
-        font-size: var(--p-font);
-        mask-border: 40px;
-        margin-bottom: 40px;
-        padding-right: 0px;
-        margin-left: 0px;
-    }
-
-    .aboutcta-btn {
-        margin-left: 0px;
-    }
-
-    .award-content .award-carousel {
-        margin-left: 55px;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .award-content .award-carousel {
-        margin-left: 32px;
-    }
-}
-
-@media screen and (max-width: 900px) {
-
-    .award-content .award-carousel {
-        margin-left: 9px;
-    }
-}
-
-@media screen and (max-width: 850px) {
-    .award-content .award-carousel {
-        grid-auto-columns: calc((100% / 2) - 12px);
-        margin-left: 80px;
-    }
-}
-
 @media screen and (max-width: 768px) {
     h1 {
         font-size: 2rem;
@@ -456,26 +411,10 @@ iframe {
     section {
         padding: 40px 8%;
     }
-    
-    .about {
-        gap: 0px;
-    }
 
     :root {
         --h1-font: 3rem;
         --h2-font: 2rem;
-    }
-
-    .award-content .award-carousel {
-        grid-auto-columns: calc((100% / 2) - 12px);
-        margin-left: 50px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .award-content .award-carousel {
-        grid-auto-columns: 100%;
-        margin-left: 120px;
     }
 }
 
@@ -492,18 +431,5 @@ iframe {
         --h1-font: 2.4rem;
         --h2-font: 1.8rem;
     }
-
-    .award-content .award-carousel {
-        grid-auto-columns: 100%;
-        margin-left: 75px;
-    }
 }
-
-@media screen and (max-width: 400px) {
-    .award-content .award-carousel {
-        grid-auto-columns: 100%;
-        margin-left: 30px;
-    }
-}
-
 
