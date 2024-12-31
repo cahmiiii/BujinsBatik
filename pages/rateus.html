@@ -178,9 +178,10 @@
                 reviewCard.innerHTML = `
                     <h3>${name}</h3>
                     <p>Rating: ${'★'.repeat(selectedRating)}</p>
-                    <p>${feedback}</p>
+                    <span class="review-feedback">${feedback}</span>
                 `;
                 reviewCarousel.appendChild(reviewCard);
+
 
                 // Clear Form Fields
                 document.getElementById('rateusForm').reset();

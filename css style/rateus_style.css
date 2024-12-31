@@ -59,14 +59,14 @@ body {
 
 /* === REVIEW CARD === */
 .review-card {
-    min-height: 250px; /* Adjust card height */
+    min-height: 250px;
     min-width: 300px;
     max-width: 300px;
     scroll-snap-align: start;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem; /* Increased padding */
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -90,12 +90,25 @@ body {
 }
 
 .review-card p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #555;
     margin: 0.5rem 0;
     text-align: center;
 }
 
+/* Feedback Text */
+.review-feedback {
+    font-size: 0.95rem;
+    color: #555;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+    text-align: center;
+    display: block; /* Ensures span behaves like a block */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Rating Styling */
 .review-card .rating {
     margin-top: 1rem;
 }
