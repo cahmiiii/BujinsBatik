@@ -76,99 +76,60 @@
         </div>
     </section>
 
-    <!--- feedback rating --->
+    <!-- Feedback Section -->
     <section class="review">
         <div class="review-content">
-            
-            <ul class="review-carousel">
-                <li class="review-card">
-                    <div class="review-img">
-                        <img src="img/Profile pic (1).jpg" alt="">
-                        <h3>James Miller</h3>
-                        <span>Chic designs, top quality!</span>
-                    </div>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </li>
-                <li class="review-card">
-                    <div class="review-img">
-                        <img src="img/Profile pic (2).jpg" alt="" draggable="false">
-                        <h3>Sophia Lopez</h3>
-                        <span>Trendy styles, excellent service</span>
-                    </div>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </li>
-                <li class="review-card">
-                    <div class="review-img">
-                        <img src="img/Profile pic (3).jpg" alt="" draggable="false">
-                        <h3>Benjamin Carter</h3>
-                        <span>Unique pieces, stand out!</span>
-                    </div>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </li>
-                <li class="review-card">
-                    <div class="review-img">
-                        <img src="img/Profile pic (4).jpg" alt="" draggable="false">
-                        <h3>Emma Baker</h3>
-                        <span>Stylish and top quality!</span>
-                    </div>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </li>
-                <li class="review-card">
-                    <div class="review-img">
-                        <img src="img/Profile pic (5).jpg" alt="" draggable="false">
-                        <h3>Lucas Rodriguez</h3>
-                        <span>Trendy styles, great service.</span>
-                    </div>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </li>
-                <li class="review-card">
-                    <div class="review-img">
-                        <img src="img/Profile pic (6).jpg" alt="" draggable="false">
-                        <h3>Isabella Wright</h3>
-                        <span>Unique pieces, standout fashion!</span>
-                    </div>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </li>
+            <h2>User Reviews</h2>
+            <ul class="review-carousel" id="review-container">
+                <!-- Reviews will be dynamically loaded here -->
             </ul>
-            
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchReviews();
+        });
+
+        function fetchReviews() {
+            // Fetch reviews from localStorage
+            let storedFeedback = localStorage.getItem('userFeedback') || '[]';
+            let feedbackList = JSON.parse(storedFeedback);
+
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = ''; // Clear existing content
+
+            if (feedbackList.length === 0) {
+                reviewContainer.innerHTML = '<p>No reviews available.</p>';
+                return;
+            }
+
+            feedbackList.forEach(feedback => {
+                const reviewCard = document.createElement('li');
+                reviewCard.classList.add('review-card');
+
+                reviewCard.innerHTML = `
+                    <div class="review-img">
+                        <img src="img/default-profile.png" alt="User Profile">
+                        <h3>${feedback.name}</h3>
+                        <span>${feedback.feedback}</span>
+                    </div>
+                    <div class="rating">
+                        ${getStarRating(feedback.rating)}
+                    </div>
+                `;
+                reviewContainer.appendChild(reviewCard);
+            });
+        }
+
+        function getStarRating(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += i <= rating ? '<i class="fa fa-star"></i>' : '<i class="fa fa-star-o"></i>';
+            }
+            return stars;
+        }
+    </script>
 
     <!--- Latest News --->
     <section class="cta-info">
