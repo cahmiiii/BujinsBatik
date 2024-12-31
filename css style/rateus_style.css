@@ -108,6 +108,13 @@ body {
     overflow-wrap: break-word;
 }
 
+.review-card span {
+    color: #04023c;
+    font-size: 1rem;
+    margin: 30px 0 5px;
+    padding-left: 5px;
+}
+
 /* Rating Styling */
 .review-card .rating {
     margin-top: 1rem;
