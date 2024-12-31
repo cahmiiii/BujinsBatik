@@ -60,6 +60,8 @@ body {
 
 .review-card {
     flex: 0 0 auto;
+    text-align: center;
+    min-height: 200px;
     min-width: 300px;
     max-width: 300px;
     scroll-snap-align: start;
