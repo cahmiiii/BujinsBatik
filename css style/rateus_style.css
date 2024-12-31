@@ -73,9 +73,8 @@ body {
     justify-content: center;
     text-align: center;
     margin: 0 auto;
-    transition: transform 0.3s ease-in-out;
-    overflow-wrap: break-word; /* Ensure text wraps */
-    word-break: break-word;
+    overflow: hidden; /* Prevents overflow of the card itself */
+    word-wrap: break-word;
 }
 
 .review-card:hover {
@@ -94,6 +93,10 @@ body {
     color: #555;
     margin: 0.5rem 0;
     text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    line-height: 1.4;
 }
 
 /* Feedback Text */
@@ -101,18 +104,13 @@ body {
     font-size: 0.95rem;
     color: #555;
     margin-top: 0.5rem;
-    line-height: 1.4;
     text-align: center;
-    display: block; /* Ensures span behaves like a block */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-.review-card span {
-    color: #04023c;
-    font-size: 1rem;
-    margin: 30px 0 5px;
-    padding-left: 5px;
+    word-wrap: break-word; /* Ensures long words break onto the next line */
+    overflow-wrap: break-word; /* Modern equivalent of word-wrap */
+    white-space: normal; /* Allows text to wrap naturally */
+    line-height: 1.5; /* Adds spacing between lines */
+    width: 90%; /* Prevents text from stretching edge-to-edge */
+    display: block; /* Ensures span behaves like a block element for better wrapping */
 }
 
 /* Rating Styling */
