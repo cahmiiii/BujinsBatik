@@ -72,8 +72,10 @@ body {
     align-items: center;
     justify-content: space-between; 
     text-align: center;
+    overflow: hidden;
     margin: 0 auto;
     transition: transform 0.3s ease-in-out;
+    word-wrap: break-word;
 }
 
 .review-card:hover {
@@ -91,6 +93,10 @@ body {
     color: #555;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 3.6em;
+    line-height: 1.2em;
 }
 
 .rating {
