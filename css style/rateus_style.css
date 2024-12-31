@@ -59,23 +59,23 @@ body {
 
 /* === REVIEW CARD === */
 .review-card {
-    min-height: 250px;
+    min-height: 250px; /* Adjust card height */
     min-width: 300px;
     max-width: 300px;
     scroll-snap-align: start;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
+    padding: 1.5rem; /* Increased padding */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
     margin: 0 auto;
     transition: transform 0.3s ease-in-out;
-    overflow: hidden;
-    word-wrap: break-word;
+    overflow-wrap: break-word; /* Ensure text wraps */
+    word-break: break-word;
 }
 
 .review-card:hover {
@@ -86,30 +86,23 @@ body {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
     font-weight: 600;
+    text-align: center;
 }
 
 .review-card p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #555;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3; /* Limits to 3 lines */
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    word-break: break-word;
+    margin: 0.5rem 0;
+    text-align: center;
 }
 
-/* === RATING ICONS === */
-.rating {
-    margin-top: 0.5rem;
+.review-card .rating {
+    margin-top: 1rem;
 }
 
-.rating i {
+.review-card .rating i {
     color: #fbd875;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 /* === RESPONSIVE DESIGN === */
