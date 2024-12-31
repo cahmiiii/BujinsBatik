@@ -180,6 +180,14 @@ body {
     transform: scale(1.2);
 }
 
+#charCount {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+    text-align: right;
+}
+
+
 /* Form Inputs */
 .rateus-form input,
 .rateus-form textarea {

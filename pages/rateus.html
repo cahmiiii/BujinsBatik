@@ -66,7 +66,8 @@
                 </div>
                 <input type="text" id="name" name="name" placeholder="Your Name" required>
                 <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <textarea id="feedback" name="feedback" placeholder="Your Feedback" rows="5" required></textarea>
+                <textarea id="feedback" name="feedback" placeholder="Your Feedback" rows="5" maxlength="80" required></textarea>
+                <div id="charCount">0 / 80 characters</div>
                 <button type="button" class="rateus-btn" id="submitFeedback">Submit Feedback</button>
             </form>
         </div>
@@ -107,6 +108,20 @@
                     star.classList.toggle('highlighted', index < count);
                 });
             }
+
+            // Character Count Limit for Feedback Textarea
+            const feedbackTextarea = document.getElementById('feedback');
+            const charCount = document.getElementById('charCount');
+
+            feedbackTextarea.addEventListener('input', () => {
+                const currentLength = feedbackTextarea.value.length;
+                charCount.textContent = `${currentLength} / 80 characters`;
+
+                if (currentLength > 80) {
+                    feedbackTextarea.value = feedbackTextarea.value.substring(0, 80);
+                    charCount.textContent = `80 / 80 characters`;
+                }
+            });
 
             // Submit Feedback
             document.getElementById('submitFeedback').addEventListener('click', () => {
