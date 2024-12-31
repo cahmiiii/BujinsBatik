@@ -10,8 +10,7 @@ body {
     background-color: #f9fafc;
 }
 
-/* Review Display Section */
-/* Review Display Section */
+/* === REVIEW DISPLAY SECTION === */
 .review-display {
     padding: 2rem;
     text-align: center;
@@ -24,7 +23,7 @@ body {
     color: #333;
 }
 
-/* Review Carousel */
+/* === REVIEW CAROUSEL === */
 .review-carousel {
     display: flex;
     overflow-x: auto;
@@ -35,9 +34,9 @@ body {
     white-space: nowrap;
     cursor: grab;
     -webkit-overflow-scrolling: touch;
+    margin-top: 1rem;
 }
 
-/* Add Scrollbar for Desktop */
 .review-carousel::-webkit-scrollbar {
     height: 8px;
     background: #f1f1f1;
@@ -58,19 +57,20 @@ body {
     scroll-snap-type: none;
 }
 
+/* === REVIEW CARD === */
 .review-card {
-    min-height: 200px;
-    min-width: 300px;
-    max-width: 300px;
+    min-height: 250px; 
+    min-width: 350px;
+    max-width: 350px;
     scroll-snap-align: start;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; 
     text-align: center;
     margin: 0 auto;
     transition: transform 0.3s ease-in-out;
@@ -87,11 +87,24 @@ body {
 }
 
 .review-card p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #555;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-/* Responsive Adjustments */
+.rating {
+    margin-top: 0.5rem;
+}
+
+.rating i {
+    color: #fbd875;
+    font-size: 1rem;
+}
+
+/* === RESPONSIVE DESIGN === */
+
+/* Tablet View */
 @media (min-width: 768px) {
     .review-carousel {
         grid-auto-columns: calc((100% / 2) - 12px);
@@ -108,6 +121,7 @@ body {
     }
 }
 
+/* Desktop View */
 @media (min-width: 992px) {
     .review-carousel {
         grid-auto-columns: calc((100% / 3) - 12px);
@@ -119,6 +133,7 @@ body {
     }
 }
 
+/* Large Desktop View */
 @media (min-width: 1200px) {
     .review-carousel {
         grid-auto-columns: calc((100% / 5) - 12px);
