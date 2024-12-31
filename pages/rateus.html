@@ -115,7 +115,7 @@
             const emailError = document.getElementById('emailError');
 
             // Allowed domains for emails
-            const allowedDomains = [];
+            const allowedDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com'];
 
             emailInput.addEventListener('input', () => {
                 const emailValue = emailInput.value;
@@ -127,7 +127,7 @@
                 } else {
                     const domain = emailValue.split('@')[1];
                     if (!allowedDomains.includes(domain)) {
-                        emailError.textContent = ``;
+                        emailError.textContent = 'Please enter a valid email address.';
                         emailError.style.color = 'red';
                     } else {
                         emailError.textContent = '';
