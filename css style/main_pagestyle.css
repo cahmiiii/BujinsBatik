@@ -88,43 +88,6 @@ section {
     transform: scale(1.1);
 }
 
-.showcase-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-    align-items: center;
-    gap: 1.7rem;
-    text-align: center;
-}
-
-.showcase {
-    padding: 90px 12% 20px;
-    padding-bottom: 30px;
-    padding-top: 30px;
-}
-
-.showcase-box img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-}
-
-.showcase-btn {
-    display: inline-block;
-    font-size: var(--p-font);
-    color: #04023c;
-    border-bottom: 1px solid #04023c;
-    font-weight: 500;
-}
-
-.showcase-box {
-    transition: all .5s ease;
-}
-
-.showcase-box:hover {
-    transform: translateY(-8px);
-    cursor: pointer;
-}
-
 .latest-news {
     padding-top:30px;
     padding-bottom: 30px;
