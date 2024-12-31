@@ -59,9 +59,9 @@ body {
 
 /* === REVIEW CARD === */
 .review-card {
-    min-height: 250px; 
-    min-width: 350px;
-    max-width: 350px;
+    min-height: 250px;
+    min-width: 300px;
+    max-width: 300px;
     scroll-snap-align: start;
     background: #fff;
     border-radius: 12px;
@@ -70,11 +70,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
     text-align: center;
-    overflow: hidden;
     margin: 0 auto;
     transition: transform 0.3s ease-in-out;
+    overflow: hidden;
     word-wrap: break-word;
 }
 
@@ -89,16 +89,20 @@ body {
 }
 
 .review-card p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #555;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    text-overflow: ellipsis;
+    line-height: 1.4;
     overflow: hidden;
-    max-height: 3.6em;
-    line-height: 1.2em;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limits to 3 lines */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-break: break-word;
 }
 
+/* === RATING ICONS === */
 .rating {
     margin-top: 0.5rem;
 }
@@ -150,7 +154,6 @@ body {
         max-width: 18%;
     }
 }
-
 
 /* Rate Us Section */
 .rateus {
