@@ -145,12 +145,13 @@ p {
 .popup-content {
     background: #fff;
     border-radius: 8px;
-    width: 80%;
-    max-width: 600px;
+    width: auto;
+    max-width: 1200px;
     padding: 20px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    max-height: 90vh;
 }
 
 .popup-content h2 {
