@@ -189,19 +189,15 @@
                 return;
             }
 
+            // Hash the new password
+            const hashedPassword = await hashPassword(newPassword);
+
             let data = JSON.parse(localStorage.getItem(selectedUserType));
-            data[selectedUserIndex].password = newPassword;
+            data[selectedUserIndex].password = hashedPassword; // Save hashed password
             localStorage.setItem(selectedUserType, JSON.stringify(data));
 
             alert('Password updated successfully!');
             closeModal();
-
-            // Sync changes with `admin_dbms.html`
-            if (selectedUserType === 'admins') {
-                fetch('/BujinsBatik/admin/admin_dbms.html').then(() => {
-                    console.log('Admin password updated in database file');
-                });
-            }
             location.reload();
         }
 

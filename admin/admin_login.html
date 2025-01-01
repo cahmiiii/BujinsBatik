@@ -19,7 +19,7 @@
     </div>
 
     <script>
-        // ===== PASSWORD HASHING FUNCTION =====
+        // Password Hashing Function using SHA-256
         async function hashPassword(password) {
             const encoder = new TextEncoder();
             const data = encoder.encode(password);
@@ -29,14 +29,13 @@
                 .join('');
         }
 
-        // ===== CHECK LATEST PASSWORD AND LOGIN =====
+        // Login Validation
         document.getElementById('adminLoginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const email = document.getElementById('adminEmail').value.trim();
             const password = document.getElementById('adminPassword').value.trim();
 
-            // Fetch latest admins data from localStorage
             let admins = JSON.parse(localStorage.getItem('admins')) || [];
             if (admins.length === 0) {
                 alert('No registered admin accounts found!');
@@ -46,7 +45,7 @@
             // Hash the entered password
             const hashedPassword = await hashPassword(password);
 
-            // Check credentials against the latest data
+            // Validate admin credentials
             const validAdmin = admins.find(admin => admin.email === email && admin.password === hashedPassword);
 
             if (validAdmin) {
