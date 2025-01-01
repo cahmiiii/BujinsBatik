@@ -24,21 +24,50 @@
 </head>
 <body>
     <h1>Admin Panel</h1>
-    <table id="feedbackTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Rating</th>
-                <th>Feedback</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Dynamic Rows will be added here -->
-        </tbody>
-    </table>
+
+    <!-- Tab Buttons -->
+    <div class="tab-buttons">
+        <button id="feedbackTab" class="active" onclick="showTab('feedback')">View Feedback</button>
+        <button id="usersTab" onclick="showTab('users')">View Users</button>
+    </div>
+
+    <!-- Feedback Table -->
+    <div id="feedbackContent" class="tab-content active">
+        <h2>User Feedback</h2>
+        <table id="feedbackTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Rating</th>
+                    <th>Feedback</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic Rows will be added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Users Table -->
+    <div id="usersContent" class="tab-content">
+        <h2>Registered Users</h2>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Password (Hashed)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic Rows will be added here -->
+            </tbody>
+        </table>
+        <button onclick="clearUsers()">Clear User Database</button>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -67,8 +96,27 @@
                     feedbackTableBody.appendChild(row);
                 });
             }
+
+            // Handle Users Table
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            const userTableBody = document.querySelector('#userTable tbody');
+
+            if (users.length === 0) {
+                userTableBody.innerHTML = '<tr><td colspan="3">No registered users</td></tr>';
+            } else {
+                users.forEach(user => {
+                    let row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.password}</td>
+                    `;
+                    userTableBody.appendChild(row);
+                });
+            }
         });
 
+        // Delete Feedback
         function deleteFeedback(index) {
             if (confirm('Are you sure you want to delete this entry?')) {
                 let storedFeedback = localStorage.getItem('userFeedback') || '[]';
@@ -80,6 +128,35 @@
 
                 // Reload the page to refresh the table
                 location.reload();
+            }
+        }
+
+        // Clear User Database
+        function clearUsers() {
+            if (confirm('Are you sure you want to clear all user data?')) {
+                localStorage.removeItem('users');
+                alert('User database cleared!');
+                location.reload();
+            }
+        }
+
+        // Tab Switching
+        function showTab(tab) {
+            const feedbackContent = document.getElementById('feedbackContent');
+            const usersContent = document.getElementById('usersContent');
+            const feedbackTab = document.getElementById('feedbackTab');
+            const usersTab = document.getElementById('usersTab');
+
+            if (tab === 'feedback') {
+                feedbackContent.classList.add('active');
+                usersContent.classList.remove('active');
+                feedbackTab.classList.add('active');
+                usersTab.classList.remove('active');
+            } else if (tab === 'users') {
+                feedbackContent.classList.remove('active');
+                usersContent.classList.add('active');
+                feedbackTab.classList.remove('active');
+                usersTab.classList.add('active');
             }
         }
     </script>
