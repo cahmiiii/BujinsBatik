@@ -19,47 +19,33 @@
     </div>
 
     <script>
+        // Password Hashing Function using SHA-256
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
         document.getElementById('adminLoginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const email = document.getElementById('adminEmail').value.trim();
             const password = document.getElementById('adminPassword').value.trim();
 
-            try {
-                // Fetch admin data from admin_dbms.html
-                const response = await fetch('/BujinsBatik/admin/admin_dbms.html');
-                const text = await response.text();
+            let admins = JSON.parse(localStorage.getItem('admins')) || [];
+            const hashedPassword = await hashPassword(password); // Hash the entered password
 
-                // Parse Admin Data
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text, 'text/html');
-                const rows = doc.querySelectorAll('tbody tr');
-                let validAdmin = null;
+            const validAdmin = admins.find(admin => admin.email === email && admin.password === hashedPassword);
 
-                rows.forEach(row => {
-                    const columns = row.querySelectorAll('td');
-                    const storedEmail = columns[1]?.innerText.trim();
-                    const storedPassword = columns[2]?.innerText.trim();
-
-                    if (storedEmail === email && storedPassword === password) {
-                        validAdmin = {
-                            username: columns[0]?.innerText.trim(),
-                            email: storedEmail,
-                            password: storedPassword
-                        };
-                    }
-                });
-
-                if (validAdmin) {
-                    alert(`Welcome Admin, ${validAdmin.username}!`);
-                    localStorage.setItem('currentAdmin', JSON.stringify(validAdmin)); // Store admin session
-                    window.location.href = '/BujinsBatik/admin/admin.html'; // Redirect to Admin Panel
-                } else {
-                    alert('Invalid admin credentials!');
-                }
-            } catch (error) {
-                console.error('Error fetching admin data:', error);
-                alert('Failed to validate admin credentials. Please try again later.');
+            if (validAdmin) {
+                alert(`Welcome Admin, ${validAdmin.username}!`);
+                localStorage.setItem('currentAdmin', JSON.stringify(validAdmin)); // Store admin session
+                window.location.href = '/BujinsBatik/admin/admin.html'; // Redirect to Admin Panel
+            } else {
+                alert('Invalid admin credentials!');
             }
         });
     </script>
