@@ -21,7 +21,7 @@
 <body>
     <div id="navbar-container">
         <script>
-            fetch('pages/navbar.html')
+            fetch('/BujinsBatik/pages/navbar.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('navbar-container').innerHTML = data;
@@ -37,11 +37,10 @@
 
                     document.querySelector('.menu-button').addEventListener('click', showSidebar);
                     document.querySelector('.sidebar li').addEventListener('click', hideSidebar);
-                    
                     // Handle dynamic Login/Logout
                     const authLink = document.getElementById('authLink');
-                    const authLinkDesktop = document.getElementById('authLinkDesktop');
-                    const currentUser = localStorage.getItem('currentUser');
+                        const authLinkDesktop = document.getElementById('authLinkDesktop');
+                        const currentUser = localStorage.getItem('currentUser');
 
                     if (currentUser) {
                         authLink.textContent = 'Logout';
