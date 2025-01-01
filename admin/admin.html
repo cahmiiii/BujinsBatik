@@ -181,8 +181,13 @@
         }
 
         async function saveNewPassword() {
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmNewPassword').value;
+            const newPassword = document.getElementById('newPassword').value.trim();
+            const confirmPassword = document.getElementById('confirmNewPassword').value.trim();
+
+            if (!newPassword || !confirmPassword) {
+                alert('Both password fields are required!');
+                return;
+            }
 
             if (newPassword !== confirmPassword) {
                 alert('Passwords do not match!');
@@ -192,14 +197,42 @@
             // Hash the new password
             const hashedPassword = await hashPassword(newPassword);
 
-            let data = JSON.parse(localStorage.getItem(selectedUserType));
-            data[selectedUserIndex].password = hashedPassword; // Save hashed password
-            localStorage.setItem(selectedUserType, JSON.stringify(data));
+            // Update the selected user/admin in localStorage
+            let data = JSON.parse(localStorage.getItem(selectedUserType)) || [];
+            
+            if (selectedUserIndex !== null && data[selectedUserIndex]) {
+                data[selectedUserIndex].password = hashedPassword; // Update with hashed password
+                localStorage.setItem(selectedUserType, JSON.stringify(data));
 
-            alert('Password updated successfully!');
-            closeModal();
-            location.reload();
+                alert('Password updated successfully!');
+                closeModal();
+                location.reload();
+            } else {
+                alert('Failed to update password. Please try again.');
+            }
         }
+
+        function openPasswordModal(type, index) {
+            selectedUserType = type; // 'users' or 'admins'
+            selectedUserIndex = index; // Index of the user/admin in array
+            document.getElementById('passwordModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmNewPassword').value = '';
+        }
+
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
 
         // ===== TAB SWITCHING =====
         function showTab(tab) {
