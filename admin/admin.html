@@ -7,138 +7,126 @@
     <link rel="stylesheet" href="../css style/adminstyle.css">
 </head>
 <body>
-    <h1>Bujins Batik Admin</h1>
+    <h1>Bujins Batik Admin Panel</h1>
 
-    <!-- Placeholder for Admin Actions -->
-    <div id="adminActions">
-        <p>Checking admin session...</p>
+    <!-- Logout Button -->
+    <button id="logoutButton">Logout</button>
+
+    <!-- Tab Buttons -->
+    <div class="tab-buttons">
+        <button id="feedbackTab" class="active" onclick="showTab('feedback')">View Feedback</button>
+        <button id="usersTab" onclick="showTab('users')">View Users</button>
+        <button id="adminTab" onclick="showTab('admin')">View Admins</button>
     </div>
 
-    <!-- Admin Panel Content (Hidden by Default) -->
-    <div id="adminPanel" style="display: none;">
-        <!-- Tab Buttons -->
-        <div class="tab-buttons">
-            <button id="feedbackTab" class="active" onclick="showTab('feedback')">View Feedback</button>
-            <button id="usersTab" onclick="showTab('users')">View Users</button>
-            <button id="adminTab" onclick="showTab('admin')">View Admins</button>
-        </div>
+    <!-- Feedback Table -->
+    <div id="feedbackContent" class="tab-content active">
+        <h2>User Feedback</h2>
+        <table id="feedbackTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Rating</th>
+                    <th>Feedback</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Feedback rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
 
-        <!-- Feedback Table -->
-        <div id="feedbackContent" class="tab-content active">
-            <h2>User Feedback</h2>
-            <table id="feedbackTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Rating</th>
-                        <th>Feedback</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dynamic Rows will be added here -->
-                </tbody>
-            </table>
-        </div>
+    <!-- Users Table -->
+    <div id="usersContent" class="tab-content">
+        <h2>Registered Users</h2>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Password (Hashed)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- User rows will be dynamically added here -->
+            </tbody>
+        </table>
+        <button onclick="clearUsers()">Clear User Database</button>
+    </div>
 
-        <!-- Users Table -->
-        <div id="usersContent" class="tab-content">
-            <h2>Registered Users</h2>
-            <table id="userTable">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Password (Hashed)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dynamic Rows will be added here -->
-                </tbody>
-            </table>
-            <button onclick="clearUsers()">Clear User Database</button>
-        </div>
+    <!-- Admin Table -->
+    <div id="adminContent" class="tab-content">
+        <h2>Registered Admins</h2>
+        <table id="adminTable">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Password (Hashed)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Admin rows will be dynamically added here -->
+            </tbody>
+        </table>
+        <button onclick="clearAdmins()">Clear Admin Database</button>
+    </div>
 
-        <!-- Admin Table -->
-        <div id="adminContent" class="tab-content">
-            <h2>Registered Admins</h2>
-            <table id="adminTable">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Password (Hashed)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dynamic Rows will be added here -->
-                </tbody>
-            </table>
-            <button onclick="clearAdmins()">Clear Admin Database</button>
+    <!-- Password Update Modal -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2>Update Password</h2>
+            <input type="password" id="newPassword" placeholder="Enter New Password" required>
+            <input type="password" id="confirmNewPassword" placeholder="Confirm New Password" required>
+            <button onclick="saveNewPassword()">Save</button>
+            <button onclick="closeModal()">Cancel</button>
         </div>
-
-        <!-- Logout Button -->
-        <button id="logoutButton" onclick="logoutAdmin()">Logout</button>
     </div>
 
     <script>
+        let selectedUserType = null;
+        let selectedUserIndex = null;
+
         document.addEventListener('DOMContentLoaded', async () => {
-            const adminActions = document.getElementById('adminActions');
-            const adminPanel = document.getElementById('adminPanel');
-            const logoutButton = document.getElementById('logoutButton');
-
-            // Check if currentAdmin exists
-            const currentAdmin = JSON.parse(localStorage.getItem('currentAdmin'));
-
-            if (!currentAdmin) {
-                adminActions.innerHTML = `
-                    <p>You must be logged in to access the admin panel.</p>
-                    <button onclick="window.location.href='/BujinsBatik/admin/admin_login.html'">Login</button>
+            if (!localStorage.getItem('currentAdmin')) {
+                document.body.innerHTML = `
+                    <h1>Bujins Batik Admin</h1>
+                    <p>Please <a href="/BujinsBatik/admin/admin_login.html">Login</a> to access the admin panel.</p>
                 `;
                 return;
             }
 
-            // Display Admin Panel
-            adminActions.style.display = 'none';
-            adminPanel.style.display = 'block';
+            loadFeedback();
+            loadUsers();
+            loadAdmins();
+        });
 
-            // Display admin-specific data
-            await loadFeedback();
-            await loadUsers();
-            await loadAdmins();
-
-            // Update Logout Button
-            logoutButton.style.display = 'block';
+        // ===== LOGOUT FUNCTION =====
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            localStorage.removeItem('currentAdmin');
+            alert('You have been logged out!');
+            window.location.href = '/BujinsBatik/admin/admin_login.html';
         });
 
         // ===== FEEDBACK HANDLING =====
         function loadFeedback() {
-            let storedFeedback = localStorage.getItem('userFeedback') || '[]';
-            let feedbackList = JSON.parse(storedFeedback);
-
+            let feedbackList = JSON.parse(localStorage.getItem('userFeedback')) || [];
             const feedbackTableBody = document.querySelector('#feedbackTable tbody');
-
-            if (feedbackList.length === 0) {
-                feedbackTableBody.innerHTML = '<tr><td colspan="6">No feedback available</td></tr>';
-            } else {
-                feedbackList.forEach((feedback, index) => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
+            feedbackTableBody.innerHTML = feedbackList.length === 0 
+                ? '<tr><td colspan="5">No feedback available</td></tr>'
+                : feedbackList.map((feedback, index) => `
+                    <tr>
                         <td>${index + 1}</td>
                         <td>${feedback.name}</td>
                         <td>${feedback.email}</td>
                         <td>${feedback.rating}</td>
                         <td>${feedback.feedback}</td>
-                        <td>
-                            <a href="edit.html?id=${index}">Update</a>
-                            <a href="#" onclick="deleteFeedback(${index}); return false;">Delete</a>
-                        </td>
-                    `;
-                    feedbackTableBody.appendChild(row);
-                });
-            }
+                    </tr>
+                `).join('');
         }
 
         // ===== USER HANDLING =====
@@ -147,10 +135,11 @@
             const userTableBody = document.querySelector('#userTable tbody');
 
             if (users.length === 0) {
-                userTableBody.innerHTML = '<tr><td colspan="3">No registered users</td></tr>';
+                userTableBody.innerHTML = '<tr><td colspan="4">No registered users</td></tr>';
             } else {
+                userTableBody.innerHTML = ''; // Clear existing rows
                 for (const user of users) {
-                    const hashedPassword = await hashPassword(user.password);
+                    const hashedPassword = await hashPassword(user.password); // Await works here
                     let row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${user.username}</td>
@@ -162,16 +151,26 @@
             }
         }
 
+
+        function clearUsers() {
+            if (confirm('Are you sure you want to clear all user data?')) {
+                localStorage.removeItem('users');
+                alert('User database cleared!');
+                location.reload();
+            }
+        }
+
         // ===== ADMIN HANDLING =====
         async function loadAdmins() {
             let admins = JSON.parse(localStorage.getItem('admins')) || [];
             const adminTableBody = document.querySelector('#adminTable tbody');
 
             if (admins.length === 0) {
-                adminTableBody.innerHTML = '<tr><td colspan="3">No registered admins</td></tr>';
+                adminTableBody.innerHTML = '<tr><td colspan="4">No registered admins</td></tr>';
             } else {
+                adminTableBody.innerHTML = ''; // Clear existing rows
                 for (const admin of admins) {
-                    const hashedPassword = await hashPassword(admin.password);
+                    const hashedPassword = await hashPassword(admin.password); // Await works here
                     let row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${admin.username}</td>
@@ -183,14 +182,45 @@
             }
         }
 
-        // ===== LOGOUT =====
-        function logoutAdmin() {
-            localStorage.removeItem('currentAdmin');
-            alert('You have been logged out!');
-            window.location.href = '/BujinsBatik/admin/admin_login.html';
+
+        function clearAdmins() {
+            if (confirm('Are you sure you want to clear all admin data?')) {
+                localStorage.removeItem('admins');
+                alert('Admin database cleared!');
+                location.reload();
+            }
         }
 
-        // ===== PASSWORD HASHING =====
+        // ===== PASSWORD HANDLING =====
+        function openPasswordModal(type, index) {
+            selectedUserType = type;
+            selectedUserIndex = index;
+            document.getElementById('passwordModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('passwordModal').style.display = 'none';
+        }
+
+        async function saveNewPassword() {
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmNewPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            let data = JSON.parse(localStorage.getItem(selectedUserType === 'user' ? 'users' : 'admins'));
+            data[selectedUserIndex].password = newPassword;
+            localStorage.setItem(selectedUserType === 'user' ? 'users' : 'admins', JSON.stringify(data));
+
+            alert('Password updated successfully!');
+            closeModal();
+            location.reload();
+        }
+
+        // ===== HASH PASSWORD FUNCTION =====
         async function hashPassword(password) {
             const encoder = new TextEncoder();
             const data = encoder.encode(password);
@@ -200,12 +230,10 @@
                 .join('');
         }
 
+        // ===== TAB SWITCHING =====
         function showTab(tab) {
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.querySelectorAll('.tab-buttons button').forEach(button => button.classList.remove('active'));
-
             document.getElementById(`${tab}Content`).classList.add('active');
-            document.getElementById(`${tab}Tab`).classList.add('active');
         }
     </script>
 </body>
