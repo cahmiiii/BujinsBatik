@@ -27,6 +27,16 @@ body {
     min-height: 100vh;
 }
 
+section {
+    padding: 60px 5%;
+}
+
+#navbar-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 /* Auth Container */
 .auth-container {
     background: #fff;
