@@ -158,19 +158,6 @@ p {
     font-size: 1.5rem;
 }
 
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ff4757;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    border-radius: 50%;
-}
-
 .carousel {
     display: flex;
     overflow-x: auto;
@@ -188,7 +175,7 @@ p {
 
 /* See More Button */
 .see-more-btn {
-    background: #4a90e2;
+    background: #04023c;
     color: #fff;
     padding: 10px 20px;
     font-size: 1rem;
@@ -199,7 +186,7 @@ p {
 }
 
 .see-more-btn:hover {
-    background: #357ab7;
+    background: #fbd875;
 }
 
 /* === RESPONSIVE DESIGN === */
