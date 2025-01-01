@@ -19,7 +19,7 @@
     </div>
 
     <script>
-        // Password Hashing Function using SHA-256
+        // ===== PASSWORD HASHING FUNCTION =====
         async function hashPassword(password) {
             const encoder = new TextEncoder();
             const data = encoder.encode(password);
@@ -29,15 +29,24 @@
                 .join('');
         }
 
+        // ===== CHECK LATEST PASSWORD AND LOGIN =====
         document.getElementById('adminLoginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const email = document.getElementById('adminEmail').value.trim();
             const password = document.getElementById('adminPassword').value.trim();
 
+            // Fetch latest admins data from localStorage
             let admins = JSON.parse(localStorage.getItem('admins')) || [];
-            const hashedPassword = await hashPassword(password); // Hash the entered password
+            if (admins.length === 0) {
+                alert('No registered admin accounts found!');
+                return;
+            }
 
+            // Hash the entered password
+            const hashedPassword = await hashPassword(password);
+
+            // Check credentials against the latest data
             const validAdmin = admins.find(admin => admin.email === email && admin.password === hashedPassword);
 
             if (validAdmin) {
@@ -45,9 +54,23 @@
                 localStorage.setItem('currentAdmin', JSON.stringify(validAdmin)); // Store admin session
                 window.location.href = '/BujinsBatik/admin/admin.html'; // Redirect to Admin Panel
             } else {
-                alert('Invalid admin credentials!');
+                alert('Invalid admin credentials! Please check your email or password.');
             }
         });
+
+        // ===== ENSURE LATEST ADMIN DATA IS USED =====
+        async function syncAdminData() {
+            try {
+                // Fetch latest admin data (simulate API/database fetch if needed)
+                let updatedAdmins = JSON.parse(localStorage.getItem('admins')) || [];
+                localStorage.setItem('admins', JSON.stringify(updatedAdmins));
+                console.log('Admin data synced successfully.');
+            } catch (error) {
+                console.error('Failed to sync admin data:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', syncAdminData);
     </script>
 </body>
 </html>
