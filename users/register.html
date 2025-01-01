@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../css style/auth_style.css">
+    <link rel="stylesheet" href="../css style/navbar_style.css">
+    <link rel="stylesheet" href="../css style/footerstyle.css">
+
+    <!-- Boxicon -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/26bb1f1303.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="navbar-container"></div> <!-- Placeholder for Navbar -->
+
+    <!-- Navbar Fetch Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/BujinsBatik/pages/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar-container').innerHTML = data;
+
+                    // Reattach event listeners
+                    document.querySelector('.menu-button').addEventListener('click', () => {
+                        document.querySelector('.sidebar').style.display = 'flex';
+                    });
+                    
+                    document.querySelector('.sidebar li').addEventListener('click', () => {
+                        document.querySelector('.sidebar').style.display = 'none';
+                    });
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+        });
+    </script>
+
+    <!-- Register Auth -->
+    <div class="auth-container">
+        <h1>Register</h1>
+        <form id="registerForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            const userExists = users.find(user => user.email === email);
+
+            if (userExists) {
+                alert('User already exists with this email!');
+            } else {
+                users.push({ username, email, password });
+                localStorage.setItem('users', JSON.stringify(users));
+                alert('Registration successful!');
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+
+    <footer id="footer"></footer>
+    <script>
+        fetch('../pages/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>
