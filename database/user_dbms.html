@@ -27,15 +27,16 @@
             const userTable = document.getElementById('userTable');
             let users = JSON.parse(localStorage.getItem('users')) || [];
 
-            users.forEach(user => {
+            for (const user of users) {
+                const hashedPassword = await hashPassword(user.password); // Hash password dynamically
                 let row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${user.username}</td>
                     <td>${user.email}</td>
-                    <td>${user.password}</td>
+                    <td>${hashedPassword}</td>
                 `;
                 userTable.appendChild(row);
-            });
+            }
         });
 
         function clearUsers() {
@@ -44,7 +45,7 @@
             location.reload();
         }
 
-        // Example Hashing Function (if you want to hash passwords in the browser console)
+        // Hash Password for Display
         async function hashPassword(password) {
             const encoder = new TextEncoder();
             const data = encoder.encode(password);

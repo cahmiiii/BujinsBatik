@@ -66,7 +66,7 @@
                 .join('');
         }
 
-        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const username = document.getElementById('username').value.trim();
@@ -95,14 +95,11 @@
                 return;
             }
 
-            // Hash the password
-            const hashedPassword = await hashPassword(password);
-
-            // Store user with hashed password
+            // Store user with plain text password (hashed later in user_dbms.html)
             users.push({ 
                 username, 
                 email, 
-                password: hashedPassword 
+                password 
             });
             localStorage.setItem('users', JSON.stringify(users));
 
