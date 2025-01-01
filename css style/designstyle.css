@@ -168,11 +168,11 @@ p {
 }
 
 .carousel img {
-    width: 100%; 
-    height: auto; 
-    max-height: 400px; 
-    object-fit: contain;
+    width: 540px; 
+    height: 675px; 
+    object-fit: cover; 
     border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
 }
 
 /* See More Button */
