@@ -13,6 +13,7 @@
     <div class="tab-buttons">
         <button id="feedbackTab" class="active" onclick="showTab('feedback')">View Feedback</button>
         <button id="usersTab" onclick="showTab('users')">View Users</button>
+        <button id="adminTab" onclick="showTab('admin')">View Admins</button>
     </div>
 
     <!-- Feedback Table -->
@@ -53,9 +54,33 @@
         <button onclick="clearUsers()">Clear User Database</button>
     </div>
 
+    <!-- Admin Table -->
+    <div id="adminContent" class="tab-content">
+        <h2>Registered Admins</h2>
+        <table id="adminTable">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Password (Hashed)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic Rows will be added here -->
+            </tbody>
+        </table>
+        <button onclick="clearAdmins()">Clear Admin Database</button>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Retrieve feedback from localStorage
+        document.addEventListener('DOMContentLoaded', async () => {
+            loadFeedback();
+            loadUsers();
+            loadAdmins();
+        });
+
+        // ===== FEEDBACK HANDLING =====
+        function loadFeedback() {
             let storedFeedback = localStorage.getItem('userFeedback') || '[]';
             let feedbackList = JSON.parse(storedFeedback);
 
@@ -80,20 +105,21 @@
                     feedbackTableBody.appendChild(row);
                 });
             }
-        });
-
-        // Password Hashing Function using SHA-256
-        async function hashPassword(password) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(password);
-            const hash = await crypto.subtle.digest('SHA-256', data);
-            return Array.from(new Uint8Array(hash))
-                .map(byte => byte.toString(16).padStart(2, '0'))
-                .join('');
         }
 
-        // Handle Users Table
-        document.addEventListener('DOMContentLoaded', async () => {
+        function deleteFeedback(index) {
+            if (confirm('Are you sure you want to delete this feedback?')) {
+                let storedFeedback = localStorage.getItem('userFeedback') || '[]';
+                let feedbackList = JSON.parse(storedFeedback);
+
+                feedbackList.splice(index, 1);
+                localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
+                location.reload();
+            }
+        }
+
+        // ===== USER HANDLING =====
+        async function loadUsers() {
             let users = JSON.parse(localStorage.getItem('users')) || [];
             const userTableBody = document.querySelector('#userTable tbody');
 
@@ -101,7 +127,7 @@
                 userTableBody.innerHTML = '<tr><td colspan="3">No registered users</td></tr>';
             } else {
                 for (const user of users) {
-                    const hashedPassword = await hashPassword(user.password); // Hash the password dynamically
+                    const hashedPassword = await hashPassword(user.password);
                     let row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${user.username}</td>
@@ -111,24 +137,8 @@
                     userTableBody.appendChild(row);
                 }
             }
-        });
-
-        // Delete Feedback
-        function deleteFeedback(index) {
-            if (confirm('Are you sure you want to delete this entry?')) {
-                let storedFeedback = localStorage.getItem('userFeedback') || '[]';
-                let feedbackList = JSON.parse(storedFeedback);
-
-                feedbackList.splice(index, 1); // Remove the specific feedback
-
-                localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
-
-                // Reload the page to refresh the table
-                location.reload();
-            }
         }
 
-        // Clear User Database
         function clearUsers() {
             if (confirm('Are you sure you want to clear all user data?')) {
                 localStorage.removeItem('users');
@@ -137,24 +147,57 @@
             }
         }
 
-        // Tab Switching
-        function showTab(tab) {
-            const feedbackContent = document.getElementById('feedbackContent');
-            const usersContent = document.getElementById('usersContent');
-            const feedbackTab = document.getElementById('feedbackTab');
-            const usersTab = document.getElementById('usersTab');
+        // ===== ADMIN HANDLING =====
+        async function loadAdmins() {
+            let admins = JSON.parse(localStorage.getItem('admins')) || [];
+            const adminTableBody = document.querySelector('#adminTable tbody');
 
-            if (tab === 'feedback') {
-                feedbackContent.classList.add('active');
-                usersContent.classList.remove('active');
-                feedbackTab.classList.add('active');
-                usersTab.classList.remove('active');
-            } else if (tab === 'users') {
-                feedbackContent.classList.remove('active');
-                usersContent.classList.add('active');
-                feedbackTab.classList.remove('active');
-                usersTab.classList.add('active');
+            if (admins.length === 0) {
+                adminTableBody.innerHTML = '<tr><td colspan="3">No registered admins</td></tr>';
+            } else {
+                for (const admin of admins) {
+                    const hashedPassword = await hashPassword(admin.password);
+                    let row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${admin.username}</td>
+                        <td>${admin.email}</td>
+                        <td>${hashedPassword}</td>
+                    `;
+                    adminTableBody.appendChild(row);
+                }
             }
+        }
+
+        function clearAdmins() {
+            if (confirm('Are you sure you want to clear all admin data?')) {
+                localStorage.removeItem('admins');
+                alert('Admin database cleared!');
+                location.reload();
+            }
+        }
+
+        // ===== PASSWORD HASHING =====
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        // ===== TAB SWITCHING =====
+        function showTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            document.querySelectorAll('.tab-buttons button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(`${tab}Content`).classList.add('active');
+            document.getElementById(`${tab}Tab`).classList.add('active');
         }
     </script>
 </body>
