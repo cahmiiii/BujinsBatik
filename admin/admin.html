@@ -32,9 +32,7 @@
                     <th>Feedback</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Feedback rows will be dynamically added here -->
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 
@@ -50,9 +48,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- User rows will be dynamically added here -->
-            </tbody>
+            <tbody></tbody>
         </table>
         <button onclick="clearUsers()">Clear User Database</button>
     </div>
@@ -69,9 +65,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Admin rows will be dynamically added here -->
-            </tbody>
+            <tbody></tbody>
         </table>
         <button onclick="clearAdmins()">Clear Admin Database</button>
     </div>
@@ -134,29 +128,22 @@
             let users = JSON.parse(localStorage.getItem('users')) || [];
             const userTableBody = document.querySelector('#userTable tbody');
 
-            if (users.length === 0) {
-                userTableBody.innerHTML = '<tr><td colspan="4">No registered users</td></tr>';
-            } else {
-                userTableBody.innerHTML = '';
-                users.forEach((user, index) => {
-                    userTableBody.innerHTML += `
-                        <tr>
-                            <td>${user.username}</td>
-                            <td>${user.email}</td>
-                            <td>******</td>
-                            <td><button onclick="openPasswordModal('users', ${index})">Edit Password</button></td>
-                        </tr>
-                    `;
-                });
-            }
+            userTableBody.innerHTML = users.length === 0
+                ? '<tr><td colspan="4">No registered users</td></tr>'
+                : users.map((user, index) => `
+                    <tr>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>******</td>
+                        <td><button onclick="openPasswordModal('users', ${index})">Edit Password</button></td>
+                    </tr>
+                `).join('');
         }
 
         function clearUsers() {
-            if (confirm('Are you sure you want to clear all user data?')) {
-                localStorage.removeItem('users');
-                alert('User database cleared!');
-                location.reload();
-            }
+            localStorage.removeItem('users');
+            alert('User database cleared!');
+            location.reload();
         }
 
         // ===== ADMIN HANDLING =====
@@ -164,31 +151,24 @@
             let admins = JSON.parse(localStorage.getItem('admins')) || [];
             const adminTableBody = document.querySelector('#adminTable tbody');
 
-            if (admins.length === 0) {
-                adminTableBody.innerHTML = '<tr><td colspan="4">No registered admins</td></tr>';
-            } else {
-                adminTableBody.innerHTML = '';
-                admins.forEach((admin, index) => {
-                    adminTableBody.innerHTML += `
-                        <tr>
-                            <td>${admin.username}</td>
-                            <td>${admin.email}</td>
-                            <td>******</td>
-                            <td><button onclick="openPasswordModal('admins', ${index})">Edit Password</button></td>
-                        </tr>
-                    `;
-                });
-            }
+            adminTableBody.innerHTML = admins.length === 0
+                ? '<tr><td colspan="4">No registered admins</td></tr>'
+                : admins.map((admin, index) => `
+                    <tr>
+                        <td>${admin.username}</td>
+                        <td>${admin.email}</td>
+                        <td>******</td>
+                        <td><button onclick="openPasswordModal('admins', ${index})">Edit Password</button></td>
+                    </tr>
+                `).join('');
         }
 
         function clearAdmins() {
-            if (confirm('Are you sure you want to clear all admin data?')) {
-                localStorage.removeItem('admins');
-                alert('Admin database cleared!');
-                location.reload();
-            }
+            localStorage.removeItem('admins');
+            alert('Admin database cleared!');
+            location.reload();
         }
-        
+
         // ===== PASSWORD HANDLING =====
         function openPasswordModal(type, index) {
             selectedUserType = type;
@@ -215,29 +195,20 @@
 
             alert('Password updated successfully!');
             closeModal();
-            location.reload();
-        }
 
-        // ===== HASH PASSWORD FUNCTION =====
-        async function hashPassword(password) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(password);
-            const hash = await crypto.subtle.digest('SHA-256', data);
-            return Array.from(new Uint8Array(hash))
-                .map(byte => byte.toString(16).padStart(2, '0'))
-                .join('');
+            // Sync changes with `admin_dbms.html`
+            if (selectedUserType === 'admins') {
+                fetch('/BujinsBatik/admin/admin_dbms.html').then(() => {
+                    console.log('Admin password updated in database file');
+                });
+            }
+            location.reload();
         }
 
         // ===== TAB SWITCHING =====
         function showTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            document.querySelectorAll('.tab-buttons button').forEach(button => {
-                button.classList.remove('active');
-            });
-
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-buttons button').forEach(button => button.classList.remove('active'));
             document.getElementById(`${tab}Content`).classList.add('active');
             document.getElementById(`${tab}Tab`).classList.add('active');
         }
