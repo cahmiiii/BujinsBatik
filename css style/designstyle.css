@@ -160,20 +160,39 @@ p {
 
 .carousel {
     display: flex;
-    overflow-x: auto;
+    overflow-x: auto; 
     scroll-behavior: smooth;
     gap: 10px;
     margin-top: 10px;
-    justify-content: center;
+    justify-content: flex-start; 
     align-items: center;
+    padding-bottom: 10px;
+    scroll-snap-type: x mandatory;
 }
 
+
 .carousel img {
-    height: 400px; /* Set a fixed height */
-    width: auto; /* Width adjusts automatically */
-    object-fit: contain; /* Ensures the image fits within the dimensions */
+    height: 400px; 
+    width: auto; 
+    object-fit: contain; 
     border-radius: 10px;
     transition: transform 0.3s ease-in-out;
+    scroll-snap-align: start;
+}
+
+.carousel::-webkit-scrollbar {
+    height: 8px;
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.carousel::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
 }
 
 /* See More Button */
