@@ -232,8 +232,16 @@
 
         // ===== TAB SWITCHING =====
         function showTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            document.querySelectorAll('.tab-buttons button').forEach(button => {
+                button.classList.remove('active');
+            });
+
             document.getElementById(`${tab}Content`).classList.add('active');
+            document.getElementById(`${tab}Tab`).classList.add('active');
         }
     </script>
 </body>
