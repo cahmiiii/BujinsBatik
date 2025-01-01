@@ -7,76 +7,110 @@
     <link rel="stylesheet" href="../css style/adminstyle.css">
 </head>
 <body>
-    <h1>Admin Panel</h1>
+    <h1>Bujins Batik Admin</h1>
 
-    <!-- Tab Buttons -->
-    <div class="tab-buttons">
-        <button id="feedbackTab" class="active" onclick="showTab('feedback')">View Feedback</button>
-        <button id="usersTab" onclick="showTab('users')">View Users</button>
-        <button id="adminTab" onclick="showTab('admin')">View Admins</button>
+    <!-- Placeholder for Admin Actions -->
+    <div id="adminActions">
+        <p>Checking admin session...</p>
     </div>
 
-    <!-- Feedback Table -->
-    <div id="feedbackContent" class="tab-content active">
-        <h2>User Feedback</h2>
-        <table id="feedbackTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Rating</th>
-                    <th>Feedback</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dynamic Rows will be added here -->
-            </tbody>
-        </table>
-    </div>
+    <!-- Admin Panel Content (Hidden by Default) -->
+    <div id="adminPanel" style="display: none;">
+        <!-- Tab Buttons -->
+        <div class="tab-buttons">
+            <button id="feedbackTab" class="active" onclick="showTab('feedback')">View Feedback</button>
+            <button id="usersTab" onclick="showTab('users')">View Users</button>
+            <button id="adminTab" onclick="showTab('admin')">View Admins</button>
+        </div>
 
-    <!-- Users Table -->
-    <div id="usersContent" class="tab-content">
-        <h2>Registered Users</h2>
-        <table id="userTable">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Password (Hashed)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dynamic Rows will be added here -->
-            </tbody>
-        </table>
-        <button onclick="clearUsers()">Clear User Database</button>
-    </div>
+        <!-- Feedback Table -->
+        <div id="feedbackContent" class="tab-content active">
+            <h2>User Feedback</h2>
+            <table id="feedbackTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Rating</th>
+                        <th>Feedback</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic Rows will be added here -->
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Admin Table -->
-    <div id="adminContent" class="tab-content">
-        <h2>Registered Admins</h2>
-        <table id="adminTable">
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Password (Hashed)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Dynamic Rows will be added here -->
-            </tbody>
-        </table>
-        <button onclick="clearAdmins()">Clear Admin Database</button>
+        <!-- Users Table -->
+        <div id="usersContent" class="tab-content">
+            <h2>Registered Users</h2>
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Password (Hashed)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic Rows will be added here -->
+                </tbody>
+            </table>
+            <button onclick="clearUsers()">Clear User Database</button>
+        </div>
+
+        <!-- Admin Table -->
+        <div id="adminContent" class="tab-content">
+            <h2>Registered Admins</h2>
+            <table id="adminTable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Password (Hashed)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic Rows will be added here -->
+                </tbody>
+            </table>
+            <button onclick="clearAdmins()">Clear Admin Database</button>
+        </div>
+
+        <!-- Logout Button -->
+        <button id="logoutButton" onclick="logoutAdmin()">Logout</button>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            loadFeedback();
-            loadUsers();
-            loadAdmins();
+            const adminActions = document.getElementById('adminActions');
+            const adminPanel = document.getElementById('adminPanel');
+            const logoutButton = document.getElementById('logoutButton');
+
+            // Check if currentAdmin exists
+            const currentAdmin = JSON.parse(localStorage.getItem('currentAdmin'));
+
+            if (!currentAdmin) {
+                adminActions.innerHTML = `
+                    <p>You must be logged in to access the admin panel.</p>
+                    <button onclick="window.location.href='/BujinsBatik/admin/admin_login.html'">Login</button>
+                `;
+                return;
+            }
+
+            // Display Admin Panel
+            adminActions.style.display = 'none';
+            adminPanel.style.display = 'block';
+
+            // Display admin-specific data
+            await loadFeedback();
+            await loadUsers();
+            await loadAdmins();
+
+            // Update Logout Button
+            logoutButton.style.display = 'block';
         });
 
         // ===== FEEDBACK HANDLING =====
@@ -107,17 +141,6 @@
             }
         }
 
-        function deleteFeedback(index) {
-            if (confirm('Are you sure you want to delete this feedback?')) {
-                let storedFeedback = localStorage.getItem('userFeedback') || '[]';
-                let feedbackList = JSON.parse(storedFeedback);
-
-                feedbackList.splice(index, 1);
-                localStorage.setItem('userFeedback', JSON.stringify(feedbackList));
-                location.reload();
-            }
-        }
-
         // ===== USER HANDLING =====
         async function loadUsers() {
             let users = JSON.parse(localStorage.getItem('users')) || [];
@@ -136,14 +159,6 @@
                     `;
                     userTableBody.appendChild(row);
                 }
-            }
-        }
-
-        function clearUsers() {
-            if (confirm('Are you sure you want to clear all user data?')) {
-                localStorage.removeItem('users');
-                alert('User database cleared!');
-                location.reload();
             }
         }
 
@@ -168,12 +183,11 @@
             }
         }
 
-        function clearAdmins() {
-            if (confirm('Are you sure you want to clear all admin data?')) {
-                localStorage.removeItem('admins');
-                alert('Admin database cleared!');
-                location.reload();
-            }
+        // ===== LOGOUT =====
+        function logoutAdmin() {
+            localStorage.removeItem('currentAdmin');
+            alert('You have been logged out!');
+            window.location.href = '/BujinsBatik/admin/admin_login.html';
         }
 
         // ===== PASSWORD HASHING =====
@@ -186,15 +200,9 @@
                 .join('');
         }
 
-        // ===== TAB SWITCHING =====
         function showTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            document.querySelectorAll('.tab-buttons button').forEach(button => {
-                button.classList.remove('active');
-            });
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-buttons button').forEach(button => button.classList.remove('active'));
 
             document.getElementById(`${tab}Content`).classList.add('active');
             document.getElementById(`${tab}Tab`).classList.add('active');
