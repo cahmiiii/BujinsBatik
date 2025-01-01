@@ -1,7 +1,9 @@
+/* General Styles */
 body {
     font-family: "Poppins", sans-serif;
     padding: 20px;
     background-color: #f4f4f4;
+    margin: 0;
 }
 
 h1 {
@@ -9,6 +11,7 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Table Styles */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -21,13 +24,15 @@ table, th, td {
 
 th, td {
     padding: 8px;
-    text-align: left;
+    text-align: center;
 }
 
 th {
     background-color: #f2f2f2;
+    font-weight: 600;
 }
 
+/* Links */
 a {
     text-decoration: none;
     color: #007bff;
@@ -38,12 +43,29 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Buttons */
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Form Styles */
 form {
     max-width: 600px;
     margin: 0 auto;
     background: #fff;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
 }
 
 form div {
@@ -53,24 +75,107 @@ form div {
 form label {
     display: block;
     margin-bottom: 5px;
+    font-weight: 500;
 }
 
-form input, form textarea {
+form input, 
+form textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    font-family: "Poppins", sans-serif;
 }
 
-form button {
-    padding: 10px 15px;
-    background-color: #007bff;
+/* Tabs for Admin Panel */
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.tab-buttons button {
+    padding: 10px 20px;
     border: none;
+    background-color: #04023c;
     color: white;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
-form button:hover {
-    background-color: #0056b3;
+.tab-buttons button.active {
+    background-color: #fbd875;
+    color: #333;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Feedback and User Tables */
+.feedback-container,
+.user-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.feedback-container h2,
+.user-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+
+    .tab-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .tab-buttons button {
+        width: 100%;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    form button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .tab-buttons {
+        flex-direction: column;
+    }
+
+    .tab-buttons button {
+        font-size: 0.85rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
 }
