@@ -128,57 +128,78 @@ p {
     transform: scale(1.05);
 }
 
-/* === PRODUCT 3 - BATIK UNIFORM === */
-.product3 {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-bottom: 3rem;
-    flex-direction: row; /* Image on the right */
-    background-color: #f3f4f6;
-    padding: 40px 5%;
-    border-radius: 10px;
-}
-
-.product3-text {
-    flex: 1;
-    text-align: left;
-}
-
-.product3-text h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.product3-text p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #444;
-    text-align: center;
-}
-
-.product3-img {
-    flex: 1;
-    display: flex;
+/* === POPUP OVERLAY === */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
 }
 
-.product3-img img {
-    max-width: 400px;
-    max-height: 400px;
-    width: 100%;
-    height: auto;
-    border-radius: 10px; /* Slightly rounded corners */
-    object-fit: cover;
-    border: none;
-    transition: transform 0.3s ease-in-out;
+.popup-content {
+    background: #fff;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.product3-img img:hover {
-    transform: scale(1.05);
+.popup-content h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4757;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 50%;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.carousel img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* See More Button */
+.see-more-btn {
+    background: #4a90e2;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.see-more-btn:hover {
+    background: #357ab7;
 }
 
 /* === RESPONSIVE DESIGN === */
@@ -230,6 +251,15 @@ p {
     .product3-img img {
         max-width: 250px;
     }
+
+    .popup-content {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .carousel img {
+        max-height: 200px;
+    }
 }
 
 /* Small Mobile View */
@@ -250,5 +280,13 @@ p {
     .product2-img img,
     .product3-img img {
         max-width: 200px;
+    }
+
+    .popup-content {
+        padding: 15px;
+    }
+
+    .carousel img {
+        max-height: 150px;
     }
 }
