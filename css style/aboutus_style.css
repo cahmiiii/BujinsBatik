@@ -242,20 +242,22 @@ p {
 
 .academy-btn {
     display: inline-block;
-    background: #04023c;
-    color: #fff;
+    background: #04023c; 
+    color: #fff; 
     padding: 10px 20px;
     font-size: 1rem;
     font-weight: 600;
     border-radius: 5px;
     text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s ease-in-out;
+    text-decoration: none; 
+    margin-top: 10px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .academy-btn:hover {
-    background: #fbd875;
+    background: #fbd875; 
     color: #333;
+    transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
