@@ -123,27 +123,66 @@
                 `).join('');
         }
 
-        // ===== USER HANDLING =====
+        // ===== LOAD USERS =====
         async function loadUsers() {
-            let users = JSON.parse(localStorage.getItem('users')) || [];
             const userTableBody = document.querySelector('#userTable tbody');
+            let users = JSON.parse(localStorage.getItem('users')) || [];
 
-            userTableBody.innerHTML = users.length === 0
-                ? '<tr><td colspan="4">No registered users</td></tr>'
-                : users.map((user, index) => `
-                    <tr>
+            if (users.length === 0) {
+                userTableBody.innerHTML = '<tr><td colspan="4">No registered users</td></tr>';
+            } else {
+                userTableBody.innerHTML = '';
+                users.forEach((user, index) => {
+                    let row = document.createElement('tr');
+                    row.innerHTML = `
                         <td>${user.username}</td>
                         <td>${user.email}</td>
                         <td>******</td>
-                        <td><button onclick="openPasswordModal('users', ${index})">Edit Password</button></td>
-                    </tr>
-                `).join('');
+                        <td>
+                            <button onclick="openPasswordModal(${index})">Edit Password</button>
+                        </td>
+                    `;
+                    userTableBody.appendChild(row);
+                });
+            }
         }
 
         function clearUsers() {
             localStorage.removeItem('users');
             alert('User database cleared!');
             location.reload();
+        }
+
+        // ===== SAVE USER PASSWORD =====
+        async function saveUserPassword() {
+            const newPassword = document.getElementById('newPassword').value.trim();
+            const confirmPassword = document.getElementById('confirmNewPassword').value.trim();
+
+            if (!newPassword || !confirmPassword) {
+                alert('Both password fields are required!');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Hash the new password
+            const hashedPassword = await hashPassword(newPassword);
+
+            // Update the user in localStorage
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            if (selectedUserIndex !== null && users[selectedUserIndex]) {
+                users[selectedUserIndex].password = hashedPassword;
+                localStorage.setItem('users', JSON.stringify(users));
+
+                alert('User password updated successfully!');
+                closeModal();
+                loadUsers(); // Refresh the table
+            } else {
+                alert('Failed to update password. Please try again.');
+            }
         }
 
         // ===== ADMIN HANDLING =====
