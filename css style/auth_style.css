@@ -3,28 +3,19 @@
 
 /* Global Styles */
 * {
-    padding: 0;
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    list-style-type: none;
-    text-decoration: none;
-    scroll-behavior: smooth;
-    font-family: "Poppins", sans-serif;
-}
-
-html {
-    height: 100%;
-    width: 100%;
-    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    width: 100%;
-    background: #f9fafc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #f9fafc;
+    color: #333;
     min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 section {
@@ -32,9 +23,10 @@ section {
 }
 
 #navbar-container {
-    width: 100%;
+    width: 100vw;
     margin: 0;
     padding: 0;
+    background-color: #fff;
 }
 
 /* Auth Container */
@@ -46,6 +38,7 @@ section {
     text-align: center;
     width: 100%;
     max-width: 400px;
+    margin: auto;
 }
 
 .auth-container h1 {
@@ -111,6 +104,12 @@ section {
 }
 
 /* Responsive Design */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 1.5rem;
+    }
+}
+
 @media (max-width: 480px) {
     .auth-container {
         padding: 1.5rem;
