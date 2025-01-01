@@ -41,6 +41,35 @@
 
                 document.querySelector('.menu-button').addEventListener('click', showSidebar);
                 document.querySelector('.sidebar li').addEventListener('click', hideSidebar);
+                
+                // Handle dynamic Login/Logout
+                const authLink = document.getElementById('authLink');
+                const authLinkDesktop = document.getElementById('authLinkDesktop');
+                const currentUser = localStorage.getItem('currentUser');
+
+                if (currentUser) {
+                    authLink.textContent = 'Logout';
+                    authLink.href = '#';
+                    authLink.addEventListener('click', () => {
+                        localStorage.removeItem('currentUser');
+                        alert('You have been logged out!');
+                        window.location.reload();
+                    });
+
+                    authLinkDesktop.textContent = 'Logout';
+                    authLinkDesktop.href = '#';
+                    authLinkDesktop.addEventListener('click', () => {
+                        localStorage.removeItem('currentUser');
+                        alert('You have been logged out!');
+                        window.location.reload();
+                    });
+                } else {
+                    authLink.textContent = 'Login';
+                    authLink.href = '/BujinsBatik/users/login.html';
+
+                    authLinkDesktop.textContent = 'Login';
+                    authLinkDesktop.href = '/BujinsBatik/users/login.html';
+                }
             })
             .catch(error => console.error('Error loading navbar:', error));
     </script>
