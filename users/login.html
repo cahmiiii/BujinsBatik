@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     <link rel="stylesheet" href="../css style/auth_style.css">
     <link rel="stylesheet" href="../css style/navbar_style.css">
     <link rel="stylesheet" href="../css style/footerstyle.css">
@@ -27,7 +27,7 @@
                     .then(response => response.text())
                     .then(data => {
                         document.getElementById('navbar-container').innerHTML = data;
-
+    
                         // Reattach event listeners
                         document.querySelector('.menu-button').addEventListener('click', () => {
                             document.querySelector('.sidebar').style.display = 'flex';
@@ -42,72 +42,31 @@
         </script>
     </div>
 
-    <!-- Register Auth -->
     <div class="auth-container">
-        <h1>Register</h1>
-        <form id="registerForm">
-            <input type="text" id="username" placeholder="Username" required>
+        <h1>Login</h1>
+        <form id="loginForm">
             <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="password" placeholder="Password" required>
-            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-            <button type="submit">Register</button>
+            <button type="submit">Login</button>
         </form>
-        <p>Already have an account? <a href="login.html">Login</a></p>
+        <p>Don't have an account? <a href="register.html">Register</a></p>
     </div>
 
     <script>
-        // Password Hashing Function using SHA-256
-        async function hashPassword(password) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(password);
-            const hash = await crypto.subtle.digest('SHA-256', data);
-            return Array.from(new Uint8Array(hash))
-                .map(byte => byte.toString(16).padStart(2, '0'))
-                .join('');
-        }
-
-        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
+            const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            // Validate Inputs
-            if (!username || !email || !password || !confirmPassword) {
-                alert('All fields are required!');
-                return;
-            }
-
-            // Check if passwords match
-            if (password !== confirmPassword) {
-                alert('Passwords do not match!');
-                return;
-            }
 
             let users = JSON.parse(localStorage.getItem('users')) || [];
+            const validUser = users.find(user => user.email === email && user.password === password);
 
-            // Check if the email already exists
-            const userExists = users.some(user => user.email === email);
-            if (userExists) {
-                alert('User already exists with this email!');
-                return;
+            if (validUser) {
+                alert(`Welcome back, ${validUser.username}!`);
+                window.location.href = 'user_dbms.html';
+            } else {
+                alert('Invalid email or password!');
             }
-
-            // Hash the password
-            const hashedPassword = await hashPassword(password);
-
-            // Store user with hashed password
-            users.push({ 
-                username, 
-                email, 
-                password: hashedPassword 
-            });
-            localStorage.setItem('users', JSON.stringify(users));
-
-            alert('Registration successful!');
-            window.location.href = 'login.html';
         });
     </script>
 
