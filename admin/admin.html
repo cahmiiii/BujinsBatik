@@ -137,20 +137,19 @@
             if (users.length === 0) {
                 userTableBody.innerHTML = '<tr><td colspan="4">No registered users</td></tr>';
             } else {
-                userTableBody.innerHTML = ''; // Clear existing rows
-                for (const user of users) {
-                    const hashedPassword = await hashPassword(user.password); // Await works here
-                    let row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${user.username}</td>
-                        <td>${user.email}</td>
-                        <td>${hashedPassword}</td>
+                userTableBody.innerHTML = '';
+                users.forEach((user, index) => {
+                    userTableBody.innerHTML += `
+                        <tr>
+                            <td>${user.username}</td>
+                            <td>${user.email}</td>
+                            <td>******</td>
+                            <td><button onclick="openPasswordModal('users', ${index})">Edit Password</button></td>
+                        </tr>
                     `;
-                    userTableBody.appendChild(row);
-                }
+                });
             }
         }
-
 
         function clearUsers() {
             if (confirm('Are you sure you want to clear all user data?')) {
@@ -168,20 +167,19 @@
             if (admins.length === 0) {
                 adminTableBody.innerHTML = '<tr><td colspan="4">No registered admins</td></tr>';
             } else {
-                adminTableBody.innerHTML = ''; // Clear existing rows
-                for (const admin of admins) {
-                    const hashedPassword = await hashPassword(admin.password); // Await works here
-                    let row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${admin.username}</td>
-                        <td>${admin.email}</td>
-                        <td>${hashedPassword}</td>
+                adminTableBody.innerHTML = '';
+                admins.forEach((admin, index) => {
+                    adminTableBody.innerHTML += `
+                        <tr>
+                            <td>${admin.username}</td>
+                            <td>${admin.email}</td>
+                            <td>******</td>
+                            <td><button onclick="openPasswordModal('admins', ${index})">Edit Password</button></td>
+                        </tr>
                     `;
-                    adminTableBody.appendChild(row);
-                }
+                });
             }
         }
-
 
         function clearAdmins() {
             if (confirm('Are you sure you want to clear all admin data?')) {
@@ -190,7 +188,7 @@
                 location.reload();
             }
         }
-
+        
         // ===== PASSWORD HANDLING =====
         function openPasswordModal(type, index) {
             selectedUserType = type;
@@ -211,9 +209,9 @@
                 return;
             }
 
-            let data = JSON.parse(localStorage.getItem(selectedUserType === 'user' ? 'users' : 'admins'));
+            let data = JSON.parse(localStorage.getItem(selectedUserType));
             data[selectedUserIndex].password = newPassword;
-            localStorage.setItem(selectedUserType === 'user' ? 'users' : 'admins', JSON.stringify(data));
+            localStorage.setItem(selectedUserType, JSON.stringify(data));
 
             alert('Password updated successfully!');
             closeModal();
