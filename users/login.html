@@ -81,18 +81,30 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-    
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
             let users = JSON.parse(localStorage.getItem('users')) || [];
-            const validUser = users.find(user => user.email === email && user.password === password);
-    
+            const hashedPassword = await hashPassword(password); // Hash entered password
+
+            const validUser = users.find(user => user.email === email && user.password === hashedPassword);
+
             if (validUser) {
                 alert(`Welcome back, ${validUser.username}!`);
-                localStorage.setItem('currentUser', JSON.stringify(validUser)); // Store logged-in user
-                window.location.href = '/BujinsBatik/index.html'; // Redirect to the homepage
+                localStorage.setItem('currentUser', JSON.stringify(validUser));
+                window.location.href = '/BujinsBatik/index.html'; // Redirect to Home Page
             } else {
                 alert('Invalid email or password!');
             }
