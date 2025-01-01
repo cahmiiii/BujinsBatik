@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="../css style/adminauth_style.css">
+    <link rel="stylesheet" href="../css style/navbar_style.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <h1>Admin Login</h1>
+        <form id="adminLoginForm">
+            <input type="email" id="adminEmail" placeholder="Email" required>
+            <input type="password" id="adminPassword" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('adminLoginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+
+            let admins = JSON.parse(localStorage.getItem('admins')) || [];
+            const validAdmin = admins.find(admin => admin.email === email && admin.password === password);
+
+            if (validAdmin) {
+                alert(`Welcome Admin, ${validAdmin.username}!`);
+                localStorage.setItem('currentAdmin', JSON.stringify(validAdmin)); // Store admin session
+                window.location.href = '/BujinsBatik/admin/admin.html'; // Redirect to Admin Panel
+            } else {
+                alert('Invalid admin credentials!');
+            }
+        });
+    </script>
+</body>
+</html>
