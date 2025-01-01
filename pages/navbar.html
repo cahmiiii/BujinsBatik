@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
     <link rel="stylesheet" href="css style/navbar_style.css">
-
-    <link rel="stylesheet"
-        href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header id="navbar">
@@ -27,7 +25,7 @@
                 <li><a href="/BujinsBatik/pages/design.html">Design</a></li>
                 <li><a href="/BujinsBatik/pages/about.html">About</a></li>
                 <li><a href="/BujinsBatik/pages/rateus.html">Rating</a></li>
-                <li><a href="/BujinsBatik/users/login.html">Login</a></li>
+                <li><a href="#" id="authLink">Login</a></li>
             </ul>
             <ul>
                 <li>
@@ -39,7 +37,7 @@
                 <li class="hideOnMobile"><a href="/BujinsBatik/pages/design.html">Design</a></li>
                 <li class="hideOnMobile"><a href="/BujinsBatik/pages/about.html">About</a></li>
                 <li class="hideOnMobile"><a href="/BujinsBatik/pages/rateus.html">Rating</a></li>
-                <li class="hideOnMobile"><a href="/BujinsBatik/users/login.html">Login</a></li>
+                <li class="hideOnMobile"><a href="#" id="authLinkDesktop">Login</a></li>
                 <li class="menu-button" onclick="showSidebar()">
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
@@ -49,16 +47,48 @@
                 </li>
             </ul>
         </nav>
-        <script>
-            function showSidebar() {
-                document.querySelector('.sidebar').style.display = 'flex';
-            }
-    
-            function hideSidebar() {
-                document.querySelector('.sidebar').style.display = 'none';
-            }
-        </script>
     </header>
-    
+
+    <script>
+        function showSidebar() {
+            document.querySelector('.sidebar').style.display = 'flex';
+        }
+
+        function hideSidebar() {
+            document.querySelector('.sidebar').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const authLink = document.getElementById('authLink');
+            const authLinkDesktop = document.getElementById('authLinkDesktop');
+            const currentUser = localStorage.getItem('currentUser');
+
+            if (currentUser) {
+                // If user is logged in, show Logout
+                authLink.textContent = 'Logout';
+                authLink.href = '#';
+                authLink.addEventListener('click', () => {
+                    localStorage.removeItem('currentUser');
+                    alert('You have been logged out!');
+                    window.location.reload();
+                });
+
+                authLinkDesktop.textContent = 'Logout';
+                authLinkDesktop.href = '#';
+                authLinkDesktop.addEventListener('click', () => {
+                    localStorage.removeItem('currentUser');
+                    alert('You have been logged out!');
+                    window.location.reload();
+                });
+            } else {
+                // If user is not logged in, show Login
+                authLink.textContent = 'Login';
+                authLink.href = '/BujinsBatik/users/login.html';
+
+                authLinkDesktop.textContent = 'Login';
+                authLinkDesktop.href = '/BujinsBatik/users/login.html';
+            }
+        });
+    </script>
 </body>
 </html>
