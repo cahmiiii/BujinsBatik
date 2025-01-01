@@ -146,7 +146,7 @@ p {
     background: #fff;
     border-radius: 8px;
     width: 80%;
-    max-width: 600px;
+    max-width: 800px;
     padding: 20px;
     text-align: center;
     position: relative;
@@ -165,14 +165,15 @@ p {
     gap: 10px;
     margin-top: 10px;
     justify-content: center;
+    align-items: center;
 }
 
 .carousel img {
-    width: 100%; /* Ensure the image takes full width */
-    height: auto; /* Maintain the aspect ratio */
-    max-height: 400px; /* Optional: Set a maximum height for consistency */
-    object-fit: contain; /* Prevent cropping */
+    height: 400px; /* Set a fixed height */
+    width: auto; /* Width adjusts automatically */
+    object-fit: contain; /* Ensures the image fits within the dimensions */
     border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
 }
 
 /* See More Button */
@@ -247,7 +248,7 @@ p {
     }
 
     .carousel img {
-        max-height: 200px;
+        max-height: 250px;
     }
 }
 
@@ -276,6 +277,6 @@ p {
     }
 
     .carousel img {
-        max-height: 150px;
+        max-height: 200px;
     }
 }
