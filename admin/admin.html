@@ -80,23 +80,36 @@
                     feedbackTableBody.appendChild(row);
                 });
             }
+        });
 
-            // Handle Users Table
+        // Password Hashing Function using SHA-256
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(byte => byte.toString(16).padStart(2, '0'))
+                .join('');
+        }
+
+        // Handle Users Table
+        document.addEventListener('DOMContentLoaded', async () => {
             let users = JSON.parse(localStorage.getItem('users')) || [];
             const userTableBody = document.querySelector('#userTable tbody');
 
             if (users.length === 0) {
                 userTableBody.innerHTML = '<tr><td colspan="3">No registered users</td></tr>';
             } else {
-                users.forEach(user => {
+                for (const user of users) {
+                    const hashedPassword = await hashPassword(user.password); // Hash the password dynamically
                     let row = document.createElement('tr');
                     row.innerHTML = `
                         <td>${user.username}</td>
                         <td>${user.email}</td>
-                        <td>${user.password}</td>
+                        <td>${hashedPassword}</td>
                     `;
                     userTableBody.appendChild(row);
-                });
+                }
             }
         });
 
