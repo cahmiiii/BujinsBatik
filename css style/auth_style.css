@@ -108,7 +108,7 @@ section {
 @media (max-width: 768px) {
     .auth-container {
         padding: 1.5rem;
-        margin: 3rem 1rem;
+        margin: 3rem auto;
     }
 
     .auth-container h1 {
@@ -127,7 +127,7 @@ section {
 @media (max-width: 480px) {
     .auth-container {
         padding: 1.5rem;
-        margin: 4rem 1rem;
+        margin: 4rem auto;
     }
 
     .auth-container h1 {
