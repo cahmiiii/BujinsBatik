@@ -1,142 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main Page</title>
-    <link rel="stylesheet" href="css style/main_pagestyle.css"> <!-- Include Main Page Stylesheet -->
-    <link rel="stylesheet" href="css style/navbar_style.css">
-
+    <link rel="stylesheet" href="css style/main_pagestyle.css" />
+    <!-- Include Main Page Stylesheet -->
+    <link rel="stylesheet" href="css style/navbar_style.css" />
 
     <!-- Boxicon -->
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+    />
 
     <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
+      rel="stylesheet"
+    />
 
     <!--- Java Script Connection --->
     <script src="script.js" defer></script>
-    <script src="https://kit.fontawesome.com/26bb1f1303.js" crossorigin="anonymous"></script>
-
-</head>
-<body>
+    <script
+      src="https://kit.fontawesome.com/26bb1f1303.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <div id="navbar-container">
-        <script>
-            fetch('pages/navbar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('navbar-container').innerHTML = data;
+      <script>
+        fetch("pages/navbar.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("navbar-container").innerHTML = data;
 
-                    // Attach event listeners AFTER navbar is loaded
-                    const showSidebar = () => {
-                        document.querySelector('.sidebar').style.display = 'flex';
-                    };
-                    
-                    const hideSidebar = () => {
-                        document.querySelector('.sidebar').style.display = 'none';
-                    };
+            // Attach event listeners AFTER navbar is loaded
+            const showSidebar = () => {
+              document.querySelector(".sidebar").style.display = "flex";
+            };
 
-                    document.querySelector('.menu-button').addEventListener('click', showSidebar);
-                    document.querySelector('.sidebar li').addEventListener('click', hideSidebar);
-                    
-                    // Handle dynamic Login/Logout
-                    const authLink = document.getElementById('authLink');
-                    const authLinkDesktop = document.getElementById('authLinkDesktop');
-                    const currentUser = localStorage.getItem('currentUser');
+            const hideSidebar = () => {
+              document.querySelector(".sidebar").style.display = "none";
+            };
 
-                    if (currentUser) {
-                        authLink.textContent = 'Logout';
-                        authLink.href = '#';
-                        authLink.addEventListener('click', () => {
-                            localStorage.removeItem('currentUser');
-                            alert('You have been logged out!');
-                            window.location.reload();
-                        });
+            document
+              .querySelector(".menu-button")
+              .addEventListener("click", showSidebar);
+            document
+              .querySelector(".sidebar li")
+              .addEventListener("click", hideSidebar);
 
-                        authLinkDesktop.textContent = 'Logout';
-                        authLinkDesktop.href = '#';
-                        authLinkDesktop.addEventListener('click', () => {
-                            localStorage.removeItem('currentUser');
-                            alert('You have been logged out!');
-                            window.location.reload();
-                        });
-                    } else {
-                        authLink.textContent = 'Login';
-                        authLink.href = '/BujinsBatik/users/login.html';
+            // Handle dynamic Login/Logout
+            const authLink = document.getElementById("authLink");
+            const authLinkDesktop = document.getElementById("authLinkDesktop");
+            const currentUser = localStorage.getItem("currentUser");
 
-                        authLinkDesktop.textContent = 'Login';
-                        authLinkDesktop.href = '/BujinsBatik/users/login.html';
-                    }
-                })
-                .catch(error => console.error('Error loading navbar:', error));
-        </script>
+            if (currentUser) {
+              authLink.textContent = "Logout";
+              authLink.href = "#";
+              authLink.addEventListener("click", () => {
+                localStorage.removeItem("currentUser");
+                alert("You have been logged out!");
+                window.location.reload();
+              });
+
+              authLinkDesktop.textContent = "Logout";
+              authLinkDesktop.href = "#";
+              authLinkDesktop.addEventListener("click", () => {
+                localStorage.removeItem("currentUser");
+                alert("You have been logged out!");
+                window.location.reload();
+              });
+            } else {
+              authLink.textContent = "Login";
+              authLink.href = "/BujinsBatik/users/login.html";
+
+              authLinkDesktop.textContent = "Login";
+              authLinkDesktop.href = "/BujinsBatik/users/login.html";
+            }
+          })
+          .catch((error) => console.error("Error loading navbar:", error));
+      </script>
     </div>
 
     <!--- Home Area --->
     <section class="home">
-        <div class="home-text">
-            <h1>Bujin's Batik</h1>
-            <p>Batik fashion blends tradition with style, showcasing intricate patterns and craftsmanship. 
-            This industry celebrates cultural heritage through unique and stylish clothing pieces.</p>
-            <a href="https://wa.me/+60132928980" class="homecta-btn">Contact Us</a>
-        </div>
+      <div class="home-text">
+        <h1>Bujin's Batik</h1>
+        <p>
+          Batik fashion blends tradition with style, showcasing intricate
+          patterns and craftsmanship. This industry celebrates cultural heritage
+          through unique and stylish clothing pieces.
+        </p>
+        <a href="https://wa.me/+60132928980" class="homecta-btn">Contact Us</a>
+      </div>
 
-        <div class="home-img">
-            <img src="img/Bujins Owner.png" alt="">
-        </div>
+      <div class="home-img">
+        <img src="img/Bujins Owner.png" alt="" />
+      </div>
     </section>
 
     <!--- Latest News --->
     <section class="latest-news">
-        <div class="center-news">
-            <img class="center-img" src="img/BUJIN LOGO 1.png" alt="">
-            <h2>What is Batik?</h2>
-            <p>Batik is a dyeing technique using wax resist. The term is also used to describe
-                patterned textiles created with that technique. Batik is made by drawing or stamping
-                wax on a cloth to prevent colour absorption during the dyeing process. This creates
-                a patterned negative when the wax is removed from the dyed cloth. Artisans may create
-                intricate coloured patterns with multiple cycles of wax application and dyeing.
-                Patterns and motifs vary widely even within countries. Some patterns hold symbolic
-                significance and are used only in certain occasions, while others were created to
-                satisfy market demand and fashion trends.</p>
-            <a href="#" class="news-btn">Read More</a>
-        </div>
+      <div class="center-news">
+        <img class="center-img" src="img/BUJIN LOGO 1.png" alt="" />
+        <h2>What is Batik?</h2>
+        <p>
+          Batik is a dyeing technique using wax resist. The term is also used to
+          describe patterned textiles created with that technique. Batik is made
+          by drawing or stamping wax on a cloth to prevent colour absorption
+          during the dyeing process. This creates a patterned negative when the
+          wax is removed from the dyed cloth. Artisans may create intricate
+          coloured patterns with multiple cycles of wax application and dyeing.
+          Patterns and motifs vary widely even within countries. Some patterns
+          hold symbolic significance and are used only in certain occasions,
+          while others were created to satisfy market demand and fashion trends.
+        </p>
+        <a href="#" class="news-btn">Read More</a>
+      </div>
     </section>
 
     <!-- Feedback Section -->
     <section class="review">
-        <div class="review-content">
-            <ul class="review-carousel" id="review-container">
-                <!-- Reviews will be dynamically loaded here -->
-            </ul>
-        </div>
+      <div class="review-content">
+        <ul class="review-carousel" id="review-container">
+          <!-- Reviews will be dynamically loaded here -->
+        </ul>
+      </div>
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchReviews();
-        });
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchReviews();
+      });
 
-        function fetchReviews() {
-            // Fetch reviews from localStorage
-            let storedFeedback = localStorage.getItem('userFeedback') || '[]';
-            let feedbackList = JSON.parse(storedFeedback);
+      function fetchReviews() {
+        // Fetch reviews from localStorage
+        let storedFeedback = localStorage.getItem("userFeedback") || "[]";
+        let feedbackList = JSON.parse(storedFeedback);
 
-            const reviewContainer = document.getElementById('review-container');
-            reviewContainer.innerHTML = ''; // Clear existing content
+        const reviewContainer = document.getElementById("review-container");
+        reviewContainer.innerHTML = ""; // Clear existing content
 
-            if (feedbackList.length === 0) {
-                reviewContainer.innerHTML = '<p>No reviews available.</p>';
-                return;
-            }
+        if (feedbackList.length === 0) {
+          reviewContainer.innerHTML = "<p>No reviews available.</p>";
+          return;
+        }
 
-            feedbackList.forEach(feedback => {
-                const reviewCard = document.createElement('li');
-                reviewCard.classList.add('review-card');
+        feedbackList.forEach((feedback) => {
+          const reviewCard = document.createElement("li");
+          reviewCard.classList.add("review-card");
 
-                reviewCard.innerHTML = `
+          reviewCard.innerHTML = `
                     <div class="review-img">
                         <h3>${feedback.name}</h3>
                         <span>${feedback.feedback}</span>
@@ -145,43 +163,48 @@
                         ${getStarRating(feedback.rating)}
                     </div>
                 `;
-                reviewContainer.appendChild(reviewCard);
-            });
-        }
+          reviewContainer.appendChild(reviewCard);
+        });
+      }
 
-        function getStarRating(rating) {
-            let stars = '';
-            for (let i = 1; i <= 5; i++) {
-                stars += i <= rating ? '<i class="fa fa-star"></i>' : '<i class="fa fa-star-o"></i>';
-            }
-            return stars;
+      function getStarRating(rating) {
+        let stars = "";
+        for (let i = 1; i <= 5; i++) {
+          stars +=
+            i <= rating
+              ? '<i class="fa fa-star"></i>'
+              : '<i class="fa fa-star-o"></i>';
         }
+        return stars;
+      }
     </script>
 
     <!--- Latest News --->
     <section class="cta-info">
-        <div class="center-info">
-            <img class="info-img" src="img/BUJIN LOGO 1.png" alt="">
-            <h2>History of Batik</h2>
-            <p>The origin of batik production in Malaysia is known through trade relations 
-                between the Melayu Kingdom in Jambi and Javanese coastal cities. These relations 
-                have thrived since the 13th century. The northern coastal batik-producing areas 
-                of Java (Cirebon, Lasem, Tuban, and Madura) have influenced Jambi batik. 
-                This Jambi (Sumatran) batik, as well as Javanese batik, has influenced the 
-                batik craft in the Malay Peninsula.</p>
-            <a href="https://wa.me/+60132928980" class="info-btn">Contact Us</a>
-        </div>
+      <div class="center-info">
+        <img class="info-img" src="img/BUJIN LOGO 1.png" alt="" />
+        <h2>History of Batik</h2>
+        <p>
+          The origin of batik production in Malaysia is known through trade
+          relations between the Melayu Kingdom in Jambi and Javanese coastal
+          cities. These relations have thrived since the 13th century. The
+          northern coastal batik-producing areas of Java (Cirebon, Lasem, Tuban,
+          and Madura) have influenced Jambi batik. This Jambi (Sumatran) batik,
+          as well as Javanese batik, has influenced the batik craft in the Malay
+          Peninsula.
+        </p>
+        <a href="https://wa.me/+60132928980" class="info-btn">Contact Us</a>
+      </div>
     </section>
 
     <footer id="footer"></footer>
     <script>
-        fetch('pages/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading footer:', error));
+      fetch("pages/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        })
+        .catch((error) => console.error("Error loading footer:", error));
     </script>
-
-</body>
+  </body>
 </html>

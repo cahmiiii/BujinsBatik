@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Database</title>
-    <link rel="stylesheet" href="../css style/auth_style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../css style/auth_style.css" />
+  </head>
+  <body>
     <div class="db-container">
-        <h1>User Database</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Password (Hashed)</th>
-                </tr>
-            </thead>
-            <tbody id="userTable"></tbody>
-        </table>
-        <button onclick="clearUsers()">Clear Database</button>
+      <h1>User Database</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password (Hashed)</th>
+          </tr>
+        </thead>
+        <tbody id="userTable"></tbody>
+      </table>
+      <button onclick="clearUsers()">Clear Database</button>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const userTable = document.getElementById('userTable');
-            let users = JSON.parse(localStorage.getItem('users')) || [];
+      document.addEventListener("DOMContentLoaded", async () => {
+        const userTable = document.getElementById("userTable");
+        let users = JSON.parse(localStorage.getItem("users")) || [];
 
-            for (const user of users) {
-                const hashedPassword = await hashPassword(user.password); // Hash password dynamically
-                let row = document.createElement('tr');
-                row.innerHTML = `
+        for (const user of users) {
+          const hashedPassword = await hashPassword(user.password); // Hash password dynamically
+          let row = document.createElement("tr");
+          row.innerHTML = `
                     <td>${user.username}</td>
                     <td>${user.email}</td>
                     <td>${hashedPassword}</td>
                 `;
-                userTable.appendChild(row);
-            }
-        });
-
-        function clearUsers() {
-            localStorage.removeItem('users');
-            alert('User database cleared!');
-            location.reload();
+          userTable.appendChild(row);
         }
+      });
 
-        // Hash Password for Display
-        async function hashPassword(password) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(password);
-            const hash = await crypto.subtle.digest('SHA-256', data);
-            return Array.from(new Uint8Array(hash))
-                .map(byte => byte.toString(16).padStart(2, '0'))
-                .join('');
-        }
+      function clearUsers() {
+        localStorage.removeItem("users");
+        alert("User database cleared!");
+        location.reload();
+      }
+
+      // Hash Password for Display
+      async function hashPassword(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hash))
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join("");
+      }
     </script>
-</body>
+  </body>
 </html>
