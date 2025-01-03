@@ -89,7 +89,7 @@
 
       document
         .getElementById("registerForm")
-        .addEventListener("submit", function (e) {
+        .addEventListener("submit", async function (e) {
           e.preventDefault();
 
           const username = document.getElementById("username").value.trim();
@@ -119,11 +119,12 @@
             return;
           }
 
-          // Store user with plain text password (hashed later in user_dbms.html)
+          // Hash the password before storing
+          const hashedPassword = await hashPassword(password);
           users.push({
             username,
             email,
-            password,
+            password: hashedPassword,
           });
           localStorage.setItem("users", JSON.stringify(users));
 
