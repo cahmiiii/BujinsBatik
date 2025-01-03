@@ -28,6 +28,7 @@
     ></script>
   </head>
   <body>
+    <!-- Navbar -->
     <div id="navbar-container">
       <script>
         fetch("/BujinsBatik/pages/navbar.html")
@@ -83,6 +84,7 @@
       </script>
     </div>
 
+    <!-- Container -->
     <div class="auth-container">
       <h1>Login</h1>
       <form id="loginForm">
@@ -97,6 +99,7 @@
     </div>
 
     <script>
+      // Password Hashing Function using SHA-256
       async function hashPassword(password) {
         const encoder = new TextEncoder();
         const data = encoder.encode(password);
