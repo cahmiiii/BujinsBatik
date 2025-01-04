@@ -1,0 +1,313 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f9fafc;
+}
+
+/* === REVIEW DISPLAY SECTION === */
+.review-display {
+  padding: 2rem;
+  text-align: center;
+  background: #f9fafc;
+}
+
+.review-display h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* === REVIEW CAROUSEL === */
+.review-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem;
+  white-space: nowrap;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 1rem;
+}
+
+.review-carousel::-webkit-scrollbar {
+  height: 8px;
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.review-carousel::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.review-carousel::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+.review-carousel.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+/* === REVIEW CARD === */
+.review-card {
+  min-height: 250px;
+  min-width: 300px;
+  max-width: 300px;
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  overflow: hidden; /* Prevents overflow of the card itself */
+  word-wrap: break-word;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+}
+
+.review-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.review-card p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0.5rem 0;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+/* Feedback Text */
+.review-feedback {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 0.5rem;
+  text-align: center;
+  word-wrap: break-word; /* Ensures long words break onto the next line */
+  overflow-wrap: break-word; /* Modern equivalent of word-wrap */
+  white-space: normal; /* Allows text to wrap naturally */
+  line-height: 1.5; /* Adds spacing between lines */
+  width: 90%; /* Prevents text from stretching edge-to-edge */
+  display: block; /* Ensures span behaves like a block element for better wrapping */
+}
+
+/* Rating Styling */
+.review-card .rating {
+  margin-top: 1rem;
+}
+
+.review-card .rating i {
+  color: #fbd875;
+  font-size: 1.2rem;
+}
+
+/* === RESPONSIVE DESIGN === */
+
+/* Tablet View */
+@media (min-width: 768px) {
+  .review-carousel {
+    grid-auto-columns: calc((100% / 2) - 12px);
+    scrollbar-width: none;
+  }
+
+  .review-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .review-card {
+    min-width: 48%;
+    max-width: 48%;
+  }
+}
+
+/* Desktop View */
+@media (min-width: 992px) {
+  .review-carousel {
+    grid-auto-columns: calc((100% / 3) - 12px);
+  }
+
+  .review-card {
+    min-width: 30%;
+    max-width: 30%;
+  }
+}
+
+/* Large Desktop View */
+@media (min-width: 1200px) {
+  .review-carousel {
+    grid-auto-columns: calc((100% / 5) - 12px);
+  }
+
+  .review-card {
+    min-width: 18%;
+    max-width: 18%;
+  }
+}
+
+/* Rate Us Section */
+.rateus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 50px 20px;
+  background: linear-gradient(to bottom, #ffffff, #f3f4f6);
+}
+
+.rateus-container {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.rateus-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.rateus-container p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+/* Star Rating */
+.rateus-stars {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.star {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.star.highlighted {
+  color: #fbd875;
+  transform: scale(1.2);
+}
+
+#charCount {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+  text-align: right;
+}
+
+/* Form Inputs */
+.rateus-form input,
+.rateus-form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.rateus-form input:focus,
+.rateus-form textarea:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+.rateus-form textarea {
+  resize: none;
+  height: 120px;
+}
+
+.rateus-btn {
+  background: #04023c;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.rateus-btn:hover {
+  background: #fbd875;
+  transform: scale(1.05);
+}
+
+/* Responsive Design for Rate Us Section */
+@media (max-width: 768px) {
+  .rateus-container {
+    padding: 30px;
+  }
+
+  .rateus-container h1 {
+    font-size: 2rem;
+  }
+
+  .rateus-stars {
+    gap: 8px;
+  }
+
+  .star {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rateus-container {
+    padding: 20px;
+  }
+
+  .rateus-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .rateus-container p {
+    font-size: 0.9rem;
+  }
+
+  .star {
+    font-size: 1.5rem;
+  }
+
+  .rateus-form input,
+  .rateus-form textarea {
+    font-size: 0.9rem;
+  }
+
+  .rateus-btn {
+    font-size: 0.9rem;
+  }
+}

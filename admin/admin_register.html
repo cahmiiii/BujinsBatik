@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Register</title>
+    <link rel="stylesheet" href="../css style/adminauth_style.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <h1>Admin Register</h1>
+      <form id="adminRegisterForm">
+        <input type="text" id="adminUsername" placeholder="Username" required />
+        <input type="email" id="adminEmail" placeholder="Email" required />
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Password"
+          required
+        />
+        <input
+          type="password"
+          id="adminConfirmPassword"
+          placeholder="Confirm Password"
+          required
+        />
+        <button type="submit">Register</button>
+      </form>
+      <p>
+        Already have an admin account?
+        <a href="/BujinsBatik/admin/admin_login.html">Login</a>
+      </p>
+    </div>
+
+    <script>
+      // Password Hashing Function using SHA-256
+      async function hashPassword(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hash))
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join("");
+      }
+
+      document
+        .getElementById("adminRegisterForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const username = document
+            .getElementById("adminUsername")
+            .value.trim();
+          const email = document.getElementById("adminEmail").value.trim();
+          const password = document.getElementById("adminPassword").value;
+          const confirmPassword = document.getElementById(
+            "adminConfirmPassword"
+          ).value;
+
+          // Validate Inputs
+          if (!username || !email || !password || !confirmPassword) {
+            alert("All fields are required!");
+            return;
+          }
+
+          // Check if passwords match
+          if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+          }
+
+          let admins = JSON.parse(localStorage.getItem("admins")) || [];
+
+          // Check if the email already exists
+          const adminExists = admins.some((admin) => admin.email === email);
+          if (adminExists) {
+            alert("Admin already exists with this email!");
+            return;
+          }
+
+          // Hash the password
+          const hashedPassword = await hashPassword(password);
+
+          // Store admin data
+          admins.push({
+            username,
+            email,
+            password: hashedPassword,
+          });
+          localStorage.setItem("admins", JSON.stringify(admins));
+
+          alert("Admin Registration successful!");
+          window.location.href = "/BujinsBatik/admin/admin_login.html";
+        });
+    </script>
+  </body>
+</html>

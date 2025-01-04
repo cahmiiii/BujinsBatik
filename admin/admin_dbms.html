@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Database</title>
+    <link rel="stylesheet" href="../css style/adminauth_style.css" />
+  </head>
+  <body>
+    <div class="db-container">
+      <h1>Admin Database</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Password (Hashed)</th>
+          </tr>
+        </thead>
+        <tbody id="adminTable"></tbody>
+      </table>
+      <button onclick="clearAdmins()">Clear Database</button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const adminTable = document.getElementById("adminTable");
+        let admins = JSON.parse(localStorage.getItem("admins")) || [];
+
+        if (admins.length === 0) {
+          adminTable.innerHTML =
+            '<tr><td colspan="3">No registered admins</td></tr>';
+        } else {
+          admins.forEach((admin) => {
+            let row = document.createElement("tr");
+            row.innerHTML = `
+                        <td>${admin.username}</td>
+                        <td>${admin.email}</td>
+                        <td>${admin.password}</td>
+                    `;
+            adminTable.appendChild(row);
+          });
+        }
+      });
+
+      function clearAdmins() {
+        if (confirm("Are you sure you want to clear the admin database?")) {
+          localStorage.removeItem("admins");
+          alert("Admin database cleared!");
+          location.reload();
+        }
+      }
+    </script>
+  </body>
+</html>

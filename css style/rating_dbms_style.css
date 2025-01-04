@@ -1,0 +1,95 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #ffffff; /* White background */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar Placeholder */
+#navbar-container {
+  width: 100%;
+}
+
+/* Rating Database Section */
+.rating-dbms {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background-color: #ffffff; /* White background */
+}
+
+.rating-container {
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 2rem 3rem;
+  max-width: 500px;
+  width: 90%;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.rating-container h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.rating-container p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+#feedbackMessage {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #28a745;
+  margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .rating-container {
+    padding: 1.5rem 2rem;
+  }
+
+  .rating-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .rating-container p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rating-container {
+    padding: 1rem 1.5rem;
+  }
+
+  .rating-container h1 {
+    font-size: 1.2rem;
+  }
+
+  .rating-container p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
