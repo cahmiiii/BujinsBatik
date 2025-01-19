@@ -123,28 +123,49 @@
     </section>
 
     <!-- Video Content Container -->
-    <div id="video-content-container"></div>
+    <div id="video-content-container" class="video-content-section"></div>
 
     <script>
-      fetch("/BujinsBatik/pages/video-content.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("video-content-container").innerHTML = data;
+      // Wait for the DOM to be fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load video content
+        fetch("/BujinsBatik/pages/video-content.html")
+          .then((response) => response.text())
+          .then((data) => {
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = data;
 
-          // Reattach event listener for read more button
-          const readMoreBtn = document.querySelector(".read-more-btn");
-          const expandedText = document.querySelector(".expanded-text");
+            // Find and append only the video-and-copy section
+            const videoContent = tempDiv.querySelector(".video-and-copy");
+            document
+              .getElementById("video-content-container")
+              .appendChild(videoContent);
 
-          if (readMoreBtn && expandedText) {
-            readMoreBtn.addEventListener("click", function () {
-              expandedText.classList.toggle("show");
-              readMoreBtn.textContent = expandedText.classList.contains("show")
-                ? "Read Less"
-                : "Read More";
-            });
-          }
-        })
-        .catch((error) => console.error("Error loading video content:", error));
+            // Load the CSS file
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "../css/video-content.css";
+            document.head.appendChild(link);
+
+            // Reattach event listener for read more button
+            const readMoreBtn = document.querySelector(".read-more-btn");
+            const expandedText = document.querySelector(".expanded-text");
+
+            if (readMoreBtn && expandedText) {
+              readMoreBtn.addEventListener("click", function () {
+                expandedText.classList.toggle("show");
+                readMoreBtn.textContent = expandedText.classList.contains(
+                  "show"
+                )
+                  ? "Read Less"
+                  : "Read More";
+              });
+            }
+          })
+          .catch((error) =>
+            console.error("Error loading video content:", error)
+          );
+      });
     </script>
 
     <!-- ACADEMY Section -->
