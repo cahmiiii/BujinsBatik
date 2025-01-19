@@ -40,3 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "contactus.php";
   });
 });
+
+// Add this to your existing script.js file
+document.addEventListener("DOMContentLoaded", function () {
+  const readMoreBtn = document.querySelector(".read-more-btn");
+  const expandedText = document.querySelector(".expanded-text");
+
+  readMoreBtn.addEventListener("click", function () {
+    expandedText.classList.toggle("show");
+    readMoreBtn.textContent = expandedText.classList.contains("show")
+      ? "Read Less"
+      : "Read More";
+  });
+});

@@ -399,3 +399,69 @@ section {
     margin-left: 30px;
   }
 }
+
+/* Making of Batik Section */
+.making-batik {
+  padding: 60px 20px;
+  background: #f9f9f9;
+}
+
+.center-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.center-content h2 {
+  font-size: 2.5rem;
+  color: #04023c;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.content-wrapper {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.content {
+  text-align: left;
+  line-height: 1.8;
+  color: #444;
+}
+
+.expanded-text {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.expanded-text.show {
+  max-height: 2000px; /* Adjust based on content length */
+  transition: max-height 0.5s ease-in;
+}
+
+.preview-text {
+  margin-bottom: 1rem;
+}
+
+.read-more-btn {
+  background: #04023c;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.read-more-btn:hover {
+  background: #080650;
+}
