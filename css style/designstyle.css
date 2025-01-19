@@ -579,30 +579,28 @@ p {
 .product-section {
   padding: 40px 20px;
   width: 100%;
-  height: 80vh; /* Fixed height */
-  min-height: 800px; /* Minimum height to prevent squishing */
+  min-height: 100vh; /* Changed from 80vh to ensure full content visibility */
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 40px; /* Add space between sections */
 }
 
 /* Card styles */
 .card {
   width: 100%;
   max-width: 1200px;
-  height: 100%;
-  margin: 0 auto;
   background: white;
   border-radius: 20px;
   padding: 40px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  gap: 30px; /* Add space between content and images */
 }
 
 .card-content {
   text-align: center;
-  margin-bottom: 40px;
   width: 100%;
 }
 
@@ -635,11 +633,10 @@ p {
 /* Image row styles */
 .image-row {
   width: 100%;
-  flex: 1;
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  padding: 10px;
+  padding: 20px 0;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }
@@ -656,8 +653,8 @@ p {
 
 /* Image item styles */
 .image-item {
-  flex: 0 0 500px;
-  height: 500px;
+  flex: 0 0 400px; /* Reduced from 500px */
+  height: 400px; /* Reduced from 500px */
   border-radius: 15px;
   overflow: hidden;
   scroll-snap-align: start;
@@ -677,8 +674,8 @@ p {
 /* Responsive Design */
 @media (max-width: 1200px) {
   .image-item {
-    flex: 0 0 400px;
-    height: 400px;
+    flex: 0 0 350px;
+    height: 350px;
   }
 }
 
@@ -688,17 +685,14 @@ p {
   }
 
   .image-item {
-    flex: 0 0 350px;
-    height: 350px;
+    flex: 0 0 300px;
+    height: 300px;
   }
 }
 
 @media (max-width: 768px) {
   .product-section {
     padding: 30px 15px;
-    /* Maintain fixed height */
-    height: 80vh;
-    min-height: 800px;
   }
 
   .card {
@@ -706,8 +700,8 @@ p {
   }
 
   .image-item {
-    flex: 0 0 300px;
-    height: 300px;
+    flex: 0 0 280px;
+    height: 280px;
   }
 
   .card-content h1 {
@@ -716,12 +710,6 @@ p {
 }
 
 @media (max-width: 480px) {
-  .product-section {
-    /* Still maintain fixed height */
-    height: 80vh;
-    min-height: 800px;
-  }
-
   .card {
     padding: 15px;
   }
