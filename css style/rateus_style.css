@@ -311,3 +311,20 @@ body {
     font-size: 0.9rem;
   }
 }
+
+.anonymous-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.anonymous-option input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+input:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}

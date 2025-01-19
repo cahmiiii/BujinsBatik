@@ -108,6 +108,10 @@
             <span class="star" data-value="4">&#9733;</span>
             <span class="star" data-value="5">&#9733;</span>
           </div>
+          <div class="anonymous-option">
+            <input type="checkbox" id="anonymousCheck" name="anonymous" />
+            <label for="anonymousCheck">Submit as Anonymous</label>
+          </div>
           <input
             type="text"
             id="name"
@@ -226,12 +230,20 @@
         document
           .getElementById("submitFeedback")
           .addEventListener("click", () => {
-            const name = document.getElementById("name").value;
+            const anonymousCheck = document.getElementById("anonymousCheck");
+            const name = anonymousCheck.checked
+              ? "Anonymous"
+              : document.getElementById("name").value;
             const email = document.getElementById("email").value;
             const feedback = document.getElementById("feedback").value;
 
-            if (!name || !email || !feedback || selectedRating === 0) {
-              alert("Please fill out all fields and select a rating.");
+            if (
+              !email ||
+              !feedback ||
+              selectedRating === 0 ||
+              (!anonymousCheck.checked && !name)
+            ) {
+              alert("Please fill out all required fields and select a rating.");
               return;
             }
 
@@ -305,6 +317,21 @@
           const walk = (x - startX) * 2; // Adjust scrolling speed
           reviewCarousel.scrollLeft = scrollLeft - walk;
         });
+
+        // Add event listener for anonymous checkbox
+        document
+          .getElementById("anonymousCheck")
+          .addEventListener("change", (e) => {
+            const nameInput = document.getElementById("name");
+            nameInput.disabled = e.target.checked;
+            nameInput.required = !e.target.checked;
+            if (e.target.checked) {
+              nameInput.value = "";
+              nameInput.placeholder = "Anonymous";
+            } else {
+              nameInput.placeholder = "Your Name";
+            }
+          });
       });
     </script>
   </body>
