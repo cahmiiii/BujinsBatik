@@ -507,3 +507,68 @@ section {
 body .history-section {
   background-color: #fff !important;
 }
+
+/* Malaysian Batik Section */
+.malaysian-batik {
+  padding: 60px 0;
+  background-color: #fff;
+}
+
+.malaysian-batik .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.batik-content {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.batik-image {
+  flex: 1;
+}
+
+.batik-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.batik-text {
+  flex: 1;
+}
+
+.batik-text h2 {
+  font-size: 2.5rem;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.batik-text p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .batik-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .batik-image,
+  .batik-text {
+    width: 100%;
+  }
+
+  .batik-text h2 {
+    font-size: 2rem;
+    text-align: center;
+  }
+}
