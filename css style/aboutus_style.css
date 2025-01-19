@@ -544,7 +544,7 @@ iframe {
   }
 }
 
-/* Combined video and copy section */
+/* Video and Copy Section */
 .video-and-copy {
   padding: 50px 12%;
   display: flex;
@@ -554,8 +554,7 @@ iframe {
   background: #fff;
 }
 
-/* Video container */
-.video-container iframe {
+.video-and-copy .video-container iframe {
   width: 800px;
   max-width: 100%;
   height: 450px;
@@ -563,16 +562,16 @@ iframe {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Copy container */
-.copy-container {
+.video-and-copy .copy-container {
   max-width: 800px;
   width: 100%;
 }
 
-.copy-content {
+.video-and-copy .copy-content {
   text-align: center;
 }
 
+/* Expand/Collapse functionality */
 .expanded-text {
   max-height: 0;
   overflow: hidden;
@@ -584,6 +583,7 @@ iframe {
   transition: max-height 0.5s ease-in;
 }
 
+/* Button Styling */
 .read-more-btn {
   display: inline-block;
   padding: 12px 30px;
@@ -603,13 +603,13 @@ iframe {
   color: #04023c;
 }
 
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
   .video-and-copy {
     padding: 30px 5%;
   }
 
-  .video-container iframe {
+  .video-and-copy .video-container iframe {
     height: 350px;
   }
 }
