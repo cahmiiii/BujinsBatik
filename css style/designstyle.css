@@ -41,12 +41,14 @@ p {
   margin-bottom: 3rem;
   background-color: #f3f4f6;
   padding: 40px 5%;
-  flex-direction: row; /* Image on the right */
+  flex-direction: column;
 }
 
 .product-text {
   flex: 1;
-  text-align: left;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .product-text h1 {
@@ -81,6 +83,26 @@ p {
   transform: scale(1.05);
 }
 
+.product-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.product-gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.product-gallery img:hover {
+  transform: scale(1.05);
+}
+
 /* === PRODUCT 2 - LADIES LOOK === */
 .product2 {
   display: flex;
@@ -88,13 +110,16 @@ p {
   justify-content: space-between;
   gap: 2rem;
   margin-bottom: 3rem;
-  flex-direction: row; /* Set image on the left */
+  flex-direction: column;
+  padding: 40px;
 }
 
 .product2-text {
   order: 2; /* Text comes after image */
   flex: 1;
-  text-align: left;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .product2-text h1 {
@@ -125,6 +150,26 @@ p {
 }
 
 .product2-img img:hover {
+  transform: scale(1.05);
+}
+
+.product2-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.product2-gallery img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.product2-gallery img:hover {
   transform: scale(1.05);
 }
 

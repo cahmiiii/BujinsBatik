@@ -95,20 +95,15 @@
           suitable to be transformed into garments or paintings. Although our
           collectors may choose to keep the fabric as is.
         </p>
-        <button class="see-more-btn" data-popup="product1-popup">
-          See More
-        </button>
       </div>
-      <div class="product-img">
-        <img src="../img/Batik/Sri Naga (1).png" alt="Sri Naga" />
+      <div class="product-gallery">
+        <img src="../img/Batik/Sri Naga (1).png" alt="Sri Naga Detail 1" />
+        <img src="../img/Batik/Sri Naga (2).png" alt="Sri Naga Detail 2" />
       </div>
     </section>
 
     <!-- Product Section 2 -->
     <section class="product2">
-      <div class="product2-img">
-        <img src="../img/Batik/Satin Silk (9).png" alt="Premium Silk Batik" />
-      </div>
       <div class="product2-text">
         <h1>Premium Silk Batik</h1>
         <p>
@@ -118,64 +113,18 @@
           finest silk, this scarf offers an unparalleled combination of luxury,
           style, and cultural heritage.
         </p>
-        <button class="see-more-btn" data-popup="product2-popup">
-          See More
-        </button>
+      </div>
+      <div class="product2-gallery">
+        <img src="../img/Batik/Satin Silk (1).png" alt="Silk Batik Detail 1" />
+        <img src="../img/Batik/Satin Silk (2).png" alt="Silk Batik Detail 2" />
+        <img src="../img/Batik/Satin Silk (3).png" alt="Silk Batik Detail 3" />
+        <img src="../img/Batik/Satin Silk (4).png" alt="Silk Batik Detail 4" />
+        <img src="../img/Batik/Satin Silk (6).png" alt="Silk Batik Detail 6" />
+        <img src="../img/Batik/Satin Silk (7).png" alt="Silk Batik Detail 7" />
+        <img src="../img/Batik/Satin Silk (8).png" alt="Silk Batik Detail 8" />
+        <img src="../img/Batik/Satin Silk (9).png" alt="Silk Batik Detail 9" />
       </div>
     </section>
-
-    <!-- Popup Section (Hidden by default) -->
-    <div class="popup-overlay" id="product1-popup">
-      <div class="popup-content">
-        <button class="close-btn">&times;</button>
-        <h2>Sri Naga</h2>
-        <div class="carousel">
-          <img src="../img/Batik/Sri Naga (1).png" alt="Sri Naga Detail 1" />
-          <img src="../img/Batik/Sri Naga (2).png" alt="Sri Naga Detail 2" />
-        </div>
-      </div>
-    </div>
-
-    <div class="popup-overlay" id="product2-popup">
-      <div class="popup-content">
-        <button class="close-btn">&times;</button>
-        <h2>Premium Silk Batik</h2>
-        <div class="carousel">
-          <img
-            src="../img/Batik/Satin Silk (1).png"
-            alt="Silk Batik Detail 1"
-          />
-          <img
-            src="../img/Batik/Satin Silk (2).png"
-            alt="Silk Batik Detail 2"
-          />
-          <img
-            src="../img/Batik/Satin Silk (3).png"
-            alt="Silk Batik Detail 3"
-          />
-          <img
-            src="../img/Batik/Satin Silk (4).png"
-            alt="Silk Batik Detail 4"
-          />
-          <img
-            src="../img/Batik/Satin Silk (6).png"
-            alt="Silk Batik Detail 6"
-          />
-          <img
-            src="../img/Batik/Satin Silk (7).png"
-            alt="Silk Batik Detail 7"
-          />
-          <img
-            src="../img/Batik/Satin Silk (8).png"
-            alt="Silk Batik Detail 8"
-          />
-          <img
-            src="../img/Batik/Satin Silk (9).png"
-            alt="Silk Batik Detail 9"
-          />
-        </div>
-      </div>
-    </div>
 
     <footer id="footer"></footer>
     <script>
@@ -186,32 +135,6 @@
           document.getElementById("footer").innerHTML = data;
         })
         .catch((error) => console.error("Error loading footer:", error));
-
-      // popup script
-      const seeMoreButtons = document.querySelectorAll(".see-more-btn");
-      const popups = document.querySelectorAll(".popup-overlay");
-      const closeButtons = document.querySelectorAll(".close-btn");
-
-      seeMoreButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const popupId = button.getAttribute("data-popup");
-          document.getElementById(popupId).style.display = "flex";
-        });
-      });
-
-      closeButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          button.closest(".popup-overlay").style.display = "none";
-        });
-      });
-
-      popups.forEach((popup) => {
-        popup.addEventListener("click", (event) => {
-          if (event.target === popup) {
-            popup.style.display = "none";
-          }
-        });
-      });
     </script>
   </body>
 </html>
