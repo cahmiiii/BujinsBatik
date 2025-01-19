@@ -43,8 +43,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Add this to your existing script.js file
 document.addEventListener("DOMContentLoaded", function () {
-  const readMoreBtn = document.querySelector(".read-more-btn");
-  const expandedText = document.querySelector(".expanded-text");
+  const readMoreBtn = document.querySelector(".copywriting .read-more-btn");
+  const expandedText = document.querySelector(".copywriting .expanded-text");
 
   readMoreBtn.addEventListener("click", function () {
     expandedText.classList.toggle("show");
