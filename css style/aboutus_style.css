@@ -217,14 +217,20 @@ p {
 /* -------------------------- */
 
 .academy {
+  padding: 50px 0;
   background: #fff;
+  width: 100%;
+  position: relative;
+  z-index: 2; /* Higher than video section */
+  margin-top: 50px; /* Add space after video */
   text-align: center;
-  padding: 60px 12%;
 }
 
 .academy-container {
-  max-width: 900px;
+  max-width: 800px;
+  width: 80%;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .academy h1 {
@@ -476,6 +482,8 @@ iframe {
   background: #fff;
   width: 100%;
   margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
 }
 
 .video-container {
