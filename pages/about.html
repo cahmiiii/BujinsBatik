@@ -128,26 +128,36 @@
     </div>
 
     <script>
-      // Wait for the DOM to be fully loaded
       document.addEventListener("DOMContentLoaded", function () {
-        // Load video content
-        fetch("/BujinsBatik/pages/video-content.html")
-          .then((response) => response.text())
+        // Update the fetch path to be relative to current location
+        fetch("video-content.html") // Changed from "/BujinsBatik/pages/video-content.html"
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.text();
+          })
           .then((data) => {
             const tempDiv = document.createElement("div");
             tempDiv.innerHTML = data;
 
             // Find and append only the video-and-copy section
             const videoContent = tempDiv.querySelector(".video-and-copy");
-            document
-              .getElementById("video-content-container")
-              .appendChild(videoContent);
+            if (videoContent) {
+              document
+                .getElementById("video-content-container")
+                .appendChild(videoContent);
+            } else {
+              throw new Error("Video content not found in the loaded HTML");
+            }
 
             // Load the CSS file
-            const link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = "../css/video-content.css";
-            document.head.appendChild(link);
+            if (!document.querySelector('link[href*="video-content.css"]')) {
+              const link = document.createElement("link");
+              link.rel = "stylesheet";
+              link.href = "../css/video-content.css";
+              document.head.appendChild(link);
+            }
 
             // Reattach event listener for read more button
             const readMoreBtn = document.querySelector(".read-more-btn");
@@ -164,9 +174,11 @@
               });
             }
           })
-          .catch((error) =>
-            console.error("Error loading video content:", error)
-          );
+          .catch((error) => {
+            console.error("Error loading video content:", error);
+            document.getElementById("video-content-container").innerHTML =
+              '<p style="text-align: center; color: red;">Error loading video content. Please try refreshing the page.</p>';
+          });
       });
     </script>
 
