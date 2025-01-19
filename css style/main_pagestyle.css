@@ -400,68 +400,81 @@ section {
   }
 }
 
-/* Making of Batik Section */
-.making-batik {
-  padding: 60px 20px;
-  background: #f9f9f9;
+/* Making of Batik Section - matching What is Batik style */
+.history-section {
+  padding: 30px;
+  background-color: rgb(235, 235, 235);
+  align-items: center;
 }
 
-.center-content {
-  max-width: 1200px;
-  margin: 0 auto;
+.history-section .container {
   text-align: center;
 }
 
-.center-content h2 {
-  font-size: 2.5rem;
+.history-section h2 {
+  font-size: var(--h2-font);
+  margin: 10px 0;
   color: #04023c;
-  margin-bottom: 1rem;
 }
 
-.subtitle {
+.history-section .subtitle {
   color: #666;
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  font-size: var(--p-font);
+  margin-bottom: 20px;
 }
 
-.content-wrapper {
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.content {
-  text-align: left;
+.history-section p {
+  color: black;
+  font-size: var(--p-font);
   line-height: 1.8;
-  color: #444;
+  margin-bottom: 20px;
+  text-align: justify;
 }
 
-.expanded-text {
+.history-section .expanded-text {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease-out;
 }
 
-.expanded-text.show {
-  max-height: 2000px; /* Adjust based on content length */
+.history-section .expanded-text.show {
+  max-height: 2000px;
   transition: max-height 0.5s ease-in;
 }
 
-.preview-text {
-  margin-bottom: 1rem;
-}
-
-.read-more-btn {
+.history-section .read-more-btn {
+  display: inline-block;
+  padding: 10px 25px;
   background: #04023c;
-  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 10px;
+  outline: none;
   border: none;
-  padding: 12px 30px;
-  border-radius: 25px;
+  margin-right: 12px;
+  transition: all 0.6s ease;
   cursor: pointer;
-  margin-top: 20px;
-  transition: background 0.3s ease;
 }
 
-.read-more-btn:hover {
-  background: #080650;
+.history-section .read-more-btn:hover {
+  background: #fbd875;
+  color: #04023c;
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1400px) {
+  .history-section h2 {
+    font-size: var(--h2-font);
+  }
+  .history-section p {
+    font-size: var(--p-font);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .history-section h2 {
+    font-size: var(--h2-font);
+  }
 }
