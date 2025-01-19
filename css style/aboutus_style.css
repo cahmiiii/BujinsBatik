@@ -476,29 +476,35 @@ iframe {
   }
 }
 
-/* Grid Container */
+/* Main Container */
+.about-content-container {
+  width: 100%;
+  padding: 50px 0;
+  margin-top: 50px; /* Add space after establishment section */
+  background: #fff;
+}
+
+/* Content Grid */
 .content-grid {
   display: grid;
-  grid-template-rows: auto auto; /* Two rows */
-  gap: 50px; /* Space between rows */
-  width: 100%;
+  grid-template-rows: auto auto;
+  gap: 30px;
+  width: 80%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 50px 20px;
+  background: #fff;
 }
 
 /* Video Section */
 .video-section {
-  grid-row: 1; /* First row */
+  grid-row: 1;
   width: 100%;
-  background: #fff;
-  display: flex;
-  justify-content: center;
 }
 
 .video-container {
+  width: 100%;
   max-width: 800px;
-  width: 80%;
+  margin: 0 auto;
 }
 
 .video-container iframe {
@@ -510,11 +516,11 @@ iframe {
 
 /* Copywriting Section */
 .copywriting {
-  grid-row: 2; /* Second row */
+  grid-row: 2;
   width: 100%;
-  background: #fff;
 }
 
+/* Copywriting Section */
 .copy-container {
   max-width: 800px;
   width: 80%;
