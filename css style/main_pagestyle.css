@@ -512,10 +512,12 @@ body .history-section {
 .malaysian-batik {
   padding: 60px 0;
   background-color: #fff;
+  width: 100%;
 }
 
 .malaysian-batik .container {
-  max-width: 1586px;
+  max-width: 1586px !important; /* Force the max-width */
+  width: 100%;
   margin: 0 auto;
   padding: 0 20px;
 }
