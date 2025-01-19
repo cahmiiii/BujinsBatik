@@ -530,7 +530,7 @@ body .history-section {
 
 .batik-image {
   flex: 1;
-  max-width: 600px; /* Limit the image width */
+  max-width: 350px; /* Changed to 350px */
   width: 100%;
 }
 
@@ -578,7 +578,7 @@ body .history-section {
   }
 
   .batik-image {
-    max-width: 400px; /* Smaller on mobile */
+    max-width: 300px; /* Slightly smaller on mobile */
     margin: 0 auto; /* Center on mobile */
   }
 }
