@@ -400,24 +400,29 @@ section {
   }
 }
 
-/* Making of Batik Section - matching What is Batik style exactly */
+/* Making of Batik Section - matching What is Batik width */
 .history-section {
-  padding: 30px;
+  padding: 30px 0;
   background-color: #f5f5f5;
   text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .history-section .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .history-section h2 {
   font-size: 3rem;
   color: #000;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-weight: 600;
+  width: 100%;
 }
 
 .history-section .subtitle {
@@ -425,6 +430,12 @@ section {
   font-size: 1.1rem;
   margin-bottom: 30px;
   text-align: center;
+  width: 100%;
+}
+
+.history-section .history-content {
+  width: 100%;
+  margin: 0 auto;
 }
 
 .history-section p {
@@ -433,20 +444,24 @@ section {
   line-height: 1.8;
   margin-bottom: 20px;
   text-align: center;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .history-section .expanded-text {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease-out;
+  width: 100%;
 }
 
 .history-section .expanded-text.show {
   max-height: 2000px;
   transition: max-height 0.5s ease-in;
+}
+
+.history-section .expanded-text p {
+  text-align: center;
+  margin: 0 auto 20px;
 }
 
 .history-section .read-more-btn,
@@ -472,30 +487,17 @@ section {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-  .history-section h2 {
-    font-size: 2.5rem;
-  }
-
-  .history-section p {
-    font-size: 0.95rem;
-    padding: 0 15px;
-  }
-
-  .history-section .read-more-btn,
-  .history-section .read-less-btn {
-    padding: 10px 25px;
-    font-size: 14px;
+@media (max-width: 1200px) {
+  .history-section {
+    width: 90%;
   }
 }
 
-@media (max-width: 480px) {
-  .history-section h2 {
-    font-size: 2rem;
+@media (max-width: 768px) {
+  .history-section {
+    width: 95%;
   }
-
-  .history-section p {
-    font-size: 0.9rem;
-    padding: 0 10px;
+  .history-section .container {
+    padding: 30px 20px;
   }
 }
