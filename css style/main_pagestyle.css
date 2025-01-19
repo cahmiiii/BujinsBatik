@@ -400,10 +400,10 @@ section {
   }
 }
 
-/* Making of Batik Section - matching What is Batik width */
+/* Making of Batik Section - with white background */
 .history-section {
   padding: 30px 0;
-  background-color: #f5f5f5;
+  background-color: #fff;
   text-align: center;
   width: 80%;
   margin: 0 auto;
