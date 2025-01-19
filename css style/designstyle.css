@@ -36,46 +36,41 @@ p {
 
 /* === PRODUCT 1 - MENS LOOK === */
 .product {
-  max-width: 100%;
-  margin: 0;
-  padding: 40px 0;
-  background-color: #ffffff;
-  border-radius: 0;
-  box-shadow: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 20px;
+  margin-bottom: 40px;
 }
 
 .product-text {
-  text-align: left;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px 40px 40px;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .product-text h1 {
   font-size: 2.5rem;
   color: #04023c;
   margin-bottom: 1rem;
-  text-align: left;
-  padding-bottom: 15px;
+  position: relative;
+  display: inline-block;
 }
 
 .product-text h1:after {
   content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  display: block;
   width: 60px;
   height: 3px;
-  background-color: #04023c;
+  background: #04023c;
+  margin: 10px auto 0;
 }
 
 .product-text p {
-  font-size: 1.1rem;
-  line-height: 1.8;
   color: #666;
-  text-align: left;
   max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
 }
 
 .product-img {
@@ -133,46 +128,41 @@ p {
 
 /* === PRODUCT 2 - LADIES LOOK === */
 .product2 {
-  max-width: 100%;
-  margin: 0;
-  padding: 40px 0;
-  background-color: #ffffff;
-  border-radius: 0;
-  box-shadow: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 20px;
+  margin-bottom: 40px;
 }
 
 .product2-text {
-  text-align: left;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px 40px 40px;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .product2-text h1 {
   font-size: 2.5rem;
   color: #04023c;
   margin-bottom: 1rem;
-  text-align: left;
-  padding-bottom: 15px;
+  position: relative;
+  display: inline-block;
 }
 
 .product2-text h1:after {
   content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  display: block;
   width: 60px;
   height: 3px;
-  background-color: #04023c;
+  background: #04023c;
+  margin: 10px auto 0;
 }
 
 .product2-text p {
-  font-size: 1.1rem;
-  line-height: 1.8;
   color: #666;
-  text-align: left;
   max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
 }
 
 .product2-img {
@@ -351,6 +341,20 @@ p {
     width: 350px;
     height: 450px;
   }
+
+  .gallery-item {
+    width: 400px;
+    height: 400px;
+  }
+
+  .scroll-gallery {
+    height: 300px;
+  }
+
+  .gallery-item {
+    flex: 0 0 300px;
+    height: 300px;
+  }
 }
 
 /* Mobile View */
@@ -401,6 +405,20 @@ p {
     width: 300px;
     height: 400px;
   }
+
+  .gallery-item {
+    width: 300px;
+    height: 300px;
+  }
+
+  .scroll-gallery {
+    height: 250px;
+  }
+
+  .gallery-item {
+    flex: 0 0 250px;
+    height: 250px;
+  }
 }
 
 /* Small Mobile View */
@@ -450,49 +468,67 @@ p {
     width: 250px;
     height: 350px;
   }
+
+  .gallery-item {
+    width: 250px;
+    height: 250px;
+  }
+
+  .scroll-gallery {
+    height: 200px;
+  }
+
+  .gallery-item {
+    flex: 0 0 200px;
+    height: 200px;
+  }
 }
 
 /* Scrollable gallery */
+.scroll-container {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
 .scroll-gallery {
   display: flex;
   overflow-x: auto;
   gap: 20px;
-  padding: 20px 40px;
+  padding: 0 20px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  height: 350px; /* Fixed height for single row */
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
 .scroll-gallery::-webkit-scrollbar {
-  height: 8px;
-  background: #f1f1f1;
+  display: none;
 }
 
-.scroll-gallery::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+/* Hide scrollbar for IE, Edge and Firefox */
+.scroll-gallery {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-.scroll-gallery::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-.scroll-gallery > div {
-  flex: 0 0 auto;
-  width: 400px;
-  height: 500px;
-  scroll-snap-align: start;
-  position: relative;
+.gallery-item {
+  flex: 0 0 350px; /* Fixed width equal to height for square aspect ratio */
+  height: 350px;
+  border-radius: 20px;
   overflow: hidden;
+  scroll-snap-align: start;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.scroll-gallery img {
+.gallery-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
   transition: transform 0.3s ease;
 }
 
-.scroll-gallery img:hover {
-  transform: scale(1.02);
+.gallery-item:hover img {
+  transform: scale(1.05);
 }
