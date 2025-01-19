@@ -85,95 +85,32 @@
       </script>
     </div>
 
-    <!-- WHO IS BUJIN Section -->
+    <!-- Who is Bujin Section -->
     <section class="who-is-bujin">
-      <div class="bujin-container">
-        <div class="bujin-img">
-          <img src="../img/Bujins Owner.png" alt="Bujin Owner" />
-        </div>
-        <div class="bujin-text">
-          <h1>Who is Bujin?</h1>
-          <p>
-            BUJIN is the patronymic name of Amir Harith bin Mat Kashim, a young
-            batik maker who has made a name for himself in the country and
-            abroad. He has won various batik and art competitions and was
-            honored as the country's Best Young Handicraft Entrepreneur in 2018.
-          </p>
-        </div>
-      </div>
+      <h1>Who is Bujin?</h1>
+      <p>
+        BUJIN is the patronymic name of Amir Harith bin Mat Kashim, a young
+        batik maker who has made a name for himself in the country and abroad.
+        He has won various batik and art competitions and was honored as the
+        country's Best Young Handicraft Entrepreneur in 2018.
+      </p>
     </section>
 
-    <!-- ESTABLISHMENT Section -->
+    <!-- Establishment Section -->
     <section class="establishment">
-      <div class="establishment-container">
-        <div class="establishment-img">
-          <img src="../img/Canting Pic.png" alt="Establishment Image" />
-        </div>
-        <div class="establishment-text">
-          <h1>Establishment</h1>
-          <p>
-            The Bujins Batik business was started by Amir Harith bin Mat Kashim
-            after he completed his Batik Craft Art Diploma at the National Craft
-            Institute, Rawang, Selangor, in 2011. It was officially registered
-            by Fakrul Azlee bin Fakurod Rodzi and Farhi bin Zainal under the
-            name Bujins L Batik Sdn. Bhd. In 2017, the company was officially
-            taken over by Taufiq bin Hussien.
-          </p>
-        </div>
-      </div>
+      <h1>Establishment</h1>
+      <p>
+        The Bujins Batik business was started by Amir Harith bin Mat Kashim
+        after he completed his Batik Craft Art Diploma at the National Craft
+        Institute, Rawang, Selangor, in 2011. It was officially registered by
+        Fakrul Azlee bin Fakurod Rodzi and Farhi bin Zainal under the name
+        Bujins L Batik Sdn. Bhd. In 2017, the company was officially taken over
+        by Taufiq bin Hussien.
+      </p>
     </section>
 
-    <!-- After establishment section -->
-    <section class="video-and-copy">
-      <div class="video-container">
-        <iframe
-          src="https://www.youtube.com/embed/-NvOFLJ5byM"
-          title="Bujins Batik Video"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-
-      <div class="copy-container">
-        <div class="copy-content">
-          <p class="preview-text">
-            Bujins Batik is a namesake brand by award-winning batik artist,
-            Bujin. We are a premium quality batik manufacturer that is renowned
-            in the crafts industry. Our batik designs are modern and
-            contemporary, yet the traditional canting method is preserved to
-            maintain the authenticity.
-          </p>
-          <div class="expanded-text">
-            <p>
-              We are passionate about the art of batik making. It is a cultural
-              representation of Malaysia's kaleidoscopic society that are very
-              much valued. Our batik-making process requires intricacy,
-              creativity, passion and determination as everything is hand-drawn
-              from scratch. We are proud of our art and wishes to protect this
-              cultural heritage.
-            </p>
-            <p>
-              The star is our Master Craftsman, BUJIN, or Amir Harith bin Mat
-              Kashim who was the previous winner of the Piala Seri Endon (PSE)
-              in Fashion Category in 2012. His talent was rightly appraised when
-              he was awarded the Golden Hand Award by the Prime Minister of
-              Malaysia in 2009. Fast forward to 2022, he was awarded the
-              International Craft Award by Craft Village in India.
-            </p>
-            <p>
-              Bujin's love for batik making art is deeply ingrained in him. He
-              eventually began opening showrooms for exclusive batik collections
-              in Kuala Lumpur. At the same time, he started Bujin Academy to
-              teach rural folks especially the young, the art of batik. As a
-              result, his students managed to reach the final stage of Piala
-              Seri Endon in 2013, 2014 and 3 teams as semi-finalists in 2015.
-            </p>
-          </div>
-          <button class="read-more-btn">Read More</button>
-        </div>
-      </div>
-    </section>
+    <!-- Video and Copy Content Container -->
+    <div id="video-content-container"></div>
 
     <!-- ACADEMY Section -->
     <section class="academy">
@@ -262,6 +199,29 @@
           document.getElementById("footer").innerHTML = data;
         })
         .catch((error) => console.error("Error loading footer:", error));
+    </script>
+
+    <script>
+      // Fetch video and copy content
+      fetch("/BujinsBatik/pages/video-content.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("video-content-container").innerHTML = data;
+
+          // Reattach event listener for read more button
+          const readMoreBtn = document.querySelector(".read-more-btn");
+          const expandedText = document.querySelector(".expanded-text");
+
+          if (readMoreBtn && expandedText) {
+            readMoreBtn.addEventListener("click", function () {
+              expandedText.classList.toggle("show");
+              readMoreBtn.textContent = expandedText.classList.contains("show")
+                ? "Read Less"
+                : "Read More";
+            });
+          }
+        })
+        .catch((error) => console.error("Error loading video content:", error));
     </script>
   </body>
 </html>
