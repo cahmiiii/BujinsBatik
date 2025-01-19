@@ -530,6 +530,8 @@ body .history-section {
 
 .batik-image {
   flex: 1;
+  max-width: 600px; /* Limit the image width */
+  width: 100%;
 }
 
 .batik-image img {
@@ -537,6 +539,7 @@ body .history-section {
   height: auto;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  object-fit: cover; /* Ensures image maintains aspect ratio */
 }
 
 .batik-text {
@@ -572,5 +575,10 @@ body .history-section {
   .batik-text h2 {
     font-size: 2rem;
     text-align: center;
+  }
+
+  .batik-image {
+    max-width: 400px; /* Smaller on mobile */
+    margin: 0 auto; /* Center on mobile */
   }
 }
