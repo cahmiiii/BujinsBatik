@@ -475,6 +475,7 @@ iframe {
   padding: 50px 0;
   background: #fff;
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .video-container {
@@ -511,12 +512,16 @@ iframe {
 
 /* Copywriting Section */
 .copywriting {
-  padding: 50px 0;
+  padding: 30px 0 50px 0;
   background: #fff;
+  width: 100%;
+  clear: both;
+  position: relative;
 }
 
 .copy-container {
   max-width: 800px;
+  width: 80%;
   margin: 0 auto;
   padding: 0 20px;
 }
