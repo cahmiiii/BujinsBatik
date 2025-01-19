@@ -38,23 +38,22 @@ p {
 .product {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 60px 20px;
   background: white;
-  border-radius: 20px;
-  margin-bottom: 40px;
 }
 
 .product-text {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .product-text h1 {
   font-size: 2.5rem;
   color: #04023c;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
+  font-weight: bold;
 }
 
 .product-text h1:after {
@@ -63,14 +62,15 @@ p {
   width: 60px;
   height: 3px;
   background: #04023c;
-  margin: 10px auto 0;
+  margin: 15px auto 0;
 }
 
 .product-text p {
   color: #666;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   line-height: 1.8;
+  font-size: 1.1rem;
 }
 
 .product-img {
@@ -130,23 +130,22 @@ p {
 .product2 {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 60px 20px;
   background: white;
-  border-radius: 20px;
-  margin-bottom: 40px;
 }
 
 .product2-text {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .product2-text h1 {
   font-size: 2.5rem;
   color: #04023c;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
+  font-weight: bold;
 }
 
 .product2-text h1:after {
@@ -155,14 +154,15 @@ p {
   width: 60px;
   height: 3px;
   background: #04023c;
-  margin: 10px auto 0;
+  margin: 15px auto 0;
 }
 
 .product2-text p {
   color: #666;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   line-height: 1.8;
+  font-size: 1.1rem;
 }
 
 .product2-img {
@@ -330,11 +330,11 @@ p {
 
   .product-text,
   .product2-text {
-    padding: 0 20px 30px 20px;
+    padding: 0 40px;
   }
 
   .scroll-gallery {
-    padding: 20px;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .scroll-gallery > div {
@@ -527,8 +527,9 @@ p {
 
 .gallery-item {
   aspect-ratio: 1; /* Maintains square shape */
-  border-radius: 20px;
+  border-radius: 15px;
   overflow: hidden;
+  background: #fff;
 }
 
 .gallery-item img {
@@ -540,4 +541,36 @@ p {
 
 .gallery-item:hover img {
   transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .scroll-gallery {
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  .scroll-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .scroll-gallery {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-text h1,
+  .product2-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .product-text p,
+  .product2-text p {
+    font-size: 1rem;
+  }
 }
