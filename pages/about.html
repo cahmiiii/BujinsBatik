@@ -122,6 +122,31 @@
       </div>
     </section>
 
+    <!-- Video Content Container -->
+    <div id="video-content-container"></div>
+
+    <script>
+      fetch("/BujinsBatik/pages/video-content.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("video-content-container").innerHTML = data;
+
+          // Reattach event listener for read more button
+          const readMoreBtn = document.querySelector(".read-more-btn");
+          const expandedText = document.querySelector(".expanded-text");
+
+          if (readMoreBtn && expandedText) {
+            readMoreBtn.addEventListener("click", function () {
+              expandedText.classList.toggle("show");
+              readMoreBtn.textContent = expandedText.classList.contains("show")
+                ? "Read Less"
+                : "Read More";
+            });
+          }
+        })
+        .catch((error) => console.error("Error loading video content:", error));
+    </script>
+
     <!-- ACADEMY Section -->
     <section class="academy">
       <div class="academy-container">
