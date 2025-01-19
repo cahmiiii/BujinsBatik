@@ -47,20 +47,28 @@ p {
 /* -------------------------- */
 
 .who-is-bujin {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
   padding: 50px 12%;
-  flex-direction: row; /* Default for Desktop */
+  background: #fff;
 }
 
-.bujin-container {
+.who-is-bujin-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 2rem;
-  flex-direction: row;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.who-is-bujin-img {
+  flex: 1;
+}
+
+.who-is-bujin-img img {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .bujin-text {
@@ -80,45 +88,14 @@ p {
   color: #444;
 }
 
-.bujin-img {
-  flex: 1;
-  max-width: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.bujin-img img {
-  width: 100%;
-  max-width: 350px;
-  height: auto;
-  border-radius: 10px;
-}
-
 /* Mobile View */
 @media (max-width: 768px) {
-  .who-is-bujin {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .bujin-container {
+  .who-is-bujin-content {
     flex-direction: column;
   }
 
-  .bujin-text {
+  .who-is-bujin-img img {
     max-width: 100%;
-    order: 2;
-  }
-
-  .bujin-img {
-    max-width: 100%;
-    order: 1;
-    margin-bottom: 1.5rem;
-  }
-
-  .bujin-img img {
-    max-width: 80%;
   }
 }
 
@@ -127,36 +104,24 @@ p {
 /* -------------------------- */
 
 .establishment {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 50px 12%;
-  flex-direction: row;
-  gap: 2rem;
+  background: #fff;
 }
 
-.establishment-container {
+.establishment-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 2rem;
-  flex-direction: row;
-}
-
-.establishment-img {
-  order: 2;
-  max-width: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .establishment-img img {
+  max-width: 500px;
   width: 100%;
-  max-width: 400px;
   height: auto;
   border-radius: 10px;
-  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .establishment-text {
@@ -178,24 +143,12 @@ p {
 
 /* Mobile View */
 @media (max-width: 768px) {
-  .establishment {
+  .establishment-content {
     flex-direction: column;
-    text-align: center;
-    padding: 40px 5%;
-  }
-
-  .establishment-container {
-    flex-direction: column;
-  }
-
-  .establishment-img {
-    max-width: 100%;
-    order: 1;
-    margin-bottom: 1.5rem;
   }
 
   .establishment-img img {
-    max-width: 80%;
+    max-width: 100%;
   }
 
   .establishment-text {
