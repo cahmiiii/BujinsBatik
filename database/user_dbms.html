@@ -15,6 +15,7 @@
             <th>Username</th>
             <th>Email</th>
             <th>Password (Hashed)</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody id="userTable"></tbody>
@@ -22,30 +23,103 @@
       <button onclick="clearUsers()">Clear Database</button>
     </div>
 
+    <!-- Add Password Update Modal -->
+    <div id="passwordModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <h2>Update Password</h2>
+        <input
+          type="password"
+          id="newPassword"
+          placeholder="Enter New Password"
+          required
+        />
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirm New Password"
+          required
+        />
+        <button onclick="updatePassword()">Save</button>
+        <button onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+
     <script>
+      let selectedUserIndex = null;
+
       document.addEventListener("DOMContentLoaded", async () => {
+        await loadUsers();
+      });
+
+      async function loadUsers() {
         const userTable = document.getElementById("userTable");
         let users = JSON.parse(localStorage.getItem("users")) || [];
+        userTable.innerHTML = ""; // Clear existing rows
 
-        for (const user of users) {
-          const hashedPassword = await hashPassword(user.password); // Hash password dynamically
+        for (let i = 0; i < users.length; i++) {
+          const user = users[i];
+          const hashedPassword = await hashPassword(user.password);
           let row = document.createElement("tr");
           row.innerHTML = `
                     <td>${user.username}</td>
                     <td>${user.email}</td>
                     <td>${hashedPassword}</td>
+                    <td><button onclick="openPasswordModal(${i})">Edit Password</button></td>
                 `;
           userTable.appendChild(row);
         }
-      });
-
-      function clearUsers() {
-        localStorage.removeItem("users");
-        alert("User database cleared!");
-        location.reload();
       }
 
-      // Hash Password for Display
+      function openPasswordModal(index) {
+        selectedUserIndex = index;
+        document.getElementById("passwordModal").style.display = "block";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("confirmPassword").value = "";
+      }
+
+      function closeModal() {
+        document.getElementById("passwordModal").style.display = "none";
+        selectedUserIndex = null;
+      }
+
+      async function updatePassword() {
+        const newPassword = document.getElementById("newPassword").value;
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+
+        if (!newPassword || !confirmPassword) {
+          alert("Please fill in both password fields");
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          alert("Passwords do not match");
+          return;
+        }
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        if (selectedUserIndex !== null && users[selectedUserIndex]) {
+          // Hash the new password
+          const hashedPassword = await hashPassword(newPassword);
+          users[selectedUserIndex].password = hashedPassword;
+
+          // Save updated users array
+          localStorage.setItem("users", JSON.stringify(users));
+
+          alert("Password updated successfully!");
+          closeModal();
+          loadUsers(); // Refresh the table
+        }
+      }
+
+      function clearUsers() {
+        if (confirm("Are you sure you want to clear all users?")) {
+          localStorage.removeItem("users");
+          alert("User database cleared!");
+          loadUsers();
+        }
+      }
+
       async function hashPassword(password) {
         const encoder = new TextEncoder();
         const data = encoder.encode(password);
@@ -55,5 +129,42 @@
           .join("");
       }
     </script>
+
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 500px;
+      }
+
+      .modal-content input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .modal-content button {
+        margin: 10px 5px;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
   </body>
 </html>
