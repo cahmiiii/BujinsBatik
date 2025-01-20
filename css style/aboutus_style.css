@@ -531,12 +531,12 @@ iframe {
 .popup-content {
   position: relative;
   background: #fff;
-  width: 90%;
-  max-width: 800px;
+  width: 95%;
+  max-width: 900px;
   margin: 50px auto;
   padding: 30px;
   border-radius: 20px;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow-y: auto;
   opacity: 0;
   transform: translateY(-20px);
@@ -570,6 +570,26 @@ iframe {
   color: #333;
 }
 
+/* Add video container styles */
+.popup-video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  margin-bottom: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.popup-video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .copywriting {
@@ -577,8 +597,10 @@ iframe {
   }
 
   .popup-content {
-    width: 95%;
-    margin: 20px auto;
     padding: 20px;
+  }
+
+  .popup-video-container {
+    margin-bottom: 20px;
   }
 }
