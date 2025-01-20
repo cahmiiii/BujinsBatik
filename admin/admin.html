@@ -191,19 +191,36 @@
           return;
         }
 
-        // Hash the new password
-        const hashedPassword = await hashPassword(newPassword);
+        try {
+          // Hash the new password
+          const hashedPassword = await hashPassword(newPassword);
 
-        // Update the user in localStorage
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-        if (selectedUserIndex !== null && users[selectedUserIndex]) {
-          users[selectedUserIndex].password = hashedPassword;
-          localStorage.setItem("users", JSON.stringify(users));
+          // Update the password based on selectedUserType
+          let storageKey = selectedUserType; // 'users' or 'admins'
+          let items = JSON.parse(localStorage.getItem(storageKey)) || [];
 
-          alert("User password updated successfully!");
-          closeModal();
-          loadUsers(); // Refresh the table
-        } else {
+          if (selectedUserIndex !== null && items[selectedUserIndex]) {
+            items[selectedUserIndex].password = hashedPassword;
+            localStorage.setItem(storageKey, JSON.stringify(items));
+
+            alert(
+              `${
+                selectedUserType === "admins" ? "Admin" : "User"
+              } password updated successfully!`
+            );
+            closeModal();
+
+            // Refresh the appropriate table
+            if (selectedUserType === "admins") {
+              loadAdmins();
+            } else {
+              loadUsers();
+            }
+          } else {
+            alert("Failed to update password. Please try again.");
+          }
+        } catch (error) {
+          console.error("Error updating password:", error);
           alert("Failed to update password. Please try again.");
         }
       }
@@ -219,32 +236,39 @@
             : admins
                 .map(
                   (admin, index) => `
-                    <tr>
-                        <td>${admin.username}</td>
-                        <td>${admin.email}</td>
-                        <td>******</td>
-                        <td><button onclick="openPasswordModal('admins', ${index})">Edit Password</button></td>
-                    </tr>
-                `
+                <tr>
+                    <td>${admin.username}</td>
+                    <td>${admin.email}</td>
+                    <td>******</td>
+                    <td><button onclick="openAdminPasswordModal(${index})">Edit Password</button></td>
+                </tr>
+            `
                 )
                 .join("");
       }
 
-      function clearAdmins() {
-        localStorage.removeItem("admins");
-        alert("Admin database cleared!");
-        location.reload();
-      }
-
-      // ===== PASSWORD HANDLING =====
-      function openPasswordModal(index) {
-        selectedUserType = "users"; // Specify that we're editing a user
+      function openAdminPasswordModal(index) {
+        selectedUserType = "admins"; // Specify that we're editing an admin
         selectedUserIndex = index;
         document.getElementById("passwordModal").style.display = "flex";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("confirmNewPassword").value = "";
       }
 
       function closeModal() {
         document.getElementById("passwordModal").style.display = "none";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("confirmNewPassword").value = "";
+        selectedUserIndex = null;
+        selectedUserType = null;
+      }
+
+      function clearAdmins() {
+        if (confirm("Are you sure you want to clear all admins?")) {
+          localStorage.removeItem("admins");
+          alert("Admin database cleared!");
+          loadAdmins();
+        }
       }
 
       async function hashPassword(password) {
