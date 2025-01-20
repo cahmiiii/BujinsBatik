@@ -329,6 +329,19 @@
           .join("");
       }
 
+      function clearAdmins() {
+        if (confirm("Are you sure you want to clear all admins?")) {
+          try {
+            localStorage.removeItem("admins");
+            alert("Admin database cleared successfully!");
+            loadAdmins(); // Refresh the admin table
+          } catch (error) {
+            console.error("Error clearing admin database:", error);
+            alert("Failed to clear admin database. Please try again.");
+          }
+        }
+      }
+
       // ===== TAB SWITCHING =====
       function showTab(tab) {
         document

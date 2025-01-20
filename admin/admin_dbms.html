@@ -23,9 +23,13 @@
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
+      // Function to load admin data
+      function loadAdminData() {
         const adminTable = document.getElementById("adminTable");
         let admins = JSON.parse(localStorage.getItem("admins")) || [];
+
+        // Clear existing table content
+        adminTable.innerHTML = "";
 
         if (admins.length === 0) {
           adminTable.innerHTML =
@@ -34,22 +38,31 @@
           admins.forEach((admin) => {
             let row = document.createElement("tr");
             row.innerHTML = `
-                        <td>${admin.username}</td>
-                        <td>${admin.email}</td>
-                        <td>${admin.password}</td>
-                    `;
+              <td>${admin.username}</td>
+              <td>${admin.email}</td>
+              <td>${admin.password}</td>
+            `;
             adminTable.appendChild(row);
           });
         }
-      });
+      }
 
+      // Function to clear admin database
       function clearAdmins() {
         if (confirm("Are you sure you want to clear the admin database?")) {
-          localStorage.removeItem("admins");
-          alert("Admin database cleared!");
-          location.reload();
+          try {
+            localStorage.removeItem("admins");
+            alert("Admin database cleared successfully!");
+            loadAdminData(); // Refresh the table without reloading the page
+          } catch (error) {
+            console.error("Error clearing admin database:", error);
+            alert("Failed to clear admin database. Please try again.");
+          }
         }
       }
+
+      // Load admin data when page loads
+      document.addEventListener("DOMContentLoaded", loadAdminData);
     </script>
   </body>
 </html>
