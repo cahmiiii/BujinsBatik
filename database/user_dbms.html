@@ -23,8 +23,8 @@
       <button onclick="clearUsers()">Clear Database</button>
     </div>
 
-    <!-- Add Password Update Modal -->
-    <div id="passwordModal" class="modal" style="display: none">
+    <!-- Update the Password Modal HTML to match admin's structure -->
+    <div id="passwordModal" class="modal">
       <div class="modal-content">
         <h2>Update Password</h2>
         <input
@@ -35,11 +35,11 @@
         />
         <input
           type="password"
-          id="confirmPassword"
+          id="confirmNewPassword"
           placeholder="Confirm New Password"
           required
         />
-        <button onclick="updatePassword()">Save</button>
+        <button onclick="saveNewPassword()">Save</button>
         <button onclick="closeModal()">Cancel</button>
       </div>
     </div>
@@ -47,94 +47,82 @@
     <script>
       let selectedUserIndex = null;
 
-      document.addEventListener("DOMContentLoaded", async () => {
-        await loadUsers();
-      });
-
       async function loadUsers() {
         const userTable = document.getElementById("userTable");
         let users = JSON.parse(localStorage.getItem("users")) || [];
         userTable.innerHTML = ""; // Clear existing rows
 
-        for (let i = 0; i < users.length; i++) {
-          const user = users[i];
-          const hashedPassword = await hashPassword(user.password);
+        users.forEach((user, index) => {
           let row = document.createElement("tr");
           row.innerHTML = `
                     <td>${user.username}</td>
                     <td>${user.email}</td>
-                    <td>${hashedPassword}</td>
-                    <td><button onclick="openPasswordModal(${i})">Edit Password</button></td>
+                    <td>******</td>
+                    <td><button onclick="openPasswordModal(${index})">Edit Password</button></td>
                 `;
           userTable.appendChild(row);
-        }
+        });
       }
 
       function openPasswordModal(index) {
-        console.log("Opening modal for user index:", index);
         selectedUserIndex = index;
-        console.log("selectedUserIndex set to:", selectedUserIndex);
         document.getElementById("passwordModal").style.display = "block";
         document.getElementById("newPassword").value = "";
-        document.getElementById("confirmPassword").value = "";
+        document.getElementById("confirmNewPassword").value = "";
       }
 
       function closeModal() {
         document.getElementById("passwordModal").style.display = "none";
+        document.getElementById("newPassword").value = "";
+        document.getElementById("confirmNewPassword").value = "";
         selectedUserIndex = null;
       }
 
-      async function updatePassword() {
-        const newPassword = document.getElementById("newPassword").value;
-        const confirmPassword =
-          document.getElementById("confirmPassword").value;
-
-        console.log("Starting password update...");
-        console.log("Selected User Index:", selectedUserIndex);
+      async function saveNewPassword() {
+        const newPassword = document.getElementById("newPassword").value.trim();
+        const confirmPassword = document
+          .getElementById("confirmNewPassword")
+          .value.trim();
 
         if (!newPassword || !confirmPassword) {
-          console.log("Empty password fields");
-          alert("Please fill in both password fields");
+          alert("Both password fields are required!");
           return;
         }
 
         if (newPassword !== confirmPassword) {
-          console.log("Passwords do not match");
-          alert("Passwords do not match");
+          alert("Passwords do not match!");
           return;
         }
 
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-        console.log("Current users:", users);
-        console.log("Attempting to update user at index:", selectedUserIndex);
-
         try {
+          // Hash the new password
+          const hashedPassword = await hashPassword(newPassword);
+
+          // Update the user in localStorage
+          let users = JSON.parse(localStorage.getItem("users")) || [];
           if (selectedUserIndex !== null && users[selectedUserIndex]) {
-            // Hash the new password
-            console.log("Hashing password...");
-            const hashedPassword = await hashPassword(newPassword);
-            console.log("Password hashed successfully");
-
             users[selectedUserIndex].password = hashedPassword;
-            console.log("Updated user object:", users[selectedUserIndex]);
-
-            // Save updated users array
             localStorage.setItem("users", JSON.stringify(users));
-            console.log("Users array saved to localStorage");
 
-            alert("Password updated successfully!");
+            alert("User password updated successfully!");
             closeModal();
             loadUsers(); // Refresh the table
           } else {
-            console.error("Invalid user index or user not found");
-            console.log("selectedUserIndex:", selectedUserIndex);
-            console.log("user at index:", users[selectedUserIndex]);
-            alert("Failed to update password. User not found.");
+            alert("Failed to update password. Please try again.");
           }
         } catch (error) {
           console.error("Error updating password:", error);
           alert("Failed to update password. Please try again.");
         }
+      }
+
+      async function hashPassword(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        const hash = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hash))
+          .map((byte) => byte.toString(16).padStart(2, "0"))
+          .join("");
       }
 
       function clearUsers() {
@@ -145,22 +133,10 @@
         }
       }
 
-      async function hashPassword(password) {
-        try {
-          console.log("Starting password hashing...");
-          const encoder = new TextEncoder();
-          const data = encoder.encode(password);
-          const hash = await crypto.subtle.digest("SHA-256", data);
-          const hashedString = Array.from(new Uint8Array(hash))
-            .map((byte) => byte.toString(16).padStart(2, "0"))
-            .join("");
-          console.log("Password hashed successfully");
-          return hashedString;
-        } catch (error) {
-          console.error("Error in hashPassword:", error);
-          throw error;
-        }
-      }
+      // Initialize the page
+      document.addEventListener("DOMContentLoaded", () => {
+        loadUsers();
+      });
     </script>
 
     <style>

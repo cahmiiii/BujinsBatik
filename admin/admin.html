@@ -88,7 +88,7 @@
           placeholder="Confirm New Password"
           required
         />
-        <button onclick="saveNewPassword()">Save</button>
+        <button onclick="saveUserPassword()">Save</button>
         <button onclick="closeModal()">Cancel</button>
       </div>
     </div>
@@ -237,60 +237,14 @@
       }
 
       // ===== PASSWORD HANDLING =====
-      function openPasswordModal(type, index) {
-        selectedUserType = type;
+      function openPasswordModal(index) {
+        selectedUserType = "users"; // Specify that we're editing a user
         selectedUserIndex = index;
         document.getElementById("passwordModal").style.display = "flex";
       }
 
       function closeModal() {
         document.getElementById("passwordModal").style.display = "none";
-      }
-
-      async function saveNewPassword() {
-        const newPassword = document.getElementById("newPassword").value.trim();
-        const confirmPassword = document
-          .getElementById("confirmNewPassword")
-          .value.trim();
-
-        if (!newPassword || !confirmPassword) {
-          alert("Both password fields are required!");
-          return;
-        }
-
-        if (newPassword !== confirmPassword) {
-          alert("Passwords do not match!");
-          return;
-        }
-
-        // Hash the new password
-        const hashedPassword = await hashPassword(newPassword);
-
-        // Update the selected user/admin in localStorage
-        let data = JSON.parse(localStorage.getItem(selectedUserType)) || [];
-
-        if (selectedUserIndex !== null && data[selectedUserIndex]) {
-          data[selectedUserIndex].password = hashedPassword; // Update with hashed password
-          localStorage.setItem(selectedUserType, JSON.stringify(data));
-
-          alert("Password updated successfully!");
-          closeModal();
-          location.reload();
-        } else {
-          alert("Failed to update password. Please try again.");
-        }
-      }
-
-      function openPasswordModal(type, index) {
-        selectedUserType = type; // 'users' or 'admins'
-        selectedUserIndex = index; // Index of the user/admin in array
-        document.getElementById("passwordModal").style.display = "flex";
-      }
-
-      function closeModal() {
-        document.getElementById("passwordModal").style.display = "none";
-        document.getElementById("newPassword").value = "";
-        document.getElementById("confirmNewPassword").value = "";
       }
 
       async function hashPassword(password) {
