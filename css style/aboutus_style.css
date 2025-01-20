@@ -294,7 +294,7 @@ p {
 .award-carousel {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: 2rem;
   padding: 1rem;
   list-style: none;
@@ -310,6 +310,10 @@ p {
   padding: 20px;
   transition: transform 0.3s ease-in-out;
   width: 300px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .award-card:hover {
@@ -321,6 +325,8 @@ p {
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  height: 100%;
+  justify-content: center;
 }
 
 .award-img img {
@@ -340,6 +346,8 @@ p {
   font-size: 0.9rem;
   color: #777;
   display: block;
+  padding: 0 10px;
+  line-height: 1.4;
 }
 
 /* Mobile responsiveness */
