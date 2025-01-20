@@ -279,6 +279,11 @@ p {
   text-align: center;
 }
 
+.award-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .award-content h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -288,30 +293,15 @@ p {
 
 .award-carousel {
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
   padding: 1rem;
-  scrollbar-width: thin; /* For Firefox scrollbar */
-  -webkit-overflow-scrolling: touch;
-  justify-content: flex-start; /* Ensures alignment starts from the left */
+  list-style: none;
+  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
-.award-carousel::-webkit-scrollbar {
-  height: 8px;
-}
-
-.award-carousel::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-
-.award-carousel::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* Award Card Styling */
 .award-card {
   background: #fff;
   border-radius: 10px;
@@ -319,60 +309,52 @@ p {
   text-align: center;
   padding: 20px;
   transition: transform 0.3s ease-in-out;
+  width: 300px;
 }
 
 .award-card:hover {
   transform: translateY(-5px);
 }
 
+.award-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
 .award-img img {
   width: 80px;
   height: 80px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 10px;
+  object-fit: contain;
 }
 
 .award-card h3 {
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin: 10px 0 5px;
+  color: #04023c;
 }
 
 .award-card span {
   font-size: 0.9rem;
   color: #777;
+  display: block;
 }
 
-/* Mobile View: Horizontal Scroll */
+/* Mobile responsiveness */
 @media (max-width: 768px) {
+  .award {
+    padding: 40px 5%;
+  }
+
   .award-carousel {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
     gap: 1rem;
-    padding-bottom: 10px;
-  }
-
-  .award-carousel::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  .award-carousel::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 10px;
-  }
-
-  .award-carousel::-webkit-scrollbar-track {
-    background: #f1f1f1;
   }
 
   .award-card {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    width: 80%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 280px;
   }
 }
 
