@@ -267,15 +267,23 @@
     </script>
 
     <script>
-      // Popup functionality for copywriting section
       function openPopup() {
-        document.getElementById("copyPopup").style.display = "block";
-        document.body.style.overflow = "hidden"; // Prevent background scrolling
+        const popup = document.getElementById("copyPopup");
+        popup.style.display = "block";
+        // Force reflow
+        popup.offsetHeight;
+        popup.classList.add("show");
+        document.body.style.overflow = "hidden";
       }
 
       function closePopup() {
-        document.getElementById("copyPopup").style.display = "none";
-        document.body.style.overflow = "auto"; // Restore scrolling
+        const popup = document.getElementById("copyPopup");
+        popup.classList.remove("show");
+        // Wait for animation to finish before hiding
+        setTimeout(() => {
+          popup.style.display = "none";
+          document.body.style.overflow = "auto";
+        }, 300);
       }
 
       // Close popup when clicking outside
