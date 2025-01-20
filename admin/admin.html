@@ -72,30 +72,52 @@
       <button onclick="clearAdmins()">Clear Admin Database</button>
     </div>
 
-    <!-- Password Update Modal -->
-    <div id="passwordModal" class="modal">
+    <!-- User Password Update Modal -->
+    <div id="userPasswordModal" class="modal">
       <div class="modal-content">
-        <h2>Update Password</h2>
+        <h2>Update User Password</h2>
         <input
           type="password"
-          id="newPassword"
+          id="newUserPassword"
           placeholder="Enter New Password"
           required
         />
         <input
           type="password"
-          id="confirmNewPassword"
+          id="confirmUserPassword"
           placeholder="Confirm New Password"
           required
         />
         <button onclick="saveUserPassword()">Save</button>
-        <button onclick="closeModal()">Cancel</button>
+        <button onclick="closeUserModal()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Admin Password Update Modal -->
+    <div id="adminPasswordModal" class="modal">
+      <div class="modal-content">
+        <h2>Update Admin Password</h2>
+        <input
+          type="password"
+          id="newAdminPassword"
+          placeholder="Enter New Password"
+          required
+        />
+        <input
+          type="password"
+          id="confirmAdminPassword"
+          placeholder="Confirm New Password"
+          required
+        />
+        <button onclick="saveAdminPassword()">Save</button>
+        <button onclick="closeAdminModal()">Cancel</button>
       </div>
     </div>
 
     <script>
       let selectedUserType = null;
       let selectedUserIndex = null;
+      let selectedAdminIndex = null;
 
       document.addEventListener("DOMContentLoaded", async () => {
         if (!localStorage.getItem("currentAdmin")) {
@@ -160,7 +182,7 @@
                         <td>${user.email}</td>
                         <td>******</td>
                         <td>
-                            <button onclick="openPasswordModal(${index})">Edit Password</button>
+                            <button onclick="openUserPasswordModal(${index})">Edit Password</button>
                         </td>
                     `;
             userTableBody.appendChild(row);
@@ -176,9 +198,11 @@
 
       // ===== SAVE USER PASSWORD =====
       async function saveUserPassword() {
-        const newPassword = document.getElementById("newPassword").value.trim();
+        const newPassword = document
+          .getElementById("newUserPassword")
+          .value.trim();
         const confirmPassword = document
-          .getElementById("confirmNewPassword")
+          .getElementById("confirmUserPassword")
           .value.trim();
 
         if (!newPassword || !confirmPassword) {
@@ -192,82 +216,107 @@
         }
 
         try {
-          // Hash the new password
           const hashedPassword = await hashPassword(newPassword);
+          let users = JSON.parse(localStorage.getItem("users")) || [];
 
-          // Update the password based on selectedUserType
-          let storageKey = selectedUserType; // 'users' or 'admins'
-          let items = JSON.parse(localStorage.getItem(storageKey)) || [];
-
-          if (selectedUserIndex !== null && items[selectedUserIndex]) {
-            items[selectedUserIndex].password = hashedPassword;
-            localStorage.setItem(storageKey, JSON.stringify(items));
-
-            alert(
-              `${
-                selectedUserType === "admins" ? "Admin" : "User"
-              } password updated successfully!`
-            );
-            closeModal();
-
-            // Refresh the appropriate table
-            if (selectedUserType === "admins") {
-              loadAdmins();
-            } else {
-              loadUsers();
-            }
+          if (selectedUserIndex !== null && users[selectedUserIndex]) {
+            users[selectedUserIndex].password = hashedPassword;
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("User password updated successfully!");
+            closeUserModal();
+            loadUsers();
           } else {
-            alert("Failed to update password. Please try again.");
+            alert("Failed to update user password. Please try again.");
           }
         } catch (error) {
-          console.error("Error updating password:", error);
-          alert("Failed to update password. Please try again.");
+          console.error("Error updating user password:", error);
+          alert("Failed to update user password. Please try again.");
         }
+      }
+
+      function openUserPasswordModal(index) {
+        selectedUserIndex = index;
+        document.getElementById("userPasswordModal").style.display = "flex";
+        document.getElementById("newUserPassword").value = "";
+        document.getElementById("confirmUserPassword").value = "";
+      }
+
+      function closeUserModal() {
+        document.getElementById("userPasswordModal").style.display = "none";
+        selectedUserIndex = null;
       }
 
       // ===== ADMIN HANDLING =====
       async function loadAdmins() {
-        let admins = JSON.parse(localStorage.getItem("admins")) || [];
         const adminTableBody = document.querySelector("#adminTable tbody");
+        let admins = JSON.parse(localStorage.getItem("admins")) || [];
 
-        adminTableBody.innerHTML =
-          admins.length === 0
-            ? '<tr><td colspan="4">No registered admins</td></tr>'
-            : admins
-                .map(
-                  (admin, index) => `
-                <tr>
-                    <td>${admin.username}</td>
-                    <td>${admin.email}</td>
-                    <td>******</td>
-                    <td><button onclick="openAdminPasswordModal(${index})">Edit Password</button></td>
-                </tr>
-            `
-                )
-                .join("");
+        if (admins.length === 0) {
+          adminTableBody.innerHTML =
+            '<tr><td colspan="4">No registered admins</td></tr>';
+        } else {
+          adminTableBody.innerHTML = "";
+          admins.forEach((admin, index) => {
+            let row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${admin.username}</td>
+                <td>${admin.email}</td>
+                <td>******</td>
+                <td>
+                    <button onclick="openAdminPasswordModal(${index})">Edit Password</button>
+                </td>
+            `;
+            adminTableBody.appendChild(row);
+          });
+        }
       }
 
       function openAdminPasswordModal(index) {
-        selectedUserType = "admins"; // Specify that we're editing an admin
-        selectedUserIndex = index;
-        document.getElementById("passwordModal").style.display = "flex";
-        document.getElementById("newPassword").value = "";
-        document.getElementById("confirmNewPassword").value = "";
+        selectedAdminIndex = index;
+        document.getElementById("adminPasswordModal").style.display = "flex";
+        document.getElementById("newAdminPassword").value = "";
+        document.getElementById("confirmAdminPassword").value = "";
       }
 
-      function closeModal() {
-        document.getElementById("passwordModal").style.display = "none";
-        document.getElementById("newPassword").value = "";
-        document.getElementById("confirmNewPassword").value = "";
-        selectedUserIndex = null;
-        selectedUserType = null;
+      function closeAdminModal() {
+        document.getElementById("adminPasswordModal").style.display = "none";
+        selectedAdminIndex = null;
       }
 
-      function clearAdmins() {
-        if (confirm("Are you sure you want to clear all admins?")) {
-          localStorage.removeItem("admins");
-          alert("Admin database cleared!");
-          loadAdmins();
+      async function saveAdminPassword() {
+        const newPassword = document
+          .getElementById("newAdminPassword")
+          .value.trim();
+        const confirmPassword = document
+          .getElementById("confirmAdminPassword")
+          .value.trim();
+
+        if (!newPassword || !confirmPassword) {
+          alert("Both password fields are required!");
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          alert("Passwords do not match!");
+          return;
+        }
+
+        try {
+          const hashedPassword = await hashPassword(newPassword);
+          let admins = JSON.parse(localStorage.getItem("admins")) || [];
+
+          if (selectedAdminIndex !== null && admins[selectedAdminIndex]) {
+            admins[selectedAdminIndex].password = hashedPassword;
+            localStorage.setItem("admins", JSON.stringify(admins));
+            alert("Admin password updated successfully!");
+            closeAdminModal();
+            loadAdmins();
+          } else {
+            alert("Failed to update admin password. Please try again.");
+          }
+        } catch (error) {
+          console.error("Error updating admin password:", error);
+          alert("Failed to update admin password. Please try again.");
         }
       }
 
