@@ -175,7 +175,9 @@
               higher quality than mass-produced items.
             </p>
           </div>
-          <button class="read-more-btn">Read More</button>
+          <button class="read-more-btn" onclick="toggleText(this)">
+            Read More
+          </button>
         </div>
       </div>
     </section>
@@ -265,7 +267,60 @@
         }
         return stars;
       }
+
+      function toggleText(button) {
+        const content = button.previousElementSibling; // gets the expanded-text div
+        const isExpanded = content.style.maxHeight;
+
+        if (!isExpanded) {
+          content.style.maxHeight = content.scrollHeight + "px";
+          button.textContent = "Read Less";
+        } else {
+          content.style.maxHeight = null;
+          button.textContent = "Read More";
+        }
+      }
     </script>
+
+    <style>
+      .expanded-text {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out;
+      }
+
+      .read-more-btn {
+        background: #fbd875;
+        color: #04023c;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+
+      .read-more-btn:hover {
+        background: #04023c;
+        color: #fbd875;
+      }
+
+      .history-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .preview-text {
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .expanded-text p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+      }
+    </style>
 
     <!--- Latest News --->
     <section class="cta-info">
