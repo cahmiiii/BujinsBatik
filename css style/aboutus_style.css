@@ -469,3 +469,93 @@ iframe {
     --h2-font: 1.8rem;
   }
 }
+
+/* Copywriting Section */
+.copywriting {
+  padding: 50px 12%;
+  background: #fff;
+}
+
+.copy-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.preview-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.read-more-btn {
+  background: #04023c;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.read-more-btn:hover {
+  background: #fbd875;
+  color: #04023c;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Popup Styles */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.popup-content {
+  position: relative;
+  background: #fff;
+  width: 90%;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 20px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.close-btn {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+}
+
+.full-copy p {
+  margin-bottom: 20px;
+  line-height: 1.8;
+  color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .copywriting {
+    padding: 30px 5%;
+  }
+
+  .popup-content {
+    width: 95%;
+    margin: 20px auto;
+    padding: 20px;
+  }
+}
