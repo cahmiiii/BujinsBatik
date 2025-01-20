@@ -491,23 +491,38 @@ iframe {
   text-align: center;
 }
 
-.read-more-btn {
-  background: #04023c;
-  color: #fff;
-  border: none;
-  padding: 15px 30px;
-  border-radius: 30px;
-  font-size: 1rem;
+.read-more-link {
+  color: #04023c;
+  text-decoration: none;
   font-weight: 500;
+  position: relative;
   cursor: pointer;
-  transition: all 0.3s ease;
+  display: inline-block;
+  margin-top: 15px;
+  transition: color 0.3s ease;
 }
 
-.read-more-btn:hover {
-  background: #fbd875;
-  color: #04023c;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+.read-more-link:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #04023c;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.read-more-link:hover {
+  color: #fbd875;
+}
+
+.read-more-link:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  background-color: #fbd875;
 }
 
 /* Popup Styles */
