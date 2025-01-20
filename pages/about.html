@@ -265,5 +265,33 @@
         })
         .catch((error) => console.error("Error loading footer:", error));
     </script>
+
+    <script>
+      // Popup functionality for copywriting section
+      function openPopup() {
+        document.getElementById("copyPopup").style.display = "block";
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
+      }
+
+      function closePopup() {
+        document.getElementById("copyPopup").style.display = "none";
+        document.body.style.overflow = "auto"; // Restore scrolling
+      }
+
+      // Close popup when clicking outside
+      window.onclick = function (event) {
+        const popup = document.getElementById("copyPopup");
+        if (event.target === popup) {
+          closePopup();
+        }
+      };
+
+      // Close popup with Escape key
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closePopup();
+        }
+      });
+    </script>
   </body>
 </html>

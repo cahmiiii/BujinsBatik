@@ -474,6 +474,7 @@ iframe {
 .copywriting {
   padding: 50px 12%;
   background: #fff;
+  text-align: center;
 }
 
 .copy-container {
@@ -487,6 +488,7 @@ iframe {
   line-height: 1.8;
   color: #333;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .read-more-btn {
@@ -532,18 +534,25 @@ iframe {
   overflow-y: auto;
 }
 
-.close-btn {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  font-size: 28px;
-  cursor: pointer;
+.popup-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
   color: #333;
 }
 
 .full-copy p {
   margin-bottom: 20px;
   line-height: 1.8;
+  color: #333;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 28px;
+  cursor: pointer;
   color: #333;
 }
 
