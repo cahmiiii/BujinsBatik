@@ -132,19 +132,21 @@
           the traditional canting method is preserved to maintain the
           authenticity.
         </p>
-        <button class="read-more-btn" onclick="openPopup()">Read More</button>
+        <button class="read-more-btn" onclick="openContentPopup()">
+          Read More
+        </button>
       </div>
 
-      <!-- Popup Modal -->
-      <div id="copyPopup" class="popup">
+      <!-- Content Popup Modal -->
+      <div id="contentPopup" class="popup">
         <div class="popup-content">
-          <span class="close-btn" onclick="closePopup()">&times;</span>
+          <span class="close-btn" onclick="closeContentPopup()">&times;</span>
           <h2>About Bujins Batik</h2>
 
-          <!-- Added Video Container -->
+          <!-- Video Container -->
           <div class="popup-video-container">
             <iframe
-              src="https://youtu.be/-NvOFLJ5byM?si=BfwwhQLpmtBOYPQq"
+              src="https://www.youtube.com/embed/-NvOFLJ5byM"
               title="Bujins Batik Video"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -279,37 +281,36 @@
     </script>
 
     <script>
-      function openPopup() {
-        const popup = document.getElementById("copyPopup");
+      // Content popup functions
+      function openContentPopup() {
+        const popup = document.getElementById("contentPopup");
         popup.style.display = "block";
-        // Force reflow
-        popup.offsetHeight;
+        popup.offsetHeight; // Force reflow
         popup.classList.add("show");
         document.body.style.overflow = "hidden";
       }
 
-      function closePopup() {
-        const popup = document.getElementById("copyPopup");
+      function closeContentPopup() {
+        const popup = document.getElementById("contentPopup");
         popup.classList.remove("show");
-        // Wait for animation to finish before hiding
         setTimeout(() => {
           popup.style.display = "none";
           document.body.style.overflow = "auto";
         }, 300);
       }
 
-      // Close popup when clicking outside
+      // Close content popup when clicking outside
       window.onclick = function (event) {
-        const popup = document.getElementById("copyPopup");
-        if (event.target === popup) {
-          closePopup();
+        const contentPopup = document.getElementById("contentPopup");
+        if (event.target === contentPopup) {
+          closeContentPopup();
         }
       };
 
-      // Close popup with Escape key
+      // Close content popup with Escape key
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
-          closePopup();
+          closeContentPopup();
         }
       });
     </script>
