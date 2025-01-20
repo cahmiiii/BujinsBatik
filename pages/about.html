@@ -132,28 +132,25 @@
           the traditional canting method is preserved to maintain the
           authenticity.
         </p>
-        <button class="read-more-btn" onclick="openContentPopup()">
+        <button class="read-more-btn" onclick="openVideoPopup()">
           Read More
         </button>
       </div>
 
-      <!-- Content Popup Modal -->
-      <div id="contentPopup" class="popup">
+      <!-- Video and Content Popup -->
+      <div id="videoPopup" class="popup">
         <div class="popup-content">
-          <span class="close-btn" onclick="closeContentPopup()">&times;</span>
+          <span class="close-btn" onclick="closeVideoPopup()">&times;</span>
           <h2>About Bujins Batik</h2>
-
-          <!-- Video Container -->
           <div class="popup-video-container">
             <iframe
-              src="https://youtu.be/-NvOFLJ5byM?si=BfwwhQLpmtBOYPQq"
+              src="https://www.youtube.com/embed/-NvOFLJ5byM"
               title="Bujins Batik Video"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>
           </div>
-
           <div class="full-copy">
             <p>
               Bujins Batik is a namesake brand by award-winning batik artist,
@@ -281,17 +278,17 @@
     </script>
 
     <script>
-      // Content popup functions
-      function openContentPopup() {
-        const popup = document.getElementById("contentPopup");
+      // Video Popup Functions only
+      function openVideoPopup() {
+        const popup = document.getElementById("videoPopup");
         popup.style.display = "block";
-        popup.offsetHeight; // Force reflow
+        popup.offsetHeight;
         popup.classList.add("show");
         document.body.style.overflow = "hidden";
       }
 
-      function closeContentPopup() {
-        const popup = document.getElementById("contentPopup");
+      function closeVideoPopup() {
+        const popup = document.getElementById("videoPopup");
         popup.classList.remove("show");
         setTimeout(() => {
           popup.style.display = "none";
@@ -299,18 +296,18 @@
         }, 300);
       }
 
-      // Close content popup when clicking outside
+      // Close popup when clicking outside
       window.onclick = function (event) {
-        const contentPopup = document.getElementById("contentPopup");
-        if (event.target === contentPopup) {
-          closeContentPopup();
+        const videoPopup = document.getElementById("videoPopup");
+        if (event.target === videoPopup) {
+          closeVideoPopup();
         }
       };
 
-      // Close content popup with Escape key
+      // Close popup with Escape key
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
-          closeContentPopup();
+          closeVideoPopup();
         }
       });
     </script>
