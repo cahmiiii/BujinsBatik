@@ -71,7 +71,9 @@
       }
 
       function openPasswordModal(index) {
+        console.log("Opening modal for user index:", index);
         selectedUserIndex = index;
+        console.log("selectedUserIndex set to:", selectedUserIndex);
         document.getElementById("passwordModal").style.display = "block";
         document.getElementById("newPassword").value = "";
         document.getElementById("confirmPassword").value = "";
@@ -87,28 +89,51 @@
         const confirmPassword =
           document.getElementById("confirmPassword").value;
 
+        console.log("Starting password update...");
+        console.log("Selected User Index:", selectedUserIndex);
+
         if (!newPassword || !confirmPassword) {
+          console.log("Empty password fields");
           alert("Please fill in both password fields");
           return;
         }
 
         if (newPassword !== confirmPassword) {
+          console.log("Passwords do not match");
           alert("Passwords do not match");
           return;
         }
 
         let users = JSON.parse(localStorage.getItem("users")) || [];
-        if (selectedUserIndex !== null && users[selectedUserIndex]) {
-          // Hash the new password
-          const hashedPassword = await hashPassword(newPassword);
-          users[selectedUserIndex].password = hashedPassword;
+        console.log("Current users:", users);
+        console.log("Attempting to update user at index:", selectedUserIndex);
 
-          // Save updated users array
-          localStorage.setItem("users", JSON.stringify(users));
+        try {
+          if (selectedUserIndex !== null && users[selectedUserIndex]) {
+            // Hash the new password
+            console.log("Hashing password...");
+            const hashedPassword = await hashPassword(newPassword);
+            console.log("Password hashed successfully");
 
-          alert("Password updated successfully!");
-          closeModal();
-          loadUsers(); // Refresh the table
+            users[selectedUserIndex].password = hashedPassword;
+            console.log("Updated user object:", users[selectedUserIndex]);
+
+            // Save updated users array
+            localStorage.setItem("users", JSON.stringify(users));
+            console.log("Users array saved to localStorage");
+
+            alert("Password updated successfully!");
+            closeModal();
+            loadUsers(); // Refresh the table
+          } else {
+            console.error("Invalid user index or user not found");
+            console.log("selectedUserIndex:", selectedUserIndex);
+            console.log("user at index:", users[selectedUserIndex]);
+            alert("Failed to update password. User not found.");
+          }
+        } catch (error) {
+          console.error("Error updating password:", error);
+          alert("Failed to update password. Please try again.");
         }
       }
 
@@ -121,12 +146,20 @@
       }
 
       async function hashPassword(password) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(password);
-        const hash = await crypto.subtle.digest("SHA-256", data);
-        return Array.from(new Uint8Array(hash))
-          .map((byte) => byte.toString(16).padStart(2, "0"))
-          .join("");
+        try {
+          console.log("Starting password hashing...");
+          const encoder = new TextEncoder();
+          const data = encoder.encode(password);
+          const hash = await crypto.subtle.digest("SHA-256", data);
+          const hashedString = Array.from(new Uint8Array(hash))
+            .map((byte) => byte.toString(16).padStart(2, "0"))
+            .join("");
+          console.log("Password hashed successfully");
+          return hashedString;
+        } catch (error) {
+          console.error("Error in hashPassword:", error);
+          throw error;
+        }
       }
     </script>
 
